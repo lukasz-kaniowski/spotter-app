@@ -6,7 +6,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('SpotterApp', ['ionic', 'config', 'SpotterApp.controllers'])
+angular.module('SpotterApp', ['ionic', 'config', 'SpotterApp.main', 'SpotterApp.missions'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -28,47 +28,12 @@ angular.module('SpotterApp', ['ionic', 'config', 'SpotterApp.controllers'])
     .state('app', {
       url: '/app',
       abstract: true,
-      templateUrl: 'templates/menu.html',
-      controller: 'AppCtrl'
-    })
-
-    .state('app.search', {
-      url: '/search',
-      views: {
-        'menuContent' :{
-          templateUrl: 'templates/search.html'
-        }
-      }
-    })
-
-    .state('app.browse', {
-      url: '/browse',
-      views: {
-        'menuContent' :{
-          templateUrl: 'templates/browse.html'
-        }
-      }
-    })
-    .state('app.playlists', {
-      url: '/playlists',
-      views: {
-        'menuContent' :{
-          templateUrl: 'templates/playlists.html',
-          controller: 'PlaylistsCtrl'
-        }
-      }
-    })
-
-    .state('app.single', {
-      url: '/playlists/:playlistId',
-      views: {
-        'menuContent' :{
-          templateUrl: 'templates/playlist.html',
-          controller: 'PlaylistCtrl'
-        }
-      }
+      templateUrl: 'scripts/menu.html',
+      controller: 'MainCtrl'
     });
+
+
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/app/missions');
 });
 

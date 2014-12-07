@@ -1,0 +1,32 @@
+<ion-view title="Znajdz misje" class="has-tabs-top">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-tabs class="tabs-striped tabs-top  tabs-icon-left">
+    <ion-tab title="Lista" icon="ion-android-note">
+      <ion-content padding="true" class="has-header">
+        <ion-list>
+          <ion-item href="#/app/mission">
+            <p>Lodozercy Magnum - 5PLN-10PL</p>
+
+            <p>TESCO
+              ul Fieldorfa 41
+              - 1km</p>
+
+          </ion-item>
+          <ion-item href="#/app/mission">Ogorki w Tesco - 1,5 km</ion-item>
+          <ion-item href="#/app/mission">Ogorki w Tesco - 1,5 km</ion-item>
+        </ion-list>
+      </ion-content>
+    </ion-tab>
+    <ion-tab title="Mapa" icon="ion-map">
+      <ion-content padding="true" class="has-header">
+        <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+          <ui-gmap-marker coords="marker.coords" idkey="marker.id" options="marker.options">
+          </ui-gmap-marker>
+        </ui-gmap-google-map>
+      </ion-content>
+    </ion-tab>
+
+  </ion-tabs>
+</ion-view>
