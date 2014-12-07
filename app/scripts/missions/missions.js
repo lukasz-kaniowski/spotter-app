@@ -22,5 +22,10 @@ angular
           }
         }
 
+      })
+
+      .state('missionActivate', {
+        url: '/activate',
+        templateUrl: 'scripts/missions/activate/activate.modal.html'
       });
   });
