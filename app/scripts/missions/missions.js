@@ -1,28 +1,11 @@
 'use strict';
 
 angular
-  .module('SpotterApp.missions', [])
+  .module('SpotterApp.missions', ['SpotterApp.missions.list', 'SpotterApp.missions.show'])
 
   .config(function ($stateProvider) {
 
     $stateProvider
-      .state('app.missions', {
-        url: '/missions',
-        views: {
-          'menuContent': {
-            templateUrl: 'scripts/missions/missions.html'
-          }
-        }
-      })
-      .state('app.mission', {
-        url: '/mission',
-        views: {
-          'menuContent': {
-            templateUrl: 'scripts/missions/mission.html'
-          }
-        }
-
-      })
 
       .state('missionActivate', {
         url: '/activate',
