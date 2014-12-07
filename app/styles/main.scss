@@ -14,8 +14,16 @@ $assertive:                       #ef4e3a !default;
 $royal:                           #8a6de9 !default;
 $dark:                            #444 !default;
 */
-
 // The path for our ionicons font files, relative to the built CSS in www/css
 //$ionicons-font-path: "../lib/ionic/fonts" !default;
-
 @import "../lib/ionic/scss/ionic";
+
+.angular-google-map-container {
+  height: 400px;
+}
+
+.marker-labels {
+  background-color: #44e7fc;
+  border: 1px solid #1aacc3;
+  padding: 3px;
+}
