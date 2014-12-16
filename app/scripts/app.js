@@ -6,7 +6,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('SpotterApp', ['ionic', 'config', 'uiGmapgoogle-maps', 'SpotterApp.main', 'SpotterApp.missions'])
+angular.module('SpotterApp', ['ionic', 'config', 'uiGmapgoogle-maps', 'SpotterApp.main', 'SpotterApp.missions','pascalprecht.translate'])
 
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -42,5 +42,12 @@ angular.module('SpotterApp', ['ionic', 'config', 'uiGmapgoogle-maps', 'SpotterAp
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/missions');
-  });
+  })
 
+	// Language Translation
+  .config(function ($translateProvider) {
+    $translateProvider.translations('en', translations_en);
+    $translateProvider.translations('pl', translations_pl);
+    // TODO How to set preferred language?
+    $translateProvider.preferredLanguage('pl');    
+  });
