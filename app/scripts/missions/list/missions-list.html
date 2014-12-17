@@ -6,8 +6,13 @@
     <ion-tab title="Lista" icon="ion-android-note">
       <ion-content padding="true" class="has-header">
         <ion-list>
-          <ion-item href="#/app/mission">Ogorki w Tesco - 1,5 km</ion-item>
-          <ion-item href="#/app/mission">Ogorki w Tesco - 1,5 km</ion-item>
+	        <ion-item ng-repeat="mission in missions" >
+	      	{{mission.title}}<br />
+	      	{{mission.company}}<br />
+	      	{{mission.address.distance}}<br />
+	      	{{mission.dueDate}}<br />
+	      	{{mission.price}}<br />
+	      	</ion-item>          
         </ion-list>
       </ion-content>
     </ion-tab>

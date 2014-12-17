@@ -47,9 +47,10 @@
   "scripts": {
     "test": "grunt test"
   },
-  "cordovaPlugins": [
-    "https://github.com/driftyco/ionic-plugins-keyboard.git",
+  "cordovaPlugins": [    
     "org.apache.cordova.statusbar",
-    "org.apache.cordova.console"
+    "org.apache.cordova.console",
+    "org.apache.cordova.geolocation",
+    "com.ionic.keyboard"
   ]
 }

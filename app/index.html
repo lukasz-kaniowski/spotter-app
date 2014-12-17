@@ -16,7 +16,6 @@
     <script src="scripts/i10n/en.js"></script>
     <script src="scripts/i10n/pl.js"></script>
 
-
     <!-- build:js scripts/vendor.js -->
     <!-- <script src="vendor/someContribJs.js"></script> -->
     <!-- bower:js -->
@@ -30,20 +29,28 @@
     <script src="lib/lodash/dist/lodash.compat.js"></script>
     <script src="lib/angular-google-maps/dist/angular-google-maps.js"></script>
     <script src="lib/angular-translate/angular-translate.js"></script>
+    <script src="lib/angular-resource/angular-resource.js"></script>
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
-
         <!-- build:js scripts/scripts.js -->
         <script src="scripts/config.js"></script>
         <script src="scripts/app.js"></script>
+        <script src="scripts/components/configServices.js"></script>
+        <script src="scripts/components/appGlobal.js"></script>
+        <script src="scripts/components/deviceServices.js"></script>
+        <script src="scripts/components/appServices.js"></script>
+        <script src="scripts/components/genericService.js"></script>
+        <script src="scripts/components/missionsService.js"></script>
         <script src="scripts/main.ctrl.js"></script>
         <script src="scripts/missions/missions.js"></script>
         <script src="scripts/missions/list/missions-list.ctrl.js"></script>
         <script src="scripts/missions/show/missions-show.ctrl.js"></script>
         <!-- endbuild -->
+
 </body>
 </html>

@@ -6,20 +6,10 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('SpotterApp', ['ionic', 'config', 'uiGmapgoogle-maps', 'SpotterApp.main', 'SpotterApp.missions','pascalprecht.translate'])
+angular.module('SpotterApp', ['ionic', 'config', 'uiGmapgoogle-maps', 'SpotterApp.main', 'SpotterApp.missions','pascalprecht.translate','ngResource', 'ngCordova'])
 
-  .run(function ($ionicPlatform) {
-    $ionicPlatform.ready(function () {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
-      if (window.cordova && window.cordova.plugins.Keyboard) {
-        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      }
-      if (window.StatusBar) {
-        // org.apache.cordova.statusbar required
-        StatusBar.styleDefault();
-      }
-    });
+  .run(function ($ionicPlatform, appServices) {
+	appServices.initApp();    
   })
   .config(function (uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({
@@ -45,9 +35,9 @@ angular.module('SpotterApp', ['ionic', 'config', 'uiGmapgoogle-maps', 'SpotterAp
   })
 
 	// Language Translation
-  .config(function ($translateProvider) {
+  .config(function ($translateProvider, CONFIG) {
     $translateProvider.translations('en', translations_en);
     $translateProvider.translations('pl', translations_pl);
     // TODO How to set preferred language?
-    $translateProvider.preferredLanguage('pl');    
+    $translateProvider.preferredLanguage(CONFIG.defaultLanguage);    
   });

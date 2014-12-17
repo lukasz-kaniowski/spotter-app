@@ -2,7 +2,6 @@
 
 angular
   .module('SpotterApp.missions.list', [])
-
   .config(function ($stateProvider) {
 
     $stateProvider
@@ -17,9 +16,25 @@ angular
       });
 
   })
-
-  .controller('MissionListCtrl', function ($log, $scope) {
+  	
+  .controller('MissionListCtrl', function ($log, $scope, missionsService, deviceServices, appGlobal) {
     $log.debug('MissionListCtrl');
+    // TODO start when app is ready
+    
+    // get location
+    deviceServices.detectCurrentPosition(true)
+    // List Missions
+    .then(getMissions)
+    .then(showMissions);
+
+
+    function getMissions() {    	    	
+    	var geoLocation = appGlobal.geoPosition.coords.latitude+','+ appGlobal.geoPosition.coords.longitude;
+	    return missionsService.listMissions({location:geoLocation});    	
+    }
+    function showMissions(missions) {
+    	$scope.missions = missions;
+    }
 
     $scope.map = {center: {latitude: 52.2333, longitude: 21.016}, zoom: 12};
     $scope.marker = {
