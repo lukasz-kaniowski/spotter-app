@@ -8,18 +8,18 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('SpotterApp', ['ionic', 'config', 'uiGmapgoogle-maps', 'SpotterApp.main', 'SpotterApp.missions','pascalprecht.translate','ngResource', 'ngCordova'])
 
-  .run(function ($ionicPlatform, appServices) {
+.run(function ($ionicPlatform, appServices) {
 	appServices.initApp();    
-  })
-  .config(function (uiGmapGoogleMapApiProvider) {
+})
+.config(function (uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({
       key: 'AIzaSyAjjKrR_Uz5Y7qQ62BbqWZbyMlqf-Mqb_E',
       v: '3.17',
       libraries: ''
     });
-  })
+})
 
-  .config(function ($stateProvider, $urlRouterProvider) {
+ .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
 
       .state('app', {
@@ -32,12 +32,12 @@ angular.module('SpotterApp', ['ionic', 'config', 'uiGmapgoogle-maps', 'SpotterAp
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/missions');
-  })
+})
 
 	// Language Translation
-  .config(function ($translateProvider, CONFIG) {
+.config(function ($translateProvider, CONFIG) {
     $translateProvider.translations('en', translations_en);
     $translateProvider.translations('pl', translations_pl);
     // TODO How to set preferred language?
     $translateProvider.preferredLanguage(CONFIG.defaultLanguage);    
-  });
+});

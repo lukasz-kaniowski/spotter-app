@@ -3,38 +3,42 @@
  */
 
 angular.module('SpotterApp')
-.factory('appServices', function ($q, $ionicPlatform, $rootScope, $cordovaDevice, $cordovaStatusbar, $cordovaKeyboard, 
-									$cordovaGeolocation, $cordovaSplashscreen, $window, appGlobal) {
+.factory('appServices', function ($q, $ionicPlatform, $rootScope, $window, appGlobal, $cordovaStatusbar, $cordovaKeyboard) {
 	var checkIfPluginsInstalled = function () {
 		var inactivePlugins = "";
 		if (!window.cordova) {			
 			console.log("Error: Cordova is not loaded!");
 			// Do not check the rest, since some plugins depend on window.cordova
 			return false;
-		}
-		if (!$cordovaStatusbar.isActive()) {
+		}		 
+		if (!window.StatusBar) {
 			inactivePlugins += "$cordovaStatusbar,";
 		}
-		if (!$cordovaKeyboard.isActive()) {
+		if (!window.cordova.plugins.Keyboard) {
 			inactivePlugins += "$cordovaKeyboard,";
 		}
-		if (!$cordovaDevice.isActive()) {
+		if (!window.device) {
 			inactivePlugins += "$cordovaDevice,";
 		}
-		if (!$cordovaGeolocation.isActive()) {
+		if (!navigator.geolocation) {
 			inactivePlugins += "$cordovaGeolocation,";
 		}
-		if (!$cordovaSplashscreen.isActive()) {
+		if (!navigator.splashscreen) {
 			inactivePlugins += "$cordovaSplashscreen,";
 		}		
-		// TODO find a way to check if InAppBrowser plugin is installed.
 		if (!window.console) {
 			inactivePlugins += "$cordovaConsole,";
-		}							
+		}
+		if (!plugin.google.maps) {
+			inactivePlugins += "$cordovaGoogleMaps,";
+		}
+
+		/*									
 		if (inactivePlugins) {
 			console.log("Error: missing plugins: "+inactivePlugins);
 			return false;	
-		}		
+		}
+		*/		
 		else return true;
 	};
 	
