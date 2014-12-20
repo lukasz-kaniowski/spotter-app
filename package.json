@@ -52,6 +52,8 @@
     "org.apache.cordova.console",
     "org.apache.cordova.geolocation",
     "com.ionic.keyboard",
-    "plugin.google.maps"
+    "plugin.google.maps",
+    "org.apache.cordova.device",
+    "org.apache.cordova.splashscreen"
   ]
 }

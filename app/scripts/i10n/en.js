@@ -2,7 +2,9 @@
  * @author michel-habib
  */
 var translations_en = {
-	// Common
+	// UI - Tabs
+	Tab_Map:	'Map',
+	Tab_List: 	'List',
 	// Menu
 	Menu_Dashboard: 'Dashboard',
 	Menu_FindMissions: 'Find Missions',

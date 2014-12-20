@@ -38,7 +38,7 @@ module.exports = function (grunt) {
         name: 'config',
         dest: '<%= yeoman.app %>/scripts/config.js',
         constants: {
-        	CONFIG: {
+			CONFIG: {
         		apiEndpoint: 'http://private-anon-9628aead2-spotters.apiary-mock.com/',
 		    	deviceOnly: false,	// force app to run on device only
 		    	geoTimeStep: 300000,	// 5 minutes, the time to cache geo location
@@ -51,7 +51,7 @@ module.exports = function (grunt) {
 					  },
 					  timestamp: 0
 		    	}		    	        			
-        	}        	
+        	}        	        
         },
       },
       development: {
@@ -119,7 +119,8 @@ module.exports = function (grunt) {
     jshint: {
       options: {
         jshintrc: '.jshintrc',
-        reporter: require('jshint-stylish')
+        reporter: require('jshint-stylish'),
+        force: true
       },
       all: [
         'Gruntfile.js',

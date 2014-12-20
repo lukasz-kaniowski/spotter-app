@@ -2,34 +2,70 @@
  * @author michel-habib
  */
 
-angular.module('SpotterApp')
-.factory('deviceServices', function ($cordovaGeolocation, $q, CONFIG, appGlobal, configService) {
-	var detectionInProgress = false;	 
+angular.module('SpotterApp').factory('deviceServices', function($cordovaGeolocation, $q, CONFIG, appGlobal, configService) {
+	var detectionInProgress = false;
 	var deferrer;
-    return {
-    	detectCurrentPosition: function(force) {
-    			// TODO use force
-			    var q = $q.defer();
-			    deferrer = q;			    
-	         	var geolocationOptions = CONFIG.geolocationOptions;
-				detectionInProgress = true;	 
-	         	
-	    		var geolocationSuccess = function(position) {
-					detectionInProgress = false;	 
-	    			console.log("Got geolocation Position - "+JSON.stringify(position));
-	    			appGlobal.geoPosition = position;
-	    			q.resolve(position);
-	    		};
-	    		var geolocationError = function(error) {
-					detectionInProgress = false;	 
-	    			// Cannot Get Position - not a fatal error
-	    			console.log("Cannot get geolocation Position - code: "+error.code+" message: "+error.message);
-	    			q.reject(error);
-	    		};
-         	  
-		       $cordovaGeolocation.getCurrentPosition(geolocationOptions)
-		       .then( geolocationSuccess, geolocationError);
-		       return q.promise;    		
-    	}  				
-   	};
-});
+	return {
+		checkIfPluginsInstalled: function() {
+			var inactivePlugins = '';
+			if (!window.cordova) {
+				console.log('Error: Cordova is not loaded!');
+				// Do not check the rest, since some plugins depend on window.cordova
+				return false;
+			}
+			if (!window.StatusBar) {
+				inactivePlugins += '$cordovaStatusbar,';
+			}
+			if (!window.cordova.plugins.Keyboard) {
+				inactivePlugins += '$cordovaKeyboard,';
+			}
+			if (!window.device) {
+				inactivePlugins += '$cordovaDevice,';
+			}
+			if (!navigator.geolocation) {
+				inactivePlugins += '$cordovaGeolocation,';
+			}
+			if (!navigator.splashscreen) {
+				inactivePlugins += '$cordovaSplashscreen,';
+			}
+			if (!window.console) {
+				inactivePlugins += '$cordovaConsole,';
+			}
+			if (!plugin.google.maps) {
+				inactivePlugins += '$cordovaGoogleMaps,';
+			}
+	
+			
+			 if (inactivePlugins) {
+				 console.log("Error: missing plugins: "+inactivePlugins);
+				 return false;
+			 }
+			 
+			else
+				{return true;}
+		},		
+		detectCurrentPosition : function(force) {
+			// TODO use force
+			var q = $q.defer();
+			deferrer = q;
+			var geolocationOptions = CONFIG.geolocationOptions;
+			detectionInProgress = true;
+
+			var geolocationSuccess = function(position) {
+				detectionInProgress = false;
+				console.log("Got geolocation Position - " + JSON.stringify(position));
+				appGlobal.geoPosition = position;
+				q.resolve(position);
+			};
+			var geolocationError = function(error) {
+				detectionInProgress = false;
+				// Cannot Get Position - not a fatal error
+				console.log("Cannot get geolocation Position - code: " + error.code + " message: " + error.message);
+				q.reject(error);
+			};
+
+			$cordovaGeolocation.getCurrentPosition(geolocationOptions).then(geolocationSuccess, geolocationError);
+			return q.promise;
+		}
+	};
+}); 
