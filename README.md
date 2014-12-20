@@ -11,6 +11,12 @@ First install all dependencies
 Use grunt to run 
 
     $ grunt serve
+
+To deploy on Android:-
+	
+	// plugins with variables cannot be added to package.json
+	grunt plugin:add:plugin.google.maps --variable API_KEY_FOR_ANDROID="API_KEY_HERE"	
+	grunt run:android
    
 Code organization
 =================
