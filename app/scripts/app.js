@@ -6,17 +6,13 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('SpotterApp', ['ionic', 'config', 'uiGmapgoogle-maps', 'SpotterApp.main', 'SpotterApp.missions', 'pascalprecht.translate', 'ngResource', 'ngCordova'])
+angular.module('SpotterApp', ['ionic', 'config', 'SpotterApp.main', 'SpotterApp.missions', 'pascalprecht.translate', 'ngResource', 'ngCordova'])
 .run(function($ionicPlatform, appServices) {
 	appServices.initApp();
 })
 
-.config(function(uiGmapGoogleMapApiProvider) {
-	uiGmapGoogleMapApiProvider.configure({
-		key : 'AIzaSyAjjKrR_Uz5Y7qQ62BbqWZbyMlqf-Mqb_E',
-		v : '3.17',
-		libraries : ''
-	});
+.config(function() {
+
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
