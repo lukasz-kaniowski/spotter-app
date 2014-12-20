@@ -39,7 +39,8 @@
     "ncp": "~0.6.0",
     "orchestrator": "~0.3.7",
     "ripple-emulator": "~0.9.23",
-    "time-grunt": "~0.2.1"
+    "time-grunt": "~0.2.1",
+    "win-spawn": "^2.0.0"
   },
   "engines": {
     "node": ">=0.10.0"
