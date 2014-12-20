@@ -12,5 +12,5 @@ var translations_en = {
 	Menu_Help: 'Help',
 	Menu_TestOnly: 'This is only a test',
 	Menu_Contact: 'Contact',
-	Menu_Login: 'Login',	
+	Menu_Login: 'Login'
 };

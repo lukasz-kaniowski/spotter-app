@@ -15,6 +15,6 @@ angular.module('SpotterApp').factory('configService', function() {
 		},
 		deviceOnly : false, // force app to run on device only
 		geoTimeStep : 1000 * 60 * 5, // 5 minutes, the time to cache geo location
-		defaultLanguage : 'en',
+		defaultLanguage : 'en'
 	};
 });
