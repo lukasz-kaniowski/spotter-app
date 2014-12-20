@@ -1,12 +1,15 @@
+'use strict';
 /**
  * @author michel-habib
  */
 
-angular.module('SpotterApp').factory('deviceServices', function($cordovaGeolocation, $q, CONFIG, appGlobal, configService) {
+/*global plugin */
+
+angular.module('SpotterApp').factory('deviceServices', function($cordovaGeolocation, $q, CONFIG, appGlobal) {
 	var detectionInProgress = false;
 	var deferrer;
 	return {
-		checkIfPluginsInstalled: function() {
+		checkIfPluginsInstalled : function() {
 			var inactivePlugins = '';
 			if (!window.cordova) {
 				console.log('Error: Cordova is not loaded!');
@@ -34,18 +37,17 @@ angular.module('SpotterApp').factory('deviceServices', function($cordovaGeolocat
 			if (!plugin.google.maps) {
 				inactivePlugins += '$cordovaGoogleMaps,';
 			}
-	
-			
-			 if (inactivePlugins) {
-				 console.log("Error: missing plugins: "+inactivePlugins);
-				 return false;
-			 }
-			 
-			else
-				{return true;}
-		},		
+
+			if (inactivePlugins) {
+				console.log('Error: missing plugins: ' + inactivePlugins);
+				return false;
+			} else {
+				return true;
+			}
+		},
 		detectCurrentPosition : function(force) {
 			// TODO use force
+			force = true;
 			var q = $q.defer();
 			deferrer = q;
 			var geolocationOptions = CONFIG.geolocationOptions;
@@ -53,14 +55,14 @@ angular.module('SpotterApp').factory('deviceServices', function($cordovaGeolocat
 
 			var geolocationSuccess = function(position) {
 				detectionInProgress = false;
-				console.log("Got geolocation Position - " + JSON.stringify(position));
+				console.log('Got geolocation Position - ' + JSON.stringify(position));
 				appGlobal.geoPosition = position;
 				q.resolve(position);
 			};
 			var geolocationError = function(error) {
 				detectionInProgress = false;
 				// Cannot Get Position - not a fatal error
-				console.log("Cannot get geolocation Position - code: " + error.code + " message: " + error.message);
+				console.log('Cannot get geolocation Position - code: ' + error.code + ' message: ' + error.message);
 				q.reject(error);
 			};
 
@@ -68,4 +70,4 @@ angular.module('SpotterApp').factory('deviceServices', function($cordovaGeolocat
 			return q.promise;
 		}
 	};
-}); 
+});

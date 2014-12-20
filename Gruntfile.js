@@ -38,20 +38,20 @@ module.exports = function (grunt) {
         name: 'config',
         dest: '<%= yeoman.app %>/scripts/config.js',
         constants: {
-			CONFIG: {
-        		apiEndpoint: 'http://private-anon-9628aead2-spotters.apiary-mock.com/',
-		    	deviceOnly: false,	// force app to run on device only
-		    	geoTimeStep: 300000,	// 5 minutes, the time to cache geo location
-		    	defaultLanguage: 'en',	// en or pl?
-		    	geolocationOptions: { maximumAge: 6000, timeout: 10000, enableHighAccuracy: true },
-		    	defaultGeolocation: {	
-		    		coords: {
-						latitude: 40.714728,
-						longitude: -73.998672							    				
-					  },
-					  timestamp: 0
-		    	}		    	        			
-        	}        	        
+          CONFIG: {
+            apiEndpoint: 'http://private-anon-9628aead2-spotters.apiary-mock.com/',
+            deviceOnly: false,	// force app to run on device only
+            geoTimeStep: 300000,	// 5 minutes, the time to cache geo location
+            defaultLanguage: 'en',	// en or pl?
+            geolocationOptions: { maximumAge: 6000, timeout: 10000, enableHighAccuracy: true },
+            defaultGeolocation: {
+              coords: {
+                latitude: 40.714728,
+                longitude: -73.998672
+              },
+              timestamp: 0
+            }
+          }
         },
       },
       development: {

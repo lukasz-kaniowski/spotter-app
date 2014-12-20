@@ -1,5 +1,7 @@
 'use strict';
 
+/*global plugin,alert */
+
 angular.module('SpotterApp.missions.list', []).config(function($stateProvider) {
 
 	$stateProvider.state('app.missions', {
@@ -16,13 +18,11 @@ angular.module('SpotterApp.missions.list', []).config(function($stateProvider) {
 	$log.debug('MissionListCtrl');
 
 	appGlobal.ready.then(function() {
-		Run();
+		run();
 	});
 
-	function Run() {
-		deviceServices.detectCurrentPosition(true)
-		.then(getMissions)
-		.then(showMissions);
+	function run() {
+		deviceServices.detectCurrentPosition(true).then(getMissions).then(showMissions);
 	}
 
 	function getMissions() {
@@ -31,27 +31,31 @@ angular.module('SpotterApp.missions.list', []).config(function($stateProvider) {
 			location : geoLocation
 		});
 	}
-	
+
 	function showMissions(missions) {
 		// For the List
 		$scope.missions = missions;
 		// Show map
 		if ($scope.map) {
 			updateMap();
+		} else {
+			createMap();
 		}
-		else createMap();
 	}
 
 	function createMap() {
-		function onMapInit(map) {
-		}
 		
+		function onMapInit(map) {
+			// var m = map;
+			map = map;
+		}
+
 		if (appGlobal.onDevice) {
 			plugin.google.maps.Map.isAvailable(function(isAvailable, message) {
 				if (isAvailable) {
-					var div = document.getElementById("map_canvas");
+					var div = document.getElementById('map_canvas');
 					if (div) {
-						console.log("loading map");
+						console.log('loading map');
 						$scope.map = plugin.google.maps.Map.getMap(div);
 						$scope.map.addEventListener(plugin.google.maps.event.MAP_READY, onMapInit);
 					} else {
@@ -66,37 +70,41 @@ angular.module('SpotterApp.missions.list', []).config(function($stateProvider) {
 	}
 
 	function updateMap() {
-			//  Set initial Map Settings, latLng must run after getting position and getting missions
-			var latLng;
-			// if no data returned, no need to update the map
-			if (!$scope.missions) return;
-			if ($scope.missions.length===0) return;
-			if ($scope.missions.length > 0) {
-				latLng = new plugin.google.maps.LatLng($scope.missions[0].address.coordinates[0], $scope.missions[0].address.coordinates[1]);
-			} else {
-				latLng = new plugin.google.maps.LatLng(appGlobal.geoPosition.coords.latitude, appGlobal.geoPosition.coords.longitude);
-			}
-			$scope.map.animateCamera({
-				'target': latLng,
-				'zoom' : 12,
-				'duration': 2000				
-			});
-			createMarkers();		
+		//  Set initial Map Settings, latLng must run after getting position and getting missions
+		var latLng;
+		// if no data returned, no need to update the map
+		if (!$scope.missions) {
+			return;
+		}
+		if ($scope.missions.length === 0) {
+			return;
+		}
+		if ($scope.missions.length > 0) {
+			latLng = new plugin.google.maps.LatLng($scope.missions[0].address.coordinates[0], $scope.missions[0].address.coordinates[1]);
+		} else {
+			latLng = new plugin.google.maps.LatLng(appGlobal.geoPosition.coords.latitude, appGlobal.geoPosition.coords.longitude);
+		}
+		$scope.map.animateCamera({
+			'target' : latLng,
+			'zoom' : 12,
+			'duration' : 2000
+		});
+		createMarkers();
 	}
-	
+
 	function createMarkers() {
 		var latLng;
 		for (var m = 0; m < $scope.missions.length; m++) {
-			console.log("mission " + m);
+			console.log('mission ' + m);
 			console.log($scope.missions[m]);
 			latLng = new plugin.google.maps.LatLng($scope.missions[m].address.coordinates[0], $scope.missions[m].address.coordinates[1]);
 			$scope.map.addMarker({
 				'position' : latLng,
-				'title' : $scope.missions[m].price + " GPB"
+				'title' : $scope.missions[m].price + ' GPB'
 			});
 		}
 	}
-	
+
 	// Do this to reload map when switching tabs - fixes an issue between ionic and google-maps
 	$scope.refreshMap = function() {
 		setTimeout(function() {
@@ -106,11 +114,12 @@ angular.module('SpotterApp.missions.list', []).config(function($stateProvider) {
 	};
 
 	$scope.refreshMap_ = function() {
-		var div = document.getElementById("map_canvas");
-		if ($scope.map)
+		var div = document.getElementById('map_canvas');
+		if ($scope.map) {
 			helperService.reattachMap($scope.map, div);
-		else			
+		} else {
 			createMap();
+		}
 	};
 
 });

@@ -3,6 +3,8 @@
  * @author michel-habib
  */
 
+/*global ionic */
+
 angular.module('SpotterApp').factory('appServices', function($q, $ionicPlatform, $rootScope, $window, appGlobal, deviceServices, $cordovaStatusbar, $cordovaKeyboard) {
 	
 	return {

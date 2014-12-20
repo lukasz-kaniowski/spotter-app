@@ -9,23 +9,23 @@ app.factory('genericService', function($resource, $q, CONFIG) {
 
 	// for Ajax Calls
 	var apiURL = CONFIG.apiEndpoint;
-	
-	var resource = $resource(apiURL+':action', {}, {
+
+	var resource = $resource(apiURL + ':action', {}, {
 		'ajaxCall' : {
 			method : 'GET',
 			isArray : false,
 		},
-		'ajaxCall_post' : {
+		'ajaxCallPost' : {
 			method : 'POST',
 			isArray : false,
 		},
 
-		'ajaxCall_array' : {
+		'ajaxCallArray' : {
 			method : 'GET',
 			isArray : true,
 		},
 
-		'ajaxCall_array_post' : {
+		'ajaxCallArrayPost' : {
 			method : 'POST',
 			isArray : true,
 		}
@@ -34,42 +34,39 @@ app.factory('genericService', function($resource, $q, CONFIG) {
 	return {
 		// A simplified wrapper for doing easy AJAX calls to Restful Service
 		ajaxCall : function(fname, args) {
-			console.log('Calling '+ fname + ' with parameters ' + args);
+			console.log('Calling ' + fname + ' with parameters ' + args);
 			var deferred = $q.defer();
 
 			args.action = fname;
 
 			resource.ajaxCall(args, {}, function(data) {
-				console.log('Response for '+ fname + ' '+ data);
+				console.log('Response for ' + fname + ' ' + data);
 				deferred.resolve(data);
 			}, function(response) {
-				console.log('Response for '+ fname + ' '+ response);
+				console.log('Response for ' + fname + ' ' + response);
 				deferred.reject(response);
 			});
 			return deferred.promise;
 		},
-		ajaxCall_post : function(fname, args) {
-			console.log('Calling '+ fname + ' with parameters ' + args);
+		ajaxCallPost : function(fname, args) {
+			console.log('Calling ' + fname + ' with parameters ' + args);
 			var deferred = $q.defer();
-			resource.ajaxCall_post({
+			resource.ajaxCallPost({
 				action : fname
-			}, args,
-			function(data) {
-				console.log('Response for '+ fname + ' '+ data);
+			}, args, function(data) {
+				console.log('Response for ' + fname + ' ' + data);
 				deferred.resolve(data);
 			}, function(response) {
 				deferred.reject(response);
 			});
 			return deferred.promise;
 		},
-		ajaxCall_array : function(fname, args) {
+		ajaxCallArray : function(fname, args) {
 			// console.log('Calling '+ fname + ' with parameters ' + args);
 			var deferred = $q.defer();
 			args.action = fname;
 			// var params = {'args':args};
-			resource.ajaxCall_array(
-				args,
-				{}, function(data) {
+			resource.ajaxCallArray(args, {}, function(data) {
 				// console.log('Response for '+ fname + ' '+ data);
 				deferred.resolve(data);
 			}, function(response) {
@@ -77,14 +74,14 @@ app.factory('genericService', function($resource, $q, CONFIG) {
 			});
 			return deferred.promise;
 		},
-		ajaxCall_array_post : function(fname, args) {
-			console.log('Calling '+ fname + ' with parameters ' + args);
+		ajaxCallArrayPost : function(fname, args) {
+			console.log('Calling ' + fname + ' with parameters ' + args);
 			var deferred = $q.defer();
 
-			resource.ajaxCall_array_post({
+			resource.ajaxCallArrayPost({
 				action : fname
 			}, args, function(data) {
-				console.log('Response for '+ fname + ' '+ data);
+				console.log('Response for ' + fname + ' ' + data);
 				deferred.resolve(data);
 			}, function(response) {
 				deferred.reject(response);

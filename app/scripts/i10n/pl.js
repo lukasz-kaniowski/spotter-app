@@ -1,16 +1,20 @@
 /**
  * @author michel-habib
  */
-var translations_pl = {
+
+/*exported translationsPl  */
+
+
+var translationsPl = {
 	// UI - Tabs
-	Tab_Map:	'Mapa',
-	Tab_List: 	'Lista',
+	TAB_MAP : 'Mapa',
+	TAB_LIST : 'Lista',
 	// Menu
-	Menu_Dashboard: 'Dashboard',
-	Menu_FindMissions: 'Znajdz misje',
-	Menu_Profile: 'Profil',
-	Menu_Help: 'Pomoc',
-	Menu_TestOnly: 'To tylko do testow',
-	Menu_Contact: 'Kontakt',
-	Menu_Login: 'Login'
+	MENU_DASHBOARD : 'Dashboard',
+	MENU_FIND_MISSIONS : 'Znajdz misje',
+	MENU_PROFILE : 'Profil',
+	MENU_HELP : 'Pomoc',
+	MENU_TEST_ONLY : 'To tylko do testow',
+	MENU_CONTACT : 'Contakt',
+	MENU_LOGIN : 'Login'
 };

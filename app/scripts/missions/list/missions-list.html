@@ -3,7 +3,7 @@
     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
   <ion-tabs class="tabs-striped tabs-top  tabs-icon-left">
-    <ion-tab title="{{'Tab_List' | translate}}" icon="ion-android-note">
+    <ion-tab title="{{'TAB_LIST' | translate}}" icon="ion-android-note">
       <ion-content padding="true" class="has-header">
         <ion-list>
 	        <ion-item ng-repeat="mission in missions" >
@@ -16,7 +16,7 @@
         </ion-list>
       </ion-content>
     </ion-tab>
-    <ion-tab title="{{'Tab_Map' | translate}}" icon="ion-map" on-select="refreshMap()">
+    <ion-tab title="{{'TAB_MAP' | translate}}" icon="ion-map" on-select="refreshMap()">
       <ion-content padding="true" class="has-header">
 	    <div style="width:100%;height:400px" id="map_canvas"></div>
       </ion-content>
