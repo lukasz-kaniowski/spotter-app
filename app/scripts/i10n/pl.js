@@ -12,5 +12,5 @@ var translations_pl = {
 	Menu_Help: 'Pomoc',
 	Menu_TestOnly: 'To tylko do testow',
 	Menu_Contact: 'Kontakt',
-	Menu_Login: 'Login',
+	Menu_Login: 'Login'
 };
