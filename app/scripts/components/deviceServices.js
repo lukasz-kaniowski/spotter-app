@@ -63,7 +63,9 @@ angular.module('SpotterApp').factory('deviceServices', function($cordovaGeolocat
 				detectionInProgress = false;
 				// Cannot Get Position - not a fatal error
 				console.log('Cannot get geolocation Position - code: ' + error.code + ' message: ' + error.message);
-				q.reject(error);
+				appGlobal.geoPosition = CONFIG.defaultGeolocation;
+				q.resolve(appGlobal.geoPosition);
+				// q.reject(error);
 			};
 
 			$cordovaGeolocation.getCurrentPosition(geolocationOptions).then(geolocationSuccess, geolocationError);

@@ -3,9 +3,10 @@
 /*global translationsEn,translationsPl */
 
 
-angular.module('SpotterApp', ['ionic', 'config', 'SpotterApp.main', 'SpotterApp.missions', 'pascalprecht.translate', 'ngResource', 'ngCordova'])
-.run(function($ionicPlatform, appServices) {
+angular.module('SpotterApp', ['ionic', 'config', 'SpotterApp.main', 'SpotterApp.missions', 'pascalprecht.translate', 'ngResource', 'ngCordova', 'angularMoment'])
+.run(function($ionicPlatform, appServices, amMoment, CONFIG) {
 	appServices.initApp();
+	amMoment.changeLocale(CONFIG.defaultLanguage);
 })
 .config(function() {
 
@@ -22,7 +23,7 @@ angular.module('SpotterApp', ['ionic', 'config', 'SpotterApp.main', 'SpotterApp.
 	$urlRouterProvider.otherwise('/app/missions');
 })
 // Language Translation
-.config(function($translateProvider, CONFIG) {
+.config(function($translateProvider, CONFIG ) {
 	$translateProvider.translations('en', translationsEn);
 	$translateProvider.translations('pl', translationsPl);
 	// TODO How to set preferred language?

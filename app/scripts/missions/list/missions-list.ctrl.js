@@ -1,6 +1,6 @@
 'use strict';
 
-/*global plugin,alert */
+/*global plugin */
 
 angular.module('SpotterApp.missions.list', []).config(function($stateProvider) {
 
@@ -14,9 +14,9 @@ angular.module('SpotterApp.missions.list', []).config(function($stateProvider) {
 		}
 	});
 
-}).controller('MissionListCtrl', function($log, $scope, missionsService, deviceServices, appGlobal, helperService) {
+}).controller('MissionListCtrl', function($log, $scope, $q, missionsService, deviceServices, appGlobal, helperService, $rootScope) {
 	$log.debug('MissionListCtrl');
-
+	$scope.updated = false;
 	appGlobal.ready.then(function() {
 		run();
 	});
@@ -46,30 +46,36 @@ angular.module('SpotterApp.missions.list', []).config(function($stateProvider) {
 	function createMap() {
 		
 		function onMapInit(map) {
-			// var m = map;
-			map = map;
+		  map = map;
+		  $rootScope.$apply(function() {
+		      console.log('Map Ready');
+		      updateMap();
+        });
 		}
 
 		if (appGlobal.onDevice) {
 			plugin.google.maps.Map.isAvailable(function(isAvailable, message) {
+				message = message;
 				if (isAvailable) {
 					var div = document.getElementById('map_canvas');
 					if (div) {
-						console.log('loading map');
+						console.log('creating map');
 						$scope.map = plugin.google.maps.Map.getMap(div);
 						$scope.map.addEventListener(plugin.google.maps.event.MAP_READY, onMapInit);
 					} else {
-						// no map created
+						// Div not created yet
 					}
 				} else {
-					// TODO
-					alert(message);
+					// ('Maps plugin not available');
 				}
 			});
+		} else {
+			// ('Not running on a device');
 		}
 	}
 
-	function updateMap() {
+	function updateMap(map) {
+		map = map;
 		//  Set initial Map Settings, latLng must run after getting position and getting missions
 		var latLng;
 		// if no data returned, no need to update the map
@@ -79,6 +85,11 @@ angular.module('SpotterApp.missions.list', []).config(function($stateProvider) {
 		if ($scope.missions.length === 0) {
 			return;
 		}
+		if ($scope.updated) {
+			return;
+		}
+		
+		console.log('updating map');
 		if ($scope.missions.length > 0) {
 			latLng = new plugin.google.maps.LatLng($scope.missions[0].address.coordinates[0], $scope.missions[0].address.coordinates[1]);
 		} else {
@@ -90,6 +101,7 @@ angular.module('SpotterApp.missions.list', []).config(function($stateProvider) {
 			'duration' : 2000
 		});
 		createMarkers();
+		$scope.updated = true;
 	}
 
 	function createMarkers() {

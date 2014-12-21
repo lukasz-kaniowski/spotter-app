@@ -46,8 +46,8 @@ module.exports = function (grunt) {
             geolocationOptions: { maximumAge: 6000, timeout: 10000, enableHighAccuracy: true },
             defaultGeolocation: {
               coords: {
-                latitude: 40.714728,
-                longitude: -73.998672
+                latitude: 52.230938,
+                longitude: 21.009537
               },
               timestamp: 0
             }
