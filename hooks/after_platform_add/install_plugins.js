@@ -62,6 +62,6 @@ function processPlugin(index) {
     });
 }
 
-
-var command = 'rm';
+ 
+var command = 'add';
 processPlugin(0);

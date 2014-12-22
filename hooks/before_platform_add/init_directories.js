@@ -25,7 +25,6 @@ rmdirp(pluginsDir, function (err) {
 var path = require('path');
 // var script = path.resolve(__dirname, '../../', 'rmdir -p ' + pluginsDir );
 var script = 'rm -Rf '+ pluginsDir;
-console.log("script = "+ script);
 var exec = require('child_process').exec;
 
 exec(script, function (error, stdout, stderr) {
