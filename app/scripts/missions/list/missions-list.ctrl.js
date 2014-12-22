@@ -17,6 +17,10 @@ angular.module('SpotterApp.missions.list', []).config(function($stateProvider) {
 }).controller('MissionListCtrl', function($log, $scope, $q, missionsService, deviceServices, appGlobal, helperService, $rootScope) {
 	$log.debug('MissionListCtrl');
 	$scope.updated = false;
+	
+	var myInfo = null;
+	var timer = null;
+	
 	appGlobal.ready.then(function() {
 		run();
 	});
@@ -106,17 +110,129 @@ angular.module('SpotterApp.missions.list', []).config(function($stateProvider) {
 
 	function createMarkers() {
 		var latLng;
+		
+		var icon = "data:image/png;base64,iVBORw0KGgo...CC";
+		var canvas = document.createElement('canvas');
+		canvas.width = 120;
+		canvas.height = 40;
+		var context = canvas.getContext('2d');
+		
+		var img = new Image();
+		img.src = "./images/google_logo.gif";
+		img.onload = function() {
+		  context.drawImage(img, 0, 0);
+		
+		  context.font = '15pt Calibri';
+		  context.fillStyle = 'blue';
+		  context.fillText('zozo', 40, 15);
+		  context.fillText('lolyyy', 60, 35);
+			/*
+		  $scope.map.addMarker({
+		    'position': latLng,
+		    'title': canvas.toDataURL(),
+		    'icon': icon
+		  }, function(marker) {
+		    marker.showInfoWindow();
+		  });
+		  */
+		};			
+		
 		for (var m = 0; m < $scope.missions.length; m++) {
 			console.log('mission ' + m);
 			console.log($scope.missions[m]);
 			latLng = new plugin.google.maps.LatLng($scope.missions[m].address.coordinates[0], $scope.missions[m].address.coordinates[1]);
 			$scope.map.addMarker({
 				'position' : latLng,
-				'title' : $scope.missions[m].price + ' GPB'
-			});
+				'title': canvas.toDataURL(),
+				'icon': canvas.toDataURL(),
+				'mytitle' : $scope.missions[m].price + ' GPB'
+			}, function(marker) {
+					marker.setIcon({
+				      // 'url': 'www/images/icon-yellow.png',
+				      'size': {
+				        width: 1,
+				        height: 1
+				      }
+				    });			
+				    marker.showInfoWindow();	
+				    marker.addEventListener(plugin.google.maps.event.MARKER_CLICK, function(marker) {
+					  console.log(marker);
+					  var map = marker.getMap();
+					  console.log('marker click trigger');
+					  if (!myInfo) {
+					    // myInfo = createMyInfo(marker);
+					  }	  	
+				    });				    
+				    // marker.trigger(plugin.google.maps.event.MARKER_CLICK);
+				  });
 		}
 	}
 
+	function onMarkerClicked() {
+	  var marker = this;
+	  console.log(this);
+	  var map = marker.getMap();
+	  console.log('marker click trigger');
+	  if (!myInfo) {
+	    myInfo = createMyInfo(marker);
+	  }	  
+	}
+	
+	function createMyInfo(marker) {
+	  $("#infoWnd_frame").trigger("remove");
+	  
+	  var frame = $("<div id='infoWnd_frame'>");
+	  var map = marker.getMap();
+	  var beforePoint = [];
+	  var updatePosition = function() {
+	    map.fromLatLngToPoint(marker.get("position"), function(point) {
+	      if (beforePoint[0] != point[0] || beforePoint[1] != point[1]) {
+	      	if (frame) {
+		        frame.css({
+		          "left": point[0] - 108,
+		          "top": point[1] - 180
+		        });	      		
+	      	} else {
+	    		console.log("updatePosition: cannot get frame "+marker.get("mytitle"));
+	      	}
+	        // Update the children position.
+	        map.refreshLayout();
+	      }
+	      beforePoint = point;
+	    });
+	  };
+	  timer = setInterval(updatePosition, 200);
+	  
+	  var removeInfoWnd = function() {
+	    clearInterval(timer);
+	    frame.remove();
+	    frame = null;
+	    timer = null;
+	    map.off();
+	  };
+	  frame.on("click", removeInfoWnd);
+	  map.on(plugin.google.maps.event.MAP_CLICK, removeInfoWnd);
+	  frame.one("remove", removeInfoWnd);
+	  
+	  $("<div id='infoWnd_body'>").append("<div class='testme'>hey there</div><br><i>italic text</i>").appendTo(frame);
+	  
+	  map.fromLatLngToPoint(marker.get("position"), function(point) {
+	    if (frame) {
+		    frame.css({
+		      "left": point[0] - 108,
+		      "top": point[1] - 180
+		    });	    	
+	    } else {
+	    		console.log("createMyInfo: cannot get frame "+marker.get("mytitle"));
+	      	}
+	    $("#myOverlay").append(frame);
+	    
+	    // Update the children position.
+	    map.refreshLayout();
+	    beforePoint = point;
+	  });
+	}
+	
 	// Do this to reload map when switching tabs - fixes an issue between ionic and google-maps
 	$scope.refreshMap = function() {
 		setTimeout(function() {
