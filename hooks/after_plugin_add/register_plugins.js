@@ -3,6 +3,9 @@
 /**
  * Push plugins to cordovaPlugins array after_plugin_add
  */
+
+/*
+
 var fs = require('fs');
 var _ = require('lodash');
 var packageJSON = require('../../package.json');
@@ -15,3 +18,5 @@ _.each(process.env.CORDOVA_PLUGINS.split(','), function (plugin) {
 });
 
 fs.writeFileSync('package.json', JSON.stringify(packageJSON, null, 2));
+
+*/
