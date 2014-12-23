@@ -25,7 +25,7 @@ angular
                     "coordinates": [40.714728, -73.998672],
                     "distance": "0.2km"
                   },
-                  "dueDate": "30-12-2014 22:10",
+                  "dueDate": "2015-01-22T15:20:38",
                   "price": 5,
                   "tasks": [
                     {"type": "question", count: "5", "icon": "ion-alert"},
@@ -47,6 +47,6 @@ angular
 
   .controller('MissionShowCtrl', function ($log, $scope, mission) {
     $log.debug('MissionShowCtrl');
-
     $scope.mission = mission;
+
   });

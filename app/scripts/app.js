@@ -3,7 +3,7 @@
 /*global translationsEn,translationsPl */
 
 
-angular.module('SpotterApp', ['ionic', 'config', 'SpotterApp.main', 'SpotterApp.missions', 'pascalprecht.translate', 'ngResource', 'ngCordova', 'angularMoment', 'timer'])
+angular.module('SpotterApp', ['ionic', 'config', 'SpotterApp.main', 'SpotterApp.missions', 'pascalprecht.translate', 'SpotterApp.directives', 'ngResource', 'ngCordova', 'angularMoment', 'timer'])
 .run(function($ionicPlatform, appServices, amMoment, CONFIG) {
 	appServices.initApp();
 	amMoment.changeLocale(CONFIG.defaultLanguage);
