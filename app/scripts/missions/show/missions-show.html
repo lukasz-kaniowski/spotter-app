@@ -1,56 +1,39 @@
-<ion-view title="Ogorki w Tesco">
+<ion-view title="{{'Missions.Show.Title' | translate}}">
   <ion-content padding="true" class="has-header">
-    <!--<h1>Ogorki w Tesco</h1>-->
+    <h1 ng-bind="mission.title"></h1>
 
     <div class="card">
-      <div class=" item item-text-wrap">
-        <p>
-          Opis
-
-        </p>
-
+      <div class="item">
+        <i class="icon ion-ios7-timer-outline positive"></i>
+        <span class="positive" translate="Missions.Show.DueInTitle"></span>
+        <timer countdown="1231322" interval="1000">
+          {{days}} dni, {{hours}} godzin, {{minutes}} minut, {{seconds}} sekund
+        </timer>
       </div>
-
-    </div>
-    <div class="list card">
-      <div class="item item-divider">Przykladowe zdjecie</div>
-      <div class="item item-body">
-        <p>
-          Opis zdjecia
-        </p>
-        <img src="images/polka.jpeg"/>
-      </div>
-    </div>
-    <div class="list card item-text-wrap">
-      <div class="item item-divider">Przykladowe pytanie</div>
-      <div class="item item-body">
-        <div class="list">
-
-          <label class="item item-checkbox-right item-checkbox ">
-            Pytanie 1
-            <label class="checkbox">
-              <input type="checkbox">
-            </label>
-          </label>
-
-          <div class="item item-checkbox-right item-checkbox ">
-
-            Pytanie 2
-            <label class="checkbox">
-              <input type="checkbox">
-            </label>
-          </div>
-
-        </div>
-      </div>
-    </div>
-    <div class="card">
       <div class="item item-text-wrap">
 
+        <i class="icon ion-ios7-checkmark-outline positive"></i>
+        <span class="positive" translate="Missions.Show.TasksHeader"></span>
 
-        <a href="#/activate" class="button button-balanced button-block">Akceptuje</a>
+        <ul class="list-inline">
+          <li ng-repeat="task in mission.tasks">
+            <i class="icon {{task.icon}} positive"></i>
+            {{'TaskType.'+ task.type | translate}}: {{task.count}}
+          </li>
+        </ul>
+
+
       </div>
+
+      <div class="item item-divider" translate="Missions.Show.InstructionsHeader"></div>
+      <div class="item item-text-wrap">
+        <p ng-bind-html="mission.instructions">
+        </p>
+        <a href="#/activate" class="button button-balanced button-block" translate="Missions.Show.AcceptButton"></a>
+      </div>
+
     </div>
+
 
   </ion-content>
 </ion-view>

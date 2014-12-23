@@ -16,5 +16,20 @@ var translationsPl = {
 	MENU_HELP : 'Pomoc',
 	MENU_TEST_ONLY : 'To tylko do testow',
 	MENU_CONTACT : 'Contakt',
-	MENU_LOGIN : 'Login'
+	MENU_LOGIN : 'Login',
+  Missions: {
+    Show: {
+      Title: 'Detale Misji',
+      InstructionsHeader: 'Instrukcja',
+      AcceptButton: 'Akceptuje',
+      TasksHeader: 'Zadania:',
+      DueInTitle: 'Pozostało:'
+    }
+  },
+  TaskType: {
+    question: 'Pytania',
+    photo: 'Zdjęcia'
+  }
+
+
 };
