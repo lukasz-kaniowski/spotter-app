@@ -42,7 +42,7 @@ module.exports = function (grunt) {
             apiEndpoint: 'http://private-anon-9628aead2-spotters.apiary-mock.com/',
             deviceOnly: false,	// force app to run on device only
             geoTimeStep: 300000,	// 5 minutes, the time to cache geo location
-            defaultLanguage: 'en',	// en or pl?
+            defaultLanguage: 'pl',
             geolocationOptions: { maximumAge: 6000, timeout: 10000, enableHighAccuracy: true },
             defaultGeolocation: {
               coords: {
@@ -175,7 +175,7 @@ module.exports = function (grunt) {
       }
     },
 
-    
+
     // Compiles Sass to CSS and generates necessary files if requested
     compass: {
       options: {
@@ -204,7 +204,7 @@ module.exports = function (grunt) {
         }
       }
     },
-    
+
 
     // Reads HTML for usemin blocks to enable smart builds that automatically
     // concat, minify and revision files. Creates configurations in memory so
