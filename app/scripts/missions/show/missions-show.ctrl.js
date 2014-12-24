@@ -7,7 +7,7 @@ angular
 
     $stateProvider
       .state('app.mission', {
-        url: '/mission/:missionId',
+        url: '/missions/:missionId',
         views: {
           'menuContent': {
             templateUrl: 'scripts/missions/show/missions-show.html',
