@@ -423,8 +423,13 @@ module.exports = function (grunt) {
           dest: '.tmp/concat/<%= yeoman.scripts %>'
         }]
       }
-    }
-
+    },
+	execute: {
+        installplugins: {
+            // execute javascript files in a node child_process
+            src: ['gruntinstallplugins.js']
+        }
+	}
   });
 
   // Register tasks for all Cordova commands
@@ -568,4 +573,6 @@ module.exports = function (grunt) {
     'karma:continuous',
     'compress'
   ]);
+
+  grunt.registerTask('installplugins', ['execute:installplugins']);
 };
