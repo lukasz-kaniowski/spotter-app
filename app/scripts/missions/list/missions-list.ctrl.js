@@ -13,7 +13,7 @@ angular.module('SpotterApp.missions.list', []).config(function($stateProvider) {
 			}
 		}
 	});
-
+ 
 }).controller('MissionListCtrl', function($log, $scope, $q, missionsService, deviceServices, appGlobal, helperService, $rootScope) {
 	$log.debug('MissionListCtrl');
 	$scope.updated = false;
@@ -68,13 +68,15 @@ angular.module('SpotterApp.missions.list', []).config(function($stateProvider) {
 						$scope.map.addEventListener(plugin.google.maps.event.MAP_READY, onMapInit);
 					} else {
 						// Div not created yet
+						console.log('google maps plugin is not available - div is not available');
 					}
 				} else {
+					console.log('google maps plugin is not available - '+ message);
 					// ('Maps plugin not available');
 				}
 			});
 		} else {
-			// ('Not running on a device');
+			console.log('google maps plugin is not available - not running on a device ');
 		}
 	}
 
