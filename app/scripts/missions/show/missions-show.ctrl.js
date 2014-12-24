@@ -13,30 +13,9 @@ angular
             templateUrl: 'scripts/missions/show/missions-show.html',
             controller: 'MissionShowCtrl',
             resolve: {
-              mission: function ($log, $stateParams) {
-
+              mission: function ($log, $stateParams, missionsService) {
                 $log.debug('/mission/:missionId', $stateParams);
-
-                return {
-                  "id": 1,
-                  "title": "Nice and easy",
-                  "company": "Tesco",
-                  "address": {
-                    "coordinates": [40.714728, -73.998672],
-                    "distance": "0.2km"
-                  },
-                  "dueDate": "2015-01-22T15:20:38",
-                  "price": 5,
-                  "tasks": [
-                    {"type": "question", count: "5", "icon": "ion-alert"},
-                    {"type": "question", count: "5", "icon": "ion-alert"},
-                    {"type": "question", count: "5", "icon": "ion-alert"},
-                    {"type": "question", count: "5", "icon": "ion-alert"},
-                    {"type": "photo", count: "1", "icon": "ion-help-circled"}
-                  ],
-                  "instructions": "<p>Some <b>html</b> descipiton</p>"
-                }
-
+                return missionsService.getMission($stateParams.missionId);
               }
             }
           }
@@ -46,7 +25,7 @@ angular
   })
 
   .controller('MissionShowCtrl', function ($log, $scope, mission) {
-    $log.debug('MissionShowCtrl');
+    $log.debug('MissionShowCtrl', mission);
     $scope.mission = mission;
 
   });
