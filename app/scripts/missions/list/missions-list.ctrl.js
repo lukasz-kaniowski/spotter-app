@@ -65,14 +65,14 @@ angular.module('SpotterApp.missions.list', []).config(function($stateProvider) {
 					if (div) {
 						console.log('creating map');
 						$scope.map = plugin.google.maps.Map.getMap(div);
+						$scope.map.clear();
+						$scope.map.off();
 						$scope.map.addEventListener(plugin.google.maps.event.MAP_READY, onMapInit);
 					} else {
-						// Div not created yet
-						console.log('google maps plugin is not available - div is not available');
+						console.log('google maps plugin - div is not available');
 					}
 				} else {
 					console.log('google maps plugin is not available - '+ message);
-					// ('Maps plugin not available');
 				}
 			});
 		} else {
@@ -101,6 +101,9 @@ angular.module('SpotterApp.missions.list', []).config(function($stateProvider) {
 		} else {
 			latLng = new plugin.google.maps.LatLng(appGlobal.geoPosition.coords.latitude, appGlobal.geoPosition.coords.longitude);
 		}
+		latLng = new plugin.google.maps.LatLng(appGlobal.geoPosition.coords.latitude, appGlobal.geoPosition.coords.longitude);
+		latLng = new plugin.google.maps.LatLng(52.230938, 21.009537);
+
 		$scope.map.animateCamera({
 			'target' : latLng,
 			'zoom' : 12,
@@ -113,50 +116,78 @@ angular.module('SpotterApp.missions.list', []).config(function($stateProvider) {
 	function createMarkers() {
 		var latLng;
 		
+		// Icons can be added as base64 but wont work on Android 2.3
+		 
 		var icon = "data:image/png;base64,iVBORw0KGgo...CC";
 		var canvas = document.createElement('canvas');
-		canvas.width = 120;
-		canvas.height = 40;
+		canvas.width = 50;
+		canvas.height = 55;
 		var context = canvas.getContext('2d');
-		
-		var img = new Image();
-		img.src = "./images/google_logo.gif";
-		img.onload = function() {
-		  context.drawImage(img, 0, 0);
-		
-		  context.font = '15pt Calibri';
-		  context.fillStyle = 'blue';
-		  context.fillText('zozo', 40, 15);
-		  context.fillText('lolyyy', 60, 35);
-			/*
-		  $scope.map.addMarker({
-		    'position': latLng,
-		    'title': canvas.toDataURL(),
-		    'icon': icon
-		  }, function(marker) {
-		    marker.showInfoWindow();
-		  });
-		  */
-		};			
-		
-		for (var m = 0; m < $scope.missions.length; m++) {
+
+	  	// draw rectangle
+	  	context.fillStyle = "rgba(72,195, 232, 0.8)";
+		context.fillRect(0, 0, 50, 45);
+		// draw triangle tip
+		context.beginPath();
+		context.moveTo(15, 45);
+		context.lineTo(35, 45);
+		context.lineTo(25, 55);
+		context.lineTo(15, 45);
+        context.strokeStyle = "rgba(0,0, 255, 0)";
+		context.stroke();
+		context.closePath();
+	  	context.fillStyle = "rgba(72,195, 232, 0.8)";
+		context.fill();
+
+		context.font = '16pt Arial';
+		context.fillStyle = 'white';
+		var x = canvas.width / 2;
+	  	var y = canvas.height / 2;
+	  	context.textAlign = 'center';
+	  	context.fillText('15', x, y-5);
+		context.font = '12pt Arial';
+	  	context.fillText('GBP', x, y+10);
+
+	  	var canvasData = canvas.toDataURL('image/png'); 
+		latLng = new plugin.google.maps.LatLng(52.230938, 21.009537);
+
+		$scope.map.addMarker({
+			'position' : latLng,
+			// 'title': 'tamam',
+			'icon': canvasData
+		}, function(marker) {
+				    marker.addEventListener(plugin.google.maps.event.MARKER_CLICK, function(marker) {
+					  var map = marker.getMap();
+					  console.log('marker click trigger');
+					  if (!myInfo) {
+					    	myInfo = createMyInfo(marker);
+					  }	  	
+				    });				    
+			  });
+			  /*
+		for (var m = 5; m < $scope.missions.length; m++) {
 			console.log('mission ' + m);
-			console.log($scope.missions[m]);
+			// console.log($scope.missions[m]);
 			latLng = new plugin.google.maps.LatLng($scope.missions[m].address.coordinates[0], $scope.missions[m].address.coordinates[1]);
+			// var canvasData = canvas.toDataURL('image/png'); 
+			// console.log(canvasData);
 			$scope.map.addMarker({
 				'position' : latLng,
-				'title': canvas.toDataURL(),
-				'icon': canvas.toDataURL(),
-				'mytitle' : $scope.missions[m].price + ' GPB'
+				'title': ["15", "GBP"].join("\n"), // $scope.missions[m].price + ' GPB',
+				'snippet': 'snippet text here',
+				'icon': '../images/1x1.png',
+				'styles' : {
+				    'text-align': 'center',
+				    'font-style': 'italic',
+				    'font-weight': 'bold',
+				    'color': 'blue',
+				    'background-color': '#0000bb'
+				  }
 			}, function(marker) {
-					marker.setIcon({
-				      // 'url': 'www/images/icon-yellow.png',
-				      'size': {
-				        width: 1,
-				        height: 1
-				      }
-				    });			
-				    marker.showInfoWindow();	
+				    console.log('show the marker');
+				    marker.showInfoWindow();
+				    // marker.trigger(plugin.google.maps.event.MARKER_CLICK);
+				    	
 				    marker.addEventListener(plugin.google.maps.event.MARKER_CLICK, function(marker) {
 					  console.log(marker);
 					  var map = marker.getMap();
@@ -165,9 +196,12 @@ angular.module('SpotterApp.missions.list', []).config(function($stateProvider) {
 					    // myInfo = createMyInfo(marker);
 					  }	  	
 				    });				    
-				    // marker.trigger(plugin.google.maps.event.MARKER_CLICK);
+				    // 
+				    
 				  });
 		}
+		*/
+		
 	}
 
 	function onMarkerClicked() {
@@ -216,7 +250,7 @@ angular.module('SpotterApp.missions.list', []).config(function($stateProvider) {
 	  map.on(plugin.google.maps.event.MAP_CLICK, removeInfoWnd);
 	  frame.one("remove", removeInfoWnd);
 	  
-	  $("<div id='infoWnd_body'>").append("<div class='testme'>hey there</div><br><i>italic text</i>").appendTo(frame);
+	  $("<div id='infoWnd_body'>").append("<div class='div1'>15<br>GBP<br>&nbsp;</div><div class='div2'>A GOOD Foundation<br>Debenhanms<br>5497.7 kms away</div>").appendTo(frame);
 	  
 	  map.fromLatLngToPoint(marker.get("position"), function(point) {
 	    if (frame) {
