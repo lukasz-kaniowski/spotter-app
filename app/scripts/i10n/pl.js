@@ -24,6 +24,13 @@ var translationsPl = {
       AcceptButton: 'Akceptuje',
       TasksHeader: 'Zadania:',
       DueInTitle: 'Pozostało:'
+    },
+    Activate: {
+      Title: 'Akceptacja',
+      AcceptButton: 'Akceptuje',
+      CancelButton: 'Anuluj',
+      Label: 'Czy na pewno akceptujesz to zadanie?',
+      TimeToExecute: 'Masz tylko <strong>30 minut</strong> na jego wykonanie!'
     }
   },
   TaskType: {
