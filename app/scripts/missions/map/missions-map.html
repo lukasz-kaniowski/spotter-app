@@ -1,0 +1,10 @@
+<div style="width:100%;height:400px;position:relative;" id="map_canvas">
+	  <div id="myOverlay" data-clickable='false'>
+	  		<div id="infoWnd_frame" ng-show="show" ng-click="hidePopover()" ng-style="frameCss">
+	  			<div id="infoWnd_body">
+	  			<div class="div1">{{mission.price}}<br>GBP<br>&nbsp;</div>
+	  				<div class="div2">{{mission.title}}<br>{{mission.company}}<br>{{mission.address.distance}} away</div>
+	  			</div>
+	  		</div>
+	  </div>
+</div>
