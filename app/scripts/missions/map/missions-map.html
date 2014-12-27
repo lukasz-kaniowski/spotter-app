@@ -2,9 +2,11 @@
 	  <div id="myOverlay" data-clickable='false'>
 	  		<div id="infoWnd_frame" ng-show="show" ng-click="hidePopover()" ng-style="frameCss">
 	  			<div id="infoWnd_body">
-	  			<div class="div1">{{mission.price}}<br>GBP<br>&nbsp;</div>
-	  				<div class="div2">{{mission.title}}<br>{{mission.company}}<br>{{mission.address.distance}} away</div>
-	  			</div>
+	  				<div class="popover_priceDiv">{{mission.price}}<br>GBP</div>
+	  				<div class="popover_infoDiv"><span class="popover_header">{{mission.title}}</span><br>{{mission.company}}<br>{{mission.address.distance}} away
+	  				</div>
+	  				<div class="arrow-down"></div>
+	  			</div>	  			
 	  		</div>
 	  </div>
 </div>

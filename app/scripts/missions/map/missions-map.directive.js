@@ -119,7 +119,7 @@ angular.module('SpotterApp.missions.list', []).config(function() {
 					$scope.frameLocation[0] = point[0];
 					$scope.frameLocation[1] = point[1];
 					var left, top;
-					left = point[0] - 108;
+					left = point[0] - 183;
 					top = point[1] - 180;
 					$scope.frameCss = {
 						"left" : left + "px",
@@ -156,24 +156,22 @@ angular.module('SpotterApp.missions.list', []).config(function() {
 		if ($scope.timer) {
 			$interval.cancel($scope.timer);
 		}
-		//		$scope.show = false;
+		$scope.show = false;
 		console.log('show popover');
 		$scope.currentMarker = id;
 		$scope.mission = $scope.missions[$scope.currentMarker];
-		/*
 		 $scope.map.getCameraPosition(function(camera) {
 		 $scope.map.animateCamera({
 		 'target' : $scope.markerPosition,
 		 'zoom' : camera.zoom,
-		 'duration': 0
+		 'duration': 500
 		 }, function() {
+			$scope.show = true;
+			$scope.timer = $interval(function() {
+				refreshFramePosition();
+			}, 200);
 		 });
 		 })
-		 */;
-		$scope.show = true;
-		$scope.timer = $interval(function() {
-			refreshFramePosition();
-		}, 200);
 	};
 
 	function updateMap(map) {
