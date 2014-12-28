@@ -1,14 +1,14 @@
 'use strict';
 
-// TODO test on android and ios
-// TODO use restangular instead if native $resource
-// TODO reuse missions results and location results in both list and map
-// TODO create sass formatting of html marker
-// TODO use decorator for formatting missions data
-// TODO map should work on different device sizes
 // TODO fix any jshint issues
+// create sass formatting of html marker [DONE] - need more details about the style of the app
 // TODO add button to move to the closest mission on the map
 // TODO add fallback for js maps
+// TODO test on android and ios
+// TODO check Geolocation is working in all conditions on ios and android
+// TODO map should work on different device sizes
+// reuse missions results and location results in both list and map [Done]
+// use restangular instead of native $resource [DONE]
 // Move Map Controller to a Maps Directive [DONE]
 // adjust layer location of the popover when it is off the frame? [DONE]
 // use angular instead of jquery to create html div [DONE]
@@ -29,8 +29,8 @@ angular.module('SpotterApp.missions.list', []).config(function() {
 			missions : '=',
 		}
 	};
-}).controller('MissionsMapCtrl', function($log, $scope, $q, missionsService, deviceServices, appGlobal, helperService, $rootScope, $interval) {
-	$log.debug('MissionsMapCtrl');
+}).controller('MissionsMapCtrl', function($scope, appGlobal, helperService, $interval) {
+	console.debug('MissionsMapCtrl');
 	$scope.updated = false;
 	$scope.show = false;
 	$scope.currentMarker = -1;
@@ -39,8 +39,6 @@ angular.module('SpotterApp.missions.list', []).config(function() {
 		top : 0
 	};
 	$scope.frameLocation = [0, 0];
-	var myInfo = null;
-	var timer = null;
 
 	appGlobal.ready.then(function() {
 		run();
@@ -48,21 +46,16 @@ angular.module('SpotterApp.missions.list', []).config(function() {
 
 	function run() {
 		// TODO Temp
-		// deviceServices.detectCurrentPosition(true).then(getMissions).then(showMissions);
-		appGlobal.geoPosition.coords.latitude = 52.230938;
-		appGlobal.geoPosition.coords.longitude = 21.009537;
-		var missions = helperService.missions; 
-		showMissions(missions);
-	}
-
-	function getMissions() {
-		var geoLocation = appGlobal.geoPosition.coords.latitude + ',' + appGlobal.geoPosition.coords.longitude;
-		return missionsService.getMissions({
-			location : geoLocation
-		});
+		// appGlobal.geoPosition.coords.latitude = 52.230938;
+		// appGlobal.geoPosition.coords.longitude = 21.009537;
+		// var missions = helperService.missions;
+		// showMissions(missions);
+		appGlobal.pMissions.then(showMissions);
 	}
 
 	function showMissions(missions) {
+		// TODO remove temp data
+		missions = helperService.missions;
 		$scope.missions = missions;
 		// Show map
 		if ($scope.map) {
@@ -114,7 +107,7 @@ angular.module('SpotterApp.missions.list', []).config(function() {
 	function refreshFramePosition() {
 		if ($scope.show) {
 			$scope.map.fromLatLngToPoint($scope.markerPosition, function(point) {
-				if ($scope.frameLocation[0] != point[0] || $scope.frameLocation[1] != point[1]) {
+				if ($scope.frameLocation[0] !== point[0] || $scope.frameLocation[1] !== point[1]) {
 					// console.log("point is "+point[0]+","+point[1]);
 					$scope.frameLocation[0] = point[0];
 					$scope.frameLocation[1] = point[1];
@@ -122,23 +115,14 @@ angular.module('SpotterApp.missions.list', []).config(function() {
 					left = point[0] - 183;
 					top = point[1] - 180;
 					$scope.frameCss = {
-						"left" : left + "px",
-						'top' : top + "px"
+						'left' : left + 'px',
+						'top' : top + 'px'
 					};
 					// Update the children position.
 					$scope.map.refreshLayout();
 				}
 			});
 		}
-	}
-
-	// TODO remove, not used anymore
-	function onMapCameraChange(position) {
-		console.log('map Camera is moving');
-		$scope.$apply(function() {
-			// update css only if popover is active
-			refreshFramePosition();
-		});
 	}
 
 
@@ -160,18 +144,18 @@ angular.module('SpotterApp.missions.list', []).config(function() {
 		console.log('show popover');
 		$scope.currentMarker = id;
 		$scope.mission = $scope.missions[$scope.currentMarker];
-		 $scope.map.getCameraPosition(function(camera) {
-		 $scope.map.animateCamera({
-		 'target' : $scope.markerPosition,
-		 'zoom' : camera.zoom,
-		 'duration': 500
-		 }, function() {
-			$scope.show = true;
-			$scope.timer = $interval(function() {
-				refreshFramePosition();
-			}, 200);
-		 });
-		 })
+		$scope.map.getCameraPosition(function(camera) {
+			$scope.map.animateCamera({
+				'target' : $scope.markerPosition,
+				'zoom' : camera.zoom,
+				'duration' : 500
+			}, function() {
+				$scope.show = true;
+				$scope.timer = $interval(function() {
+					refreshFramePosition();
+				}, 200);
+			});
+		});
 	};
 
 	function updateMap(map) {
@@ -230,9 +214,9 @@ angular.module('SpotterApp.missions.list', []).config(function() {
 		console.log('marker click trigger');
 		// $scope.$apply(function() {
 		var id = marker.get('missionId');
-		$scope.markerPosition = marker.get("position");
+		$scope.markerPosition = marker.get('position');
 		if ($scope.currentMarker >= 0) {
-			if ($scope.currentMarker == id) {
+			if ($scope.currentMarker === id) {
 				console.log('hitting same marker ' + id);
 				$scope.hidePopover();
 			} else {

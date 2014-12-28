@@ -428,7 +428,7 @@ module.exports = function (grunt) {
         installplugins: {
             // execute javascript files in a node child_process
             src: ['gruntinstallplugins.js']
-        }
+        	}
 	}
   });
 

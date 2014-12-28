@@ -11,7 +11,7 @@ angular.module('SpotterApp', ['ionic', 'config', 'SpotterApp.main', 'SpotterApp.
 })
 .config(function(CONFIG, RestangularProvider) {
     RestangularProvider.setBaseUrl(CONFIG.apiEndpoint);
-})
+	})
 .config(function($stateProvider, $urlRouterProvider) {
 	$stateProvider.state('app', {
 		url : '/app',

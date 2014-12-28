@@ -17,8 +17,10 @@ angular.module('SpotterApp').factory('appGlobal', function($q, CONFIG) {
 		// App Current Language
 		language : CONFIG.defaultLanguage,
 		geoPosition : CONFIG.defaultGeolocation,
+		geoPositionTime: null,
 		geoLocation : null,
 		forceGeoLocation : false, // user has forced the selection of an Area
+		pMissions: null,
 		getReady : function(val) {
 			if (val)
 				{deferrer.resolve(true);}

@@ -1,7 +1,5 @@
 'use strict';
 
-/*global plugin */
-
 angular.module('SpotterApp.missions.list').config(function($stateProvider) {
 
 	$stateProvider.state('app.missions', {
@@ -15,27 +13,34 @@ angular.module('SpotterApp.missions.list').config(function($stateProvider) {
 	});
  
 })
-
-.controller('MissionListCtrl', function($log, $scope, $q, missionsService, deviceServices, appGlobal) {
-	$log.debug('MissionListCtrl');
-	
-	appGlobal.ready.then(function() {
-		run();
-	});
-
-	function run() {
-		deviceServices.detectCurrentPosition(true).then(getMissions).then(showMissions);
-	}
-
+.run(function($q, appGlobal, deviceServices, missionsService) {
+	var q = $q.defer();
+	appGlobal.pMissions = q.promise;
 	function getMissions() {
 		var geoLocation = appGlobal.geoPosition.coords.latitude + ',' + appGlobal.geoPosition.coords.longitude;
 		return missionsService.getMissions({
 			location : geoLocation
 		});
 	}
+	deviceServices.detectCurrentPosition(false)
+	.then(getMissions)
+	.then(function(missions) {
+		q.resolve(missions);
+	});
+})
+.controller('MissionListCtrl', function( $scope, appGlobal) {
+	console.debug('MissionListCtrl');
+	
+	appGlobal.ready.then(function() {
+		run();
+	});
+
+	function run() {
+		appGlobal.pMissions.then(showMissions);
+	}
+
 
 	function showMissions(missions) {
 		$scope.missions = missions;
-	}	
-
+	}
 });

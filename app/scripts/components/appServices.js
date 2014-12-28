@@ -5,7 +5,7 @@
 
 /*global ionic */
 
-angular.module('SpotterApp').factory('appServices', function($q, $ionicPlatform, $rootScope, $window, appGlobal, deviceServices, $cordovaStatusbar, $cordovaKeyboard) {
+angular.module('SpotterApp').factory('appServices', function($q, $ionicPlatform, $rootScope, $window, appGlobal, deviceServices, $cordovaStatusbar) {
 	
 	return {
 		currentVersion : 0,

@@ -3,7 +3,7 @@
  */
 'use strict';
 
-angular.module('SpotterApp').factory('missionsService', function (genericService, Restangular, $log) {
+angular.module('SpotterApp').factory('missionsService', function (Restangular) {
 
   Restangular.extendModel('missions', function (model) {
     model.accept = function () {
@@ -18,7 +18,7 @@ angular.module('SpotterApp').factory('missionsService', function (genericService
 
   return {
     getMissions: function (args) {
-      return genericService.ajaxCallArray('missions', args);
+      return Restangular.all('missions').getList(args);
     },
     getMission: function (id) {
       return Restangular.one('missions', id).get();

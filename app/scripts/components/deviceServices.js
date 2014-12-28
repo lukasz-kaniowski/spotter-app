@@ -46,12 +46,22 @@ angular.module('SpotterApp').factory('deviceServices', function($cordovaGeolocat
 			}
 		},
 		detectCurrentPosition : function(force) {
-			// TODO use force
-			force = true;
 			var q = $q.defer();
 			deferrer = q;
 			var geolocationOptions = CONFIG.geolocationOptions;
 			detectionInProgress = true;
+			// if we are not forced to re-detect location
+			if (!force) {
+				// check if position was acquired recently
+				if (appGlobal.geoPositionTime) {
+					// is the difference bigger than max cache size?
+					var diff = Date.now() - appGlobal.geoPositionTime;
+					if (diff<CONFIG.geoTimeStep) {
+						q.resolve(appGlobal.geoPosition);
+						return q.promise;
+					}
+				}
+			}
 
 			var geolocationSuccess = function(position) {
 				detectionInProgress = false;
