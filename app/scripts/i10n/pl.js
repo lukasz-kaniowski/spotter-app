@@ -22,6 +22,7 @@ var translationsPl = {
       Title: 'Detale Misji',
       InstructionsHeader: 'Instrukcja',
       AcceptButton: 'Akceptuje',
+      StartButton: 'Rozpocznij',
       TasksHeader: 'Zadania:',
       DueInTitle: 'Pozostało:'
     },

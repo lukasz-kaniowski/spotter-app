@@ -6,7 +6,7 @@
       <div class="item">
         <i class="icon ion-ios7-timer-outline positive"></i>
         <span class="positive" translate="Missions.Show.DueInTitle"></span>
-        <due time="mission.dueDate"></due>
+        <due time="dueTime"></due>
 
       </div>
       <div class="item item-text-wrap">
@@ -28,7 +28,7 @@
       <div class="item item-text-wrap">
         <p ng-bind-html="mission.instructions">
         </p>
-        <a ng-click="openModal()" class="button button-balanced button-block" translate="Missions.Show.AcceptButton"></a>
+        <a ng-click="triggerAction()" class="button button-balanced button-block" translate="{{buttonLabelKey}}"></a>
       </div>
 
     </div>
