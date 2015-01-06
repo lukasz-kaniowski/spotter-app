@@ -35,12 +35,14 @@ angular.module('SpotterApp').factory('appServices', function($q, $ionicPlatform,
 					// get device info
 					var deviceInfo = ionic.Platform.device();
 					console.log('*** Device Detected: ' + JSON.stringify(deviceInfo));
-					// show status bar
-					$cordovaStatusbar.show();
 					// hide keyboard accessory bar TODO uncomment - causes crash in iOS
 					// $cordovaKeyboard.hideAccessoryBar();
 					// show app in full screen
 					ionic.Platform.fullScreen(true, true);
+					// show status bar
+					$cordovaStatusbar.style(0);
+					$cordovaStatusbar.overlaysWebView(false);
+//					$cordovaStatusbar.show();
 					// TODO get online status and set events
 					// setNetworkStatusEvents();
 					setAppReady().catch(errorCallback);

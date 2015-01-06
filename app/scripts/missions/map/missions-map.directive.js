@@ -1,12 +1,12 @@
 'use strict';
 
-// TODO fix any jshint issues
-// create sass formatting of html marker [DONE] - need more details about the style of the app
 // TODO add button to move to the closest mission on the map
 // TODO add fallback for js maps
-// TODO test on android and ios
 // TODO check Geolocation is working in all conditions on ios and android
 // TODO map should work on different device sizes
+// test on android and ios [DONE]
+// fix any jshint issues [DONE]
+// create sass formatting of html marker [DONE] - need more details about the style of the app
 // reuse missions results and location results in both list and map [Done]
 // use restangular instead of native $resource [DONE]
 // Move Map Controller to a Maps Directive [DONE]
@@ -29,11 +29,9 @@ angular.module('SpotterApp.missions.list', []).config(function() {
 			missions : '=',
 		}
 	};
-}).controller('MissionsMapCtrl', function($scope, appGlobal, helperService, $interval) {
+}).controller('MissionsMapCtrl', function($scope, appGlobal, helperService, $interval, $state) {
 	console.debug('MissionsMapCtrl');
-	$scope.updated = false;
 	$scope.show = false;
-	$scope.currentMarker = -1;
 	$scope.frameCss = {
 		left : 0,
 		top : 0
@@ -45,11 +43,7 @@ angular.module('SpotterApp.missions.list', []).config(function() {
 	});
 
 	function run() {
-		// TODO Temp
-		// appGlobal.geoPosition.coords.latitude = 52.230938;
-		// appGlobal.geoPosition.coords.longitude = 21.009537;
-		// var missions = helperService.missions;
-		// showMissions(missions);
+		appGlobal.missionsTab = 2;
 		appGlobal.pMissions.then(showMissions);
 	}
 
@@ -58,20 +52,14 @@ angular.module('SpotterApp.missions.list', []).config(function() {
 		missions = helperService.missions;
 		$scope.missions = missions;
 		// Show map
-		if ($scope.map) {
-			updateMap();
-		} else {
-			createMap();
-		}
+		$scope.loadMap();
 	}
 
 	function createMap() {
 
 		function onMapInit(map) {
-			console.log('Map Ready');
+			console.log('Map Initialized');
 			map.on(plugin.google.maps.event.MAP_CLICK, onMapClick);
-			// map.on(plugin.google.maps.event.CAMERA_CHANGE, onMapCameraChange);
-			updateMap();
 		}
 
 		if (appGlobal.onDevice) {
@@ -80,13 +68,12 @@ angular.module('SpotterApp.missions.list', []).config(function() {
 				if (isAvailable) {
 					var div = document.getElementById('map_canvas');
 					if (div) {
-						console.log('creating map');
 						$scope.map = plugin.google.maps.Map.getMap(div);
 						$scope.map.clear();
 						$scope.map.off();
-						// $scope.map.setDebuggable(true);
-						// $scope.map.setClickable( true );
 						$scope.map.addEventListener(plugin.google.maps.event.MAP_READY, onMapInit);
+						populateMap();
+						$scope.map.refreshLayout();
 					} else {
 						console.log('google maps plugin - div is not available');
 					}
@@ -108,12 +95,11 @@ angular.module('SpotterApp.missions.list', []).config(function() {
 		if ($scope.show) {
 			$scope.map.fromLatLngToPoint($scope.markerPosition, function(point) {
 				if ($scope.frameLocation[0] !== point[0] || $scope.frameLocation[1] !== point[1]) {
-					// console.log("point is "+point[0]+","+point[1]);
 					$scope.frameLocation[0] = point[0];
 					$scope.frameLocation[1] = point[1];
 					var left, top;
-					left = point[0] - 183;
-					top = point[1] - 180;
+					left = point[0] - 159;
+					top = point[1] - 172;
 					$scope.frameCss = {
 						'left' : left + 'px',
 						'top' : top + 'px'
@@ -126,9 +112,17 @@ angular.module('SpotterApp.missions.list', []).config(function() {
 	}
 
 
+	$scope.gotoMission = function(id) {
+		$interval.cancel($scope.timer);
+		$scope.timer = undefined;
+		$state.transitionTo('app.mission', {
+			'missionId' : id
+		});
+	};
+
 	$scope.hidePopover = function() {
-		console.log('hide popover');
-		$scope.currentMarker = -1;
+		// console.log('hide popover');
+		appGlobal.currentMarker = -1;
 		$scope.show = false;
 		$interval.cancel($scope.timer);
 		$scope.timer = undefined;
@@ -137,14 +131,16 @@ angular.module('SpotterApp.missions.list', []).config(function() {
 	};
 
 	$scope.showPopover = function(id) {
+
 		if ($scope.timer) {
 			$interval.cancel($scope.timer);
 		}
 		$scope.show = false;
-		console.log('show popover');
-		$scope.currentMarker = id;
-		$scope.mission = $scope.missions[$scope.currentMarker];
+		// console.log('show popover');
+		appGlobal.currentMarker = id;
+		$scope.mission = $scope.missions[appGlobal.currentMarker];
 		$scope.map.getCameraPosition(function(camera) {
+			// $scope.$apply(function() {
 			$scope.map.animateCamera({
 				'target' : $scope.markerPosition,
 				'zoom' : camera.zoom,
@@ -153,12 +149,13 @@ angular.module('SpotterApp.missions.list', []).config(function() {
 				$scope.show = true;
 				$scope.timer = $interval(function() {
 					refreshFramePosition();
-				}, 200);
+				}, 100);
 			});
+			// });
 		});
 	};
 
-	function updateMap(map) {
+	function populateMap(map) {
 		map = map;
 		//  Set initial Map Settings, latLng must run after getting position and getting missions
 		var latLng;
@@ -169,69 +166,74 @@ angular.module('SpotterApp.missions.list', []).config(function() {
 		if ($scope.missions.length === 0) {
 			return;
 		}
-		if ($scope.updated) {
-			return;
-		}
 
-		console.log('updating map');
-		// centering map on closest mission, or on current gps location if no missions nearby.
-		if ($scope.missions.length > 0) {
-			latLng = new plugin.google.maps.LatLng($scope.missions[0].address.coordinates[0], $scope.missions[0].address.coordinates[1]);
-		} else {
-			latLng = new plugin.google.maps.LatLng(appGlobal.geoPosition.coords.latitude, appGlobal.geoPosition.coords.longitude);
-		}
-		// latLng = new plugin.google.maps.LatLng(appGlobal.geoPosition.coords.latitude, appGlobal.geoPosition.coords.longitude);
-		// latLng = new plugin.google.maps.LatLng(52.230938, 21.009537);
+		console.log('populating map');
 
-		$scope.map.animateCamera({
-			'target' : latLng,
-			'zoom' : 12,
-			'duration' : 500
-		});
+		if (!appGlobal.missionsMap) {
+			// centering map on closest mission, or on current gps location if no missions nearby.
+			if ($scope.missions.length > 0) {
+				latLng = new plugin.google.maps.LatLng($scope.missions[0].address.coordinates[0], $scope.missions[0].address.coordinates[1]);
+			} else {
+				latLng = new plugin.google.maps.LatLng(appGlobal.geoPosition.coords.latitude, appGlobal.geoPosition.coords.longitude);
+			}
+
+			$scope.map.animateCamera({
+				'target' : latLng,
+				'zoom' : 12,
+				'duration' : 500
+			});
+		}
 		createMarkers();
-		$scope.updated = true;
+		appGlobal.missionsMap = true;
 	}
 
 	function createMarkers() {
 		var latLng;
-		// latLng = new plugin.google.maps.LatLng(52.230938, 21.009537);
+		function onMarkerClick(marker) {
+			// console.log('marker click trigger');
+			// $scope.$apply(function() {
+			var id = marker.get('missionId');
+			$scope.markerPosition = marker.get('position');
+			if (appGlobal.currentMarker >= 0) {
+				if (appGlobal.currentMarker === id) {
+					// console.log('hitting same marker ' + id);
+					$scope.hidePopover();
+				} else {
+					// console.log('hitting another marker ' + id);
+					$scope.showPopover(id);
+				}
+			} else {
+				// console.log('hitting new marker ' + id);
+				$scope.showPopover(id);
+			}
+			// });
+		}
 
 		for (var m = 0; m < $scope.missions.length; m++) {
 			latLng = new plugin.google.maps.LatLng($scope.missions[m].address.coordinates[0], $scope.missions[m].address.coordinates[1]);
-			console.log($scope.missions[m]);
-			var iconMarker = helperService.createMarkerIcon($scope.missions[m].price, 'GBP');
+			var iconMarker = helperService.createMarkerIcon($scope.missions[m].price, 'PLN');
 			$scope.map.addMarker({
 				'position' : latLng,
 				'missionId' : m,
 				'icon' : iconMarker
 			}, function(marker) {
 				marker.addEventListener(plugin.google.maps.event.MARKER_CLICK, onMarkerClick);
+				if (marker.get('missionId') === appGlobal.currentMarker) {
+					$scope.markerPosition = marker.get('position');
+					$scope.showPopover(appGlobal.currentMarker);
+				}
 			});
 		}
 	}
 
-	function onMarkerClick(marker) {
-		console.log('marker click trigger');
-		// $scope.$apply(function() {
-		var id = marker.get('missionId');
-		$scope.markerPosition = marker.get('position');
-		if ($scope.currentMarker >= 0) {
-			if ($scope.currentMarker === id) {
-				console.log('hitting same marker ' + id);
-				$scope.hidePopover();
-			} else {
-				console.log('hitting another marker ' + id);
-				$scope.showPopover(id);
-			}
-		} else {
-			console.log('hitting new marker ' + id);
-			$scope.showPopover(id);
-		}
-		// });
-	}
 
+	$scope.$on('$destroy', function() {
+		if ($scope.timer) {
+			$interval.cancel($scope.timer);
+		}
+	});
 	// Do this to reload map when switching tabs - fixes an issue between ionic and google-maps
-	$scope.refreshMap = function() {
+	$scope.loadMap = function() {
 		setTimeout(function() {
 			$scope.refreshMap_();
 		}, 1);

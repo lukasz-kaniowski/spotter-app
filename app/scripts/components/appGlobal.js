@@ -17,6 +17,10 @@ angular.module('SpotterApp').factory('appGlobal', function($q, CONFIG) {
 		// App Current Language
 		language : CONFIG.defaultLanguage,
 		geoPosition : CONFIG.defaultGeolocation,
+		// Mission State
+		missionsMap:false,
+		currentMarker: -1,
+		missionsTab: 1,
 		geoPositionTime: null,
 		geoLocation : null,
 		forceGeoLocation : false, // user has forced the selection of an Area

@@ -1,13 +1,14 @@
-<div style="width:100%;height:400px;position:relative;" id="map_canvas">
-
-	  <div id="myOverlay" data-clickable='false'>	  
-	  		<div id="infoWnd_frame" ng-show="show" ng-click="hidePopover()" ng-style="frameCss">
-	  			<div id="infoWnd_body">
-	  				<div class="popover_priceDiv">{{mission.price}}<br>GBP</div>
-	  				<div class="popover_infoDiv"><span class="popover_header">{{mission.title}}</span><br>{{mission.company}}<br>{{mission.address.distance}} away
+<div style="width:100%;height:100%;position:relative;" id="map_canvas">
+	  <div id="myOverlay" data-clickable='false'>	 
+	  		<div id="infoWnd_frame" ng-show="show"  ng-style="frameCss">
+	  			<div id="infoWnd_body" ng-click="gotoMission({{mission.id}})">
+	  				<div class="popover_priceDiv">{{mission.price}}<br>PLN</div>
+	  				<div class="popover_infoDiv">
+	  					<span class="popover_header">{{mission.title}}</span><br>{{mission.company}}<br>{{mission.address.distance}} away	  					
 	  				</div>
+	  				<div class="popover_arrowDiv"><i class="icon ion-chevron-right"></i></div>
 	  				<div class="arrow-down"></div>
-	  			</div>	  			
+	  			</div>	  				  			
 	  		</div>
 	  </div>
 </div>

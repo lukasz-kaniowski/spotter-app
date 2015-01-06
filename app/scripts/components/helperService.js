@@ -18,7 +18,7 @@ angular.module('SpotterApp').factory('helperService', function() {
 			'price' : 5
 		}, {
 			'id' : 2,
-			'title' : 'Nice and easy',
+			'title' : 'Nice and easy 2',
 			'company' : 'Tesco',
 			'address' : {
 				'coordinates' : [52.330938, 21.009537],
@@ -85,7 +85,7 @@ angular.module('SpotterApp').factory('helperService', function() {
 				'distance' : '10.2km'
 			},
 			'dueDate' : '31-12-2014 12:10',
-			'price' : 10000
+			'price' : 100
 		}, {
 			'id' : 9,
 			'title' : 'Nice and easy 9',
@@ -108,6 +108,7 @@ angular.module('SpotterApp').factory('helperService', function() {
 			'price' : 180
 		}],
 		reattachMap : function(map, div) {
+			console.log('re-attaching Native Map');
 			if (!isDom(div)) {
 				console.log('div is not dom');
 				return map;
@@ -125,7 +126,6 @@ angular.module('SpotterApp').factory('helperService', function() {
 		},
 		createMarkerIcon : function(price, currency) {
 			// Icons can be added as base64 but wont work on Android 2.3
-			console.log('adding marker' + price + currency);
 			var canvas = document.createElement('canvas');
 			canvas.width = 50;
 			canvas.height = 55;

@@ -424,13 +424,13 @@ module.exports = function (grunt) {
         }]
       }
     },
-	execute: {
+	  execute: {
         installplugins: {
             // execute javascript files in a node child_process
             src: ['gruntinstallplugins.js']
-        	}
-	}
-  });
+					}
+				}
+			});
 
   // Register tasks for all Cordova commands
   _.functions(cordovaCli).forEach(function (name) {
