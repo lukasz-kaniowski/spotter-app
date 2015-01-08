@@ -32,7 +32,11 @@ var translationsPl = {
       CancelButton: 'Anuluj',
       Label: 'Czy na pewno akceptujesz to zadanie?',
       TimeToExecute: 'Masz tylko <strong>30 minut</strong> na jego wykonanie!'
-    }
+    },
+    List: {
+		DAYS_LEFT : 'days left',
+		KMS_AWAY  : 'kms away'    	
+    },
   },
   TaskType: {
     question: 'Pytania',

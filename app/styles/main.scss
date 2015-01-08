@@ -106,3 +106,52 @@ ul.list-inline {
   left: 145px;
   position: relative;
 }   
+
+.item-right-arrow {
+float: right;
+line-height: 80px;
+display: block;
+margin: -7px;
+background-color: #dddddd;
+padding-left: 4px;
+padding-right: 4px;
+text-align: center;
+font-weight: bold;
+font-size: 24px;
+}
+
+.item-right-text {
+float: right;
+height: 80px;
+display: block;
+margin-top: -7px;
+margin-bottom: -7px;
+padding-top: 16px;
+background-color: #dddddd;
+padding-left: 16px;
+padding-right: 8px;
+font-size: 20px;
+text-align: center;
+}
+
+.grey {
+  color: #b3b1b2;
+}
+
+.blue {
+  color: #00b0f0;
+}
+
+.big-number {
+  font-size: 28px;
+}
+
+.black {
+  color: black;
+}
+
+.item {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-right: 8px;
+}

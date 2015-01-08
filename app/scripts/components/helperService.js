@@ -12,9 +12,9 @@ angular.module('SpotterApp').factory('helperService', function() {
 			'company' : 'Tesco',
 			'address' : {
 				'coordinates' : [52.230938, 21.009537],
-				'distance' : '0.2km'
+				'distance' : '2'
 			},
-			'dueDate' : '30-12-2014 22:10',
+			'dueDate' : '2/15/2015 22:10',
 			'price' : 5
 		}, {
 			'id' : 2,
@@ -22,9 +22,9 @@ angular.module('SpotterApp').factory('helperService', function() {
 			'company' : 'Tesco',
 			'address' : {
 				'coordinates' : [52.330938, 21.009537],
-				'distance' : '10.2km'
+				'distance' : '10'
 			},
-			'dueDate' : '31-12-2014 12:10',
+			'dueDate' : '1/20/2015 22:10',
 			'price' : 10
 		}, {
 			'id' : 3,
@@ -32,19 +32,19 @@ angular.module('SpotterApp').factory('helperService', function() {
 			'company' : 'Tesco 3',
 			'address' : {
 				'coordinates' : [52.430938, 21.109537],
-				'distance' : '11.2km'
+				'distance' : '11'
 			},
-			'dueDate' : '31-12-2014 12:10',
-			'price' : 100
+			'dueDate' : '2/5/2015 22:10',
+			'price' : 64
 		}, {
 			'id' : 4,
 			'title' : 'Nice and easy 4',
 			'company' : 'Tesco',
 			'address' : {
 				'coordinates' : [52.530938, 21.209537],
-				'distance' : '1999.2km'
+				'distance' : '19'
 			},
-			'dueDate' : '31-12-2014 12:10',
+			'dueDate' : '2/9/2015 22:10',
 			'price' : 1
 		}, {
 			'id' : 5,
@@ -52,9 +52,9 @@ angular.module('SpotterApp').factory('helperService', function() {
 			'company' : 'Tesco',
 			'address' : {
 				'coordinates' : [52.630938, 21.209537],
-				'distance' : '10.2km'
+				'distance' : '10'
 			},
-			'dueDate' : '31-12-2014 12:10',
+			'dueDate' : '2/9/2015 22:10',
 			'price' : 78
 		}, {
 			'id' : 6,
@@ -62,9 +62,9 @@ angular.module('SpotterApp').factory('helperService', function() {
 			'company' : 'Tesco',
 			'address' : {
 				'coordinates' : [52.730938, 21.509537],
-				'distance' : '10.2km'
+				'distance' : '10'
 			},
-			'dueDate' : '31-12-2014 12:10',
+			'dueDate' : '2/7/2015 22:10',
 			'price' : 44
 		}, {
 			'id' : 7,
@@ -72,9 +72,9 @@ angular.module('SpotterApp').factory('helperService', function() {
 			'company' : 'Tesco',
 			'address' : {
 				'coordinates' : [52.830938, 21.309537],
-				'distance' : '10.2km'
+				'distance' : '10'
 			},
-			'dueDate' : '31-12-2014 12:10',
+			'dueDate' : '2/6/2015 22:10',
 			'price' : 67
 		}, {
 			'id' : 8,
@@ -82,30 +82,30 @@ angular.module('SpotterApp').factory('helperService', function() {
 			'company' : 'Tesco',
 			'address' : {
 				'coordinates' : [52.930938, 21.009537],
-				'distance' : '10.2km'
+				'distance' : '10'
 			},
-			'dueDate' : '31-12-2014 12:10',
-			'price' : 100
+			'dueDate' : '2/1/2015 22:10',
+			'price' : 66
 		}, {
 			'id' : 9,
 			'title' : 'Nice and easy 9',
 			'company' : 'Tesco',
 			'address' : {
 				'coordinates' : [52.030938, 21.909537],
-				'distance' : '10.2km'
+				'distance' : '10'
 			},
-			'dueDate' : '31-12-2014 12:10',
-			'price' : 180
+			'dueDate' : '2/11/2015 22:10',
+			'price' : 99
 		}, {
 			'id' : 10,
 			'title' : 'Nice and easy 10',
 			'company' : 'Tesco',
 			'address' : {
 				'coordinates' : [52.330938, 22.009537],
-				'distance' : '10.2km'
+				'distance' : '10'
 			},
-			'dueDate' : '31-12-2014 12:10',
-			'price' : 180
+			'dueDate' : '2/12/2015 22:10',
+			'price' : 75
 		}],
 		reattachMap : function(map, div) {
 			console.log('re-attaching Native Map');
