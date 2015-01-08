@@ -1,5 +1,7 @@
 'use strict';
 
+/*export $ionicScrollDelegate */
+
 angular.module('SpotterApp.missions.list').config(function($stateProvider) {
 
 	$stateProvider.state('app.missions', {
@@ -29,10 +31,10 @@ angular.module('SpotterApp.missions.list').config(function($stateProvider) {
 }).controller('MissionListCtrl', function($scope, appGlobal, $ionicTabsDelegate, helperService, missionsDecorator, $state, $ionicScrollDelegate) {
 	console.debug('MissionListCtrl');
 	//var delegate = $ionicScrollDelegate($scope);
-  	//delegate.scrollToRememberedPosition('my-scroll-id');
+	//delegate.scrollToRememberedPosition('my-scroll-id');
 
-  	//saves scroll based on id on $destroy
-  	//delegate.rememberScrollPosition('my-scroll-id');
+	//saves scroll based on id on $destroy
+	//delegate.rememberScrollPosition('my-scroll-id');
 	appGlobal.ready.then(function() {
 		run();
 	});
@@ -48,9 +50,10 @@ angular.module('SpotterApp.missions.list').config(function($stateProvider) {
 	}
 
 	function showMissions(missions) {
-		missions = missionsDecorator.decorate('listMissions',missions);
+		missions = missionsDecorator.decorate('listMissions', missions);
 		$scope.missions = missions;
 	}
+
 
 	$scope.selectTab = function(index) {
 		index = index;
