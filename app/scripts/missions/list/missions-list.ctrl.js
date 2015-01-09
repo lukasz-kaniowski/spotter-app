@@ -62,6 +62,7 @@ angular.module('SpotterApp.missions.list').config(function($stateProvider) {
 	};
 
 	$scope.gotoMission = function(id) {
+		console.log("clicked goto mission " + id);
 		appGlobal.missionsTab = 1;
 		$state.transitionTo('app.mission', {
 			'missionId' : id

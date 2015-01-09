@@ -115,13 +115,14 @@ angular.module('SpotterApp.missions.list', []).config(function() {
 	$scope.gotoMission = function(id) {
 		$interval.cancel($scope.timer);
 		$scope.timer = undefined;
+		console.log("click goto mission "+id + " current marker "+appGlobal.currentMarker);
 		$state.transitionTo('app.mission', {
-			'missionId' : id
+			'missionId' : appGlobal.currentMarker
 		});
 	};
 
 	$scope.hidePopover = function() {
-		// console.log('hide popover');
+		console.log('hide popover');
 		appGlobal.currentMarker = -1;
 		$scope.show = false;
 		$interval.cancel($scope.timer);
@@ -136,7 +137,7 @@ angular.module('SpotterApp.missions.list', []).config(function() {
 			$interval.cancel($scope.timer);
 		}
 		$scope.show = false;
-		// console.log('show popover');
+		console.log('show popover');
 		appGlobal.currentMarker = id;
 		$scope.mission = $scope.missions[appGlobal.currentMarker];
 		$scope.map.getCameraPosition(function(camera) {

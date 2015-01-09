@@ -24,8 +24,9 @@ angular
 
   })
 
-  .controller('MissionShowCtrl', function ($log, $scope, mission, $ionicModal, $state) {
+  .controller('MissionShowCtrl', function ($log, $scope, mission, $ionicModal, $state, appGlobal) {
     $log.debug('MissionShowCtrl', mission);
+    createMap();    
 
     function setMission(mission) {
       $scope.mission = mission;
@@ -70,5 +71,57 @@ angular
     $scope.$on('$destroy', function () {
       $scope.modal.remove();
     });
+
+	// Map Related Functions
+	function createMap() {
+
+		function onMapInit(map) {
+			console.log('Mission Map Initialized');
+			// map.on(plugin.google.maps.event.MAP_CLICK, onMapClick);
+		}
+
+		if (appGlobal.onDevice) {
+			plugin.google.maps.Map.isAvailable(function(isAvailable, message) {
+				message = message;
+				if (isAvailable) {
+					var div = document.getElementById('mission_map_canvas');
+					if (div) {
+						$scope.map = plugin.google.maps.Map.getMap(div);
+						$scope.map.clear();
+						$scope.map.off();
+						$scope.map.addEventListener(plugin.google.maps.event.MAP_READY, onMapInit);
+						$scope.populateMap();
+						$scope.map.refreshLayout();
+					} else {
+						console.log('google maps plugin - div is not available');
+					}
+				} else {
+					console.log('google maps plugin is not available - ' + message);
+				}
+			});
+		} else {
+			console.log('google maps plugin is not available - not running on a device ');
+		}
+	}
+
+	$scope.populateMap = function() {
+		// center map on mission
+		var latLng = new plugin.google.maps.LatLng($scope.mission.address.coordinates[0], $scope.mission.address.coordinates[1]);
+		console.log("center on "+ $scope.mission.address.coordinates[0] + " and "+ $scope.mission.address.coordinates[1]);
+		$scope.map.animateCamera({
+			'target' : latLng,
+			'zoom' : 14,
+			'duration' : 500
+		});		
+		// show address in info window
+		$scope.map.addMarker({
+			'position' : latLng,
+			'title': $scope.mission.title,
+  			'snippet': ['address line 1', 'address line 2', 'address line 3'].join("\n\r"),			
+		}, function(marker) {
+			marker.showInfoWindow();
+		});
+	};
+	
 
   });
