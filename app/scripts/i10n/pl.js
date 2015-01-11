@@ -33,9 +33,9 @@ var translationsPl = {
 			TimeToExecute : 'Masz tylko <strong>30 minut</strong> na jego wykonanie!'
 		},
 		List : {
-			DAYS_LEFT : 'days left',
-			KMS_AWAY : 'kms away'
-		},
+			DAYS_LEFT : 'dni',
+			KMS_AWAY : 'km'
+		}
 	},
 	TaskType : {
 		question : 'Pytania',
