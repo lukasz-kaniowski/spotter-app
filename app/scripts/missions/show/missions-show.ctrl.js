@@ -114,12 +114,15 @@ angular
 			'duration' : 500
 		});		
 		// show address in info window
+		var icon = 'www/images/icon.png';
+		console.log(location.path);
 		$scope.map.addMarker({
 			'position' : latLng,
+			'icon'	: icon,
 			'title': $scope.mission.title,
   			'snippet': ['address line 1', 'address line 2', 'address line 3'].join("\n\r"),			
 		}, function(marker) {
-			marker.showInfoWindow();
+			// marker.showInfoWindow();
 		});
 	};
 	
