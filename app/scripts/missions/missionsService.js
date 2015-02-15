@@ -3,7 +3,7 @@
  */
 'use strict';
 
-angular.module('SpotterApp').factory('missionsService', function (Restangular) {
+angular.module('SpotterApp').factory('missionsService', function (Restangular, $http, CONFIG) {
 
   Restangular.extendModel('missions', function (model) {
     model.accept = function () {

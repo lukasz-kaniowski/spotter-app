@@ -39,7 +39,7 @@ module.exports = function (grunt) {
         dest: '<%= yeoman.app %>/scripts/config.js',
         constants: {
           CONFIG: {
-            apiEndpoint: 'http://private-anon-9628aead2-spotters.apiary-mock.com/',
+            apiEndpoint: 'http://localhost:9100',
             deviceOnly: false,	// force app to run on device only
             geoTimeStep: 300000,	// 5 minutes, the time to cache geo location
             defaultLanguage: 'pl',

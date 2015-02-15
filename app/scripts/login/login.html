@@ -1,0 +1,23 @@
+<ion-view>
+
+  <ion-content padding="true" class="has-header mission-show-content">
+    <h1>Login</h1>
+    <form name="form" ng-submit="login(form)">
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Email</span>
+          <input type="text" ng-model="user.email" required>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Password</span>
+          <input type="password" ng-model="user.password" required>
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive" type="submit">Log in</button>
+        </label>
+      </div>
+    </form>
+
+  </ion-content>
+</ion-view>
+
