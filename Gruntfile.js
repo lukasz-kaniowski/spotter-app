@@ -37,34 +37,19 @@ module.exports = function (grunt) {
         wrap: '"use strict";\n\n {%= __ngModule %}',
         name: 'config',
         dest: '<%= yeoman.app %>/scripts/config.js',
-        constants: {
-          CONFIG: {
-            apiEndpoint: 'http://localhost:9100',
-            deviceOnly: false,	// force app to run on device only
-            geoTimeStep: 300000,	// 5 minutes, the time to cache geo location
-            defaultLanguage: 'pl',
-            geolocationOptions: { maximumAge: 6000, timeout: 10000, enableHighAccuracy: true },
-            defaultGeolocation: {
-              coords: {
-                latitude: 52.230938,
-                longitude: 21.009537
-              },
-              timestamp: 0
-            }
-          }
-        },
+        constants: require('./config')
       },
       development: {
         constants: {
           ENV: {
-            name: 'development',
+            name: 'development'
           }
         }
       },
       production: {
         constants: {
           ENV: {
-            name: 'production',
+            name: 'production'
           }
         }
       }
