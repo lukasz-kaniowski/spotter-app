@@ -58,7 +58,7 @@ Application use rest api. Currently api is under development and appiary.com is 
 
 Documentation can be found here [http://docs.spotters.apiary.io/](http://docs.spotters.apiary.io/)
 
-Mock api server [http://private-anon-4d6f1cc83-spotters.apiary-mock.com](http://private-anon-4d6f1cc83-spotters.apiary-mock.com)
+Mock api server [http://private-fb018-spotters.apiary-proxy.com](http://private-fb018-spotters.apiary-proxy.com)
 
 
 
