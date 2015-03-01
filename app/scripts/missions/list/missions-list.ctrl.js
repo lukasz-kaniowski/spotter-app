@@ -64,12 +64,13 @@ angular.module('SpotterApp.missions.list').config(function($stateProvider) {
 		// console.log('changing missinos tab to '+appGlobal.missionsTab);
 	};
 
-	$scope.gotoMission = function(id) {
-		console.log("clicked goto mission " + id);
+	$scope.gotoMission = function(mission) {
 		appGlobal.missionsTab = 1;
-		$state.transitionTo('app.mission', {
-			'missionId' : id
-		});
+    console.log(mission);
+    $state.go('app.mission', {
+      'missionId': mission.id,
+      'locationId': mission.address.id
+    });
 	};
 
 });

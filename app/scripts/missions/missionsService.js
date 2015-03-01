@@ -18,10 +18,10 @@ angular.module('SpotterApp').factory('missionsService', function (Restangular, $
 
   return {
     getMissions: function (args) {
-      return Restangular.all('missions').getList(args);
+      return Restangular.all('missions').all('locations').getList(args);
     },
-    getMission: function (id) {
-      return Restangular.one('missions', id).get();
+    getMission: function (missionId, locationId) {
+      return Restangular.one('missions', missionId).one('locations', locationId).get();
     }
   };
 });

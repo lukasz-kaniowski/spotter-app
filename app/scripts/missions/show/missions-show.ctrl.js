@@ -7,15 +7,14 @@ angular
 
     $stateProvider
       .state('app.mission', {
-        url: '/missions/:missionId',
+        url: '/missions/:missionId/locations/:locationId',
         views: {
           'menuContent': {
             templateUrl: 'scripts/missions/show/missions-show.html',
             controller: 'MissionShowCtrl',
             resolve: {
               mission: function ($log, $stateParams, missionsService) {
-                $log.debug('/mission/:missionId', $stateParams);
-                return missionsService.getMission($stateParams.missionId);
+                return missionsService.getMission($stateParams.missionId, $stateParams.locationId);
               }
             }
           }
@@ -26,15 +25,15 @@ angular
 
   .controller('MissionShowCtrl', function ($log, $scope, mission, $ionicModal, $state, appGlobal) {
     $log.debug('MissionShowCtrl', mission);
-    createMap();    
+    createMap();
 
     function setMission(mission) {
       $scope.mission = mission;
-      if (mission.status === 'open') {
+      if (mission.state === 'active') {
         $scope.dueTime = mission.dueDate;
         $scope.triggerAction = openModal;
         $scope.buttonLabelKey = 'Missions.Show.AcceptButton';
-      } else if (mission.status === 'booked') {
+      } else if (mission.state === 'booked') {
         $scope.dueTime = mission.bookingDueTime;
         $scope.triggerAction = startMission;
         $scope.buttonLabelKey = 'Missions.Show.StartButton';
@@ -112,7 +111,7 @@ angular
 			'target' : latLng,
 			'zoom' : 14,
 			'duration' : 500
-		});		
+		});
 		// show address in info window
 		var icon = 'www/images/icon.png';
 		console.log(location.path);
@@ -120,11 +119,11 @@ angular
 			'position' : latLng,
 			'icon'	: icon,
 			'title': $scope.mission.title,
-  			'snippet': ['address line 1', 'address line 2', 'address line 3'].join("\n\r"),			
+  			'snippet': ['address line 1', 'address line 2', 'address line 3'].join("\n\r"),
 		}, function(marker) {
 			// marker.showInfoWindow();
 		});
 	};
-	
+
 
   });

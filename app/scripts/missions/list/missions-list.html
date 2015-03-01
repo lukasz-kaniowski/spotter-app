@@ -6,7 +6,7 @@
     <ion-tab title="{{'TAB_LIST' | translate}}" icon="ion-android-note" on-select="selectTab(1)">
       <ion-content padding="true" class="has-header">
         <ion-list>
-	        <ion-item class="item item-icon-left" ng-repeat="mission in missions" ng-click="gotoMission(mission._id)">
+	        <ion-item class="item item-icon-left" ng-repeat="mission in missions" ng-click="gotoMission(mission)">
 	      	<i class="icon ion-location blue"></i>
 	      	<i class="item-right-arrow ion-chevron-right grey"></i>
 	      	<i class="item-right-text blue" ><i class="big-number">{{mission.price}}</i><br />PLN</i>
