@@ -49,7 +49,7 @@ Test was done on Genymotion using Nexus 5 - 4.4.4 API 19 - with GApps for 4.4.4
    
 Code organization
 =================
-Application tend to fallow Angular best practices for directory structre [Google Doc](https://docs.google.com/document/d/1XXMvReO8-Awi1EZXAXS4PzDzdNvV6pGcuaF4Q9821Es/pub)
+Application tend to fallow Angular best practices for directory structure [Google Doc](https://docs.google.com/document/d/1XXMvReO8-Awi1EZXAXS4PzDzdNvV6pGcuaF4Q9821Es/pub)
 
 Backend Integration
 ===================
