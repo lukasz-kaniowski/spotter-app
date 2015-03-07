@@ -7,14 +7,14 @@ angular
 
     $stateProvider
       .state('app.mission', {
-        url: '/missions/:missionId/locations/:locationId',
+        url: '/missions/:missionId',
         views: {
           'menuContent': {
             templateUrl: 'scripts/missions/show/missions-show.html',
             controller: 'MissionShowCtrl',
             resolve: {
               mission: function ($log, $stateParams, missionsService) {
-                return missionsService.getMission($stateParams.missionId, $stateParams.locationId);
+                return missionsService.getMission($stateParams.missionId);
               }
             }
           }
@@ -52,7 +52,9 @@ angular
     setMission(mission);
 
     $scope.accept = function () {
-      mission.accept().then(setMission).then($scope.closeModal);
+      $log.debug('Accepting');
+      mission.book().then(setMission).then($scope.closeModal)
+        .catch($scope.closeModal);
     };
 
     $ionicModal.fromTemplateUrl('scripts/missions/show/activate.modal.html', {
@@ -119,7 +121,7 @@ angular
 			'position' : latLng,
 			'icon'	: icon,
 			'title': $scope.mission.title,
-  			'snippet': ['address line 1', 'address line 2', 'address line 3'].join("\n\r"),
+  			'snippet': ['address line 1', 'address line 2', 'address line 3'].join("\n\r")
 		}, function(marker) {
 			// marker.showInfoWindow();
 		});

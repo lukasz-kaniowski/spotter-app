@@ -11,6 +11,9 @@ angular.module('SpotterApp', ['ionic', 'config', 'SpotterApp.main', 'SpotterApp.
   })
   .config(function (CONFIG, RestangularProvider) {
     RestangularProvider.setBaseUrl(CONFIG.apiEndpoint + '/api');
+    RestangularProvider.setRestangularFields({
+      id: "_id"
+    });
   })
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider.state('app', {
@@ -38,9 +41,7 @@ angular.module('SpotterApp', ['ionic', 'config', 'SpotterApp.main', 'SpotterApp.
       // Add authorization token to headers
       request: function (config) {
         config.headers = config.headers || {};
-        console.log(config);
         if ($localStorage.token) {
-          console.log('adding token');
           config.headers.Authorization = 'Bearer ' + $localStorage.token;
         }
         return config;

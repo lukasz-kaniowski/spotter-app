@@ -6,11 +6,11 @@
 angular.module('SpotterApp').factory('missionsService', function (Restangular, $http, CONFIG) {
 
   Restangular.extendModel('missions', function (model) {
-    model.accept = function () {
-      return model.customPUT({}, 'accept');
+    model.book = function () {
+      return model.customPUT({}, 'book');
     };
-    model.reject = function () {
-      return model.customDELETE('accept');
+    model.cancel = function () {
+      return model.customDELETE('book');
     };
 
     return model;
@@ -18,10 +18,10 @@ angular.module('SpotterApp').factory('missionsService', function (Restangular, $
 
   return {
     getMissions: function (args) {
-      return Restangular.all('missions').all('locations').getList(args);
+      return Restangular.all('missions').getList(args);
     },
-    getMission: function (missionId, locationId) {
-      return Restangular.one('missions', missionId).one('locations', locationId).get();
+    getMission: function (missionId) {
+      return Restangular.one('missions', missionId).get();
     }
   };
 });

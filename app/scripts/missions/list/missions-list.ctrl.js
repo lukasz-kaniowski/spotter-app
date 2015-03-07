@@ -67,10 +67,7 @@ angular.module('SpotterApp.missions.list').config(function($stateProvider) {
 	$scope.gotoMission = function(mission) {
 		appGlobal.missionsTab = 1;
     console.log(mission);
-    $state.go('app.mission', {
-      'missionId': mission.id,
-      'locationId': mission.address.id
-    });
+    $state.go('app.mission', {'missionId': mission._id});
 	};
 
 });
