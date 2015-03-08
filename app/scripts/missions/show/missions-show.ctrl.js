@@ -45,7 +45,7 @@ angular
     }
 
     function startMission() {
-      $state.go('startMission');
+      $state.go('app.missionsTasks');
     }
 
     setMission(mission);
