@@ -45,7 +45,7 @@ angular.module('SpotterApp.missions.list').config(function($stateProvider) {
 			$ionicTabsDelegate.select(1);
 		}
 		// appGlobal.pMissions.then(showMissions);
-		  missionsService.getMissions({}).then(function (missions) {
+		  missionsService.getMissions({state: 'active'}).then(function (missions) {
         console.log('missions', missions);
         showMissions(missions);
       });
