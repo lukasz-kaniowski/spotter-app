@@ -30,6 +30,12 @@ To deploy on Android and iOS
 	grunt run:ios	
 	
 	// if you wish to start over completely, make sure to delete both plugins and platforms folders
+	
+Using ionic view to preview app on iPhone and android
+=====================================================
+
+    $ grunt build
+    $ ionic upload  
    
 Using Genymotion for android testing
 ====================================
