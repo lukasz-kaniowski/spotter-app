@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('SpotterApp.missions')
-  .directive('singleMissionMap', function (appGlobal, $log) {
+  .directive('singleMissionMap', function (appGlobal) {
     return {
       restrict: 'E',
       replace: true,
@@ -10,7 +10,7 @@ angular.module('SpotterApp.missions')
         mission: '='
       },
       link: function (scope, element, attrs) {
-        $log.debug('singleMissionMap, mission: ',  scope.mission);
+        console.log('singleMissionMap, mission: ',  scope.mission);
 
         createMap();
 
