@@ -13,7 +13,7 @@ Use grunt to create and build platforms
 	// must run first to create cordova folders
     $ grunt serve
 
-To deploy on Android and iOS
+To deploy on Android and iOS emulator
 =============================
 
 	grunt platform:add:ios
@@ -30,6 +30,15 @@ To deploy on Android and iOS
 	grunt run:ios	
 	
 	// if you wish to start over completely, make sure to delete both plugins and platforms folders
+	
+Development on emulator with livereload
+=======================================
+	
+You need to start 2 processes. 
+
+First run watch to copy app js and compile css into www folder. `grunt watch`
+
+Execute ionic cli to automatically reload emulator: `ionic emulate ios -lcs --target="iPhone-6"`
 	
 Using ionic view to preview app on iPhone and android
 =====================================================
