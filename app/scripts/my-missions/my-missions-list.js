@@ -3,7 +3,7 @@ angular
   .directive('myMissionsList', function () {
     return {
       restrict: 'E',
-      templateUrl: 'scripts/my-missions/my-missions-list.tpl.html',
+      templateUrl: 'scripts/my-missions/my-missions-list.tpl.html'
       //controller: 'MyMissionCtrl'
     }
   }

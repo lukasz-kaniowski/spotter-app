@@ -1,29 +1,29 @@
 'use strict';
 
 angular.module('SpotterApp').factory('missionsDecorator', function() {
-  var decorateListMissions = function(missions) {
+  var decorateListMissions = function (missions) {
       missions.forEach(function (mission) {
         var dueDate = new Date(mission.dueDate);
         var curDate = new Date();
-        mission.daysLeft = parseInt((dueDate-curDate)/(24*3600*1000));
+        mission.daysLeft = parseInt((dueDate - curDate) / (24 * 3600 * 1000));
 
       });
       return missions;
     },
-    decorateMyMissions = function(missions){
+    decorateMyMissions = function (missions) {
       var _missions = {};
       _missions.booked = [];
       _missions.review = [];
       _missions.closed = [];
-      angular.forEach(missions, function(v){
-        if(v.dueDate){
-          var date = new Date(v.dueDate)
-          v.daysLeft = date.getDate() + '/'+ (date.getMonth()+1) +'/'+date.getFullYear()
+      angular.forEach(missions, function (v) {
+        if (v.dueDate) {
+          var date = new Date(v.dueDate);
+          v.daysLeft = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear()
         }
         _missions[v.state].push(v);
-      })
+      });
       return _missions;
-    }
+    };
 
   return {
     decorate : function(action, missions) {

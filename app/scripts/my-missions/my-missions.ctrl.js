@@ -28,7 +28,7 @@ angular.module('SpotterApp.my-missions')
 
 
     $scope.selectTab = function(tabName) {
-      _tabName = tabName
+      _tabName = tabName;
       if($scope.missions)
         $scope.missions = $scope.missionsArr[_tabName];
     };
