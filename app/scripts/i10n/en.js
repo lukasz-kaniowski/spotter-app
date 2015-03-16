@@ -16,6 +16,7 @@ var translationsEn = {
 	MENU_TEST_ONLY : 'This is only a test',
 	MENU_CONTACT : 'Contact',
 	MENU_LOGIN : 'Login',
+	MENU_MY_MISSIONS : 'My Missions',
 	Missions : {
 		Show : {
 			Title : 'Detale Misji',
@@ -36,6 +37,14 @@ var translationsEn = {
 			DAYS_LEFT : 'days left',
 			KMS_AWAY : 'kms away'
 		},
+    MyMissions :{
+      Booked: 'To Do',
+      Review: 'In Review',
+      Closed: 'Completed',
+      NoTasks: "You don't have any outstanding missions right now.",
+      CheckMap: "Check the map for some opportunities!",
+      ExpiredOn: "EXPIRED ON"
+    }
 	},
 	TaskType : {
 		question : 'Pytania',

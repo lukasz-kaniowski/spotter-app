@@ -1,0 +1,17 @@
+<ion-view title="{{'MENU_MY_MISSIONS' | translate}}" ng-controller="MyMissionCtrl">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-tabs class="tabs-striped tabs-top tabs-icon-left">
+    <ion-tab title="{{'Missions.MyMissions.Booked' | translate}}" on-select="selectTab('booked')">
+      <my-missions-list></my-missions-list>
+    </ion-tab>
+    <ion-tab title="{{'Missions.MyMissions.Review' | translate}}" on-select="selectTab('review')">
+      <my-missions-list></my-missions-list>
+    </ion-tab>
+    <ion-tab title="{{'Missions.MyMissions.Closed' | translate}}" on-select="selectTab('closed')">
+      <my-missions-list></my-missions-list>
+    </ion-tab>
+
+  </ion-tabs>
+</ion-view>

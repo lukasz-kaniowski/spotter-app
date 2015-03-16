@@ -1,0 +1,19 @@
+<ion-content padding="true" class="has-header">
+  <ion-list ng-if="missions.length > 0">
+    <ion-item class="item item-icon-left" ng-repeat="mission in missions" ng-click="gotoMission(mission)">
+      <i class="icon ion-location blue"></i>
+      <i class="item-right-arrow ion-chevron-right grey"></i>
+      <i class="item-right-text blue" ><i class="big-number">{{mission.price}}</i><br />PLN</i>
+      <h2>{{mission.title}}</h2>
+      <p><i class="black">{{mission.company}}</i><br />
+        <span ng-if="mission.daysLeft">{{'Missions.MyMissions.ExpiredOn' | translate}} <i class="blue">{{mission.daysLeft}}</i></span>
+      </p>
+    </ion-item>
+  </ion-list>
+  <div class="card" ng-if="missions.length == 0">
+    <div class="item item-text-wrap">
+      <h3>{{'Missions.MyMissions.NoTasks' | translate}}</h3>
+      <h3>{{'Missions.MyMissions.CheckMap' | translate}}</h3>
+    </div>
+  </div>
+</ion-content>

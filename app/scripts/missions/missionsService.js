@@ -22,6 +22,9 @@ angular.module('SpotterApp').factory('missionsService', function (Restangular, $
     },
     getMission: function (missionId) {
       return Restangular.one('missions', missionId).get();
+    },
+    getUserMissions: function () {
+      return Restangular.all('missions/me').getList();
     }
   };
 });

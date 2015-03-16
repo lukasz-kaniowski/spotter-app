@@ -3,7 +3,7 @@
 /*global translationsEn,translationsPl */
 
 
-angular.module('SpotterApp', ['ionic', 'config', 'SpotterApp.main', 'SpotterApp.missions', 'pascalprecht.translate', 'SpotterApp.directives',
+angular.module('SpotterApp', ['ionic', 'config', 'SpotterApp.main', 'SpotterApp.missions', 'SpotterApp.my-missions', 'pascalprecht.translate', 'SpotterApp.directives',
   'ngResource', 'ngCordova', 'angularMoment', 'timer', 'restangular', 'SpotterApp.missions.list', 'ngResource', 'ngStorage'])
   .run(function ($ionicPlatform, appServices, amMoment, CONFIG) {
     appServices.initApp();
