@@ -3,7 +3,7 @@
 /*export $ionicScrollDelegate */
 
 angular.module('SpotterApp.my-missions')
-  .controller('MyMissionCtrl', function($scope, appGlobal, $ionicTabsDelegate, missionsDecorator, $state, $ionicScrollDelegate, missionsService) {
+  .controller('MyMissionCtrl', function($scope, appGlobal, $ionicTabsDelegate, missionsDecorator, $state, missions) {
     appGlobal.ready.then(function() {
       run();
     });
@@ -12,12 +12,12 @@ angular.module('SpotterApp.my-missions')
     $scope.missionsArr = [];
 
     function run() {
-      missionsService.getUserMissions().then(function (missions) {
+      //missionsService.getUserMissions().then(function (missions) {
         if(missions.length > 0)
           showMissions(missions);
         else
           $scope.missions = [];
-      });
+      //});
     }
 
     function showMissions(missions) {

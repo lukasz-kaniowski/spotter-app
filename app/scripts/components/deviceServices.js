@@ -34,9 +34,9 @@ angular.module('SpotterApp').factory('deviceServices', function($cordovaGeolocat
 			if (!window.console) {
 				inactivePlugins += '$cordovaConsole,';
 			}
-			if (!plugin.google.maps) {
-				inactivePlugins += '$cordovaGoogleMaps,';
-			}
+			//if (!plugin.google.maps) {
+			//	inactivePlugins += '$cordovaGoogleMaps,';
+			//}
 
 			if (inactivePlugins) {
 				console.log('Error: missing plugins: ' + inactivePlugins);

@@ -1,48 +1,53 @@
 <ion-view class="pane">
-  <ion-content padding="true" class="scroll-content ionic-scroll  has-header">
-    <div class="scroll padding" style="-webkit-transform: translate3d(0px, 32px, 0px) scale(1);">
-      <div class="list card">
+  <ion-content padding="true" class="has-header">
+    <!--<div class="scroll padding">-->
+    <!--<div class="scroll padding" style="-webkit-transform: translate3d(0px, 32px, 0px) scale(1);">-->
+      <div class="list">
         <div class="item item-divider">Do you like packaging?</div>
         <div class="item item-body">
           <ion-list class="disable-user-behavior">
             <div class="list">
-              <label class="item item-checkbox">
-                <div class="checkbox checkbox-input-hidden disable-pointer-events"><input type="checkbox"><i
-                  class="checkbox-icon"></i></div>
-                <div class="item-content disable-pointer-events" ng-transclude=""><span>Yes</span></div>
+              <label class="item item-radio">
+                <input type="radio" name="group" value="yes" ng-model="params.radio">
+                <div class="item-content">
+                  Yes
+                </div>
+                <i class="radio-icon ion-checkmark"></i>
               </label>
-              <label class="item item-checkbox">
-                <div class="checkbox checkbox-input-hidden disable-pointer-events"><input type="checkbox"><i
-                  class="checkbox-icon"></i></div>
-                <div class="item-content disable-pointer-events" ng-transclude=""><span>No</span></div>
+              <label class="item item-radio">
+                <input type="radio" name="group" value="no" ng-model="params.radio">
+                <div class="item-content">
+                  No
+                </div>
+                <i class="radio-icon ion-checkmark"></i>
               </label>
             </div>
           </ion-list>
         </div>
       </div>
-      <div class="list card">
+      <div class="list">
         <div class="item item-divider">Take a photo of the product</div>
         <div class="item item-body">
           <div
             style="line-height: 250px; border: 1px solid rgb(238, 238, 238); border-radius: 3px; text-align: center; background-color: rgb(255, 255, 255);">
             <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
           </div>
-          <button class="button button-stable button-block">Add Photo</button>
+          <button class="button button-stable button-block" ng-click="showActionsheet()">Add Photo</button>
         </div>
       </div>
-      <div class="list card">
+      <div class="list">
         <div class="item item-divider">What products stands next to it?</div>
         <div class="item item-body">
           <label class="item item-input">
-            <span class="input-label">Text</span><textarea placeholder=""> </textarea>
+            <span class="input-label">Text</span><textarea placeholder="" ng-model="params.text"> </textarea>
           </label>
         </div>
       </div>
-      <button class="button button-balanced button-block">Submit</button>
-    </div>
-    <div class="scroll-bar scroll-bar-v">
-      <div class="scroll-bar-indicator"
-           style="height: 300px; -webkit-transform: translate3d(0px, 0px, 0px) scaleY(0.893333333333333); -webkit-transform-origin: 50% 0%;"></div>
-    </div>
+      <button class="button button-balanced button-block" ng-click="saveParams()">Submit</button>
+    <!--</div>-->
+    <!--<div class="scroll-bar scroll-bar-v">-->
+      <!--<div class="scroll-bar-indicator"-->
+           <!--style="height: 300px; -webkit-transform: translate3d(0px, 0px, 0px) scaleY(0.893333333333333); -webkit-transform-origin: 50% 0%;"></div>-->
+    <!--</div>-->
   </ion-content>
 </ion-view>

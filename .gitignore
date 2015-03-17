@@ -1,5 +1,8 @@
 node_modules
 www
+engine
+.idea
+resources
 .tmp
 .sass-cache
 app/lib

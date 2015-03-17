@@ -1,14 +1,7 @@
 'use strict';
 
 angular.module('SpotterApp')
-  .config(function ($stateProvider) {
-    $stateProvider
-      .state('login', {
-        url: '/login',
-        templateUrl: 'scripts/login/login.html',
-        controller: 'LoginCtrl'
-      })
-  })
+
   .controller('LoginCtrl', function ($scope, Auth, $location) {
     $scope.user = {};
     $scope.errors = {};
