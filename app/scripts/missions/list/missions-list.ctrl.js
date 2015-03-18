@@ -43,12 +43,8 @@ angular.module('SpotterApp.missions.list')
 	}
 
 	function showMissions(missions) {
-    console.log("missions")
-    console.log(missions)
 		missions = missionsDecorator.decorate('listMissions', missions);
 		$scope.missions = missions;
-    console.log("$scope.missions")
-    console.log($scope.missions)
 	}
 
 
@@ -60,7 +56,6 @@ angular.module('SpotterApp.missions.list')
 
 	$scope.gotoMission = function(mission) {
 		appGlobal.missionsTab = 1;
-    console.log(mission);
     $state.go('app.mission', {'missionId': mission._id});
 	};
 

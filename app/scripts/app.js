@@ -50,7 +50,6 @@ angular.module('SpotterApp', ['ionic', 'config', 'SpotterApp.main', 'SpotterApp.
           // remove any stale tokens
           delete $localStorage.token;
           $location.path('/login');
-          console.log(2222)
           return $q.reject(response);
         }
         else {

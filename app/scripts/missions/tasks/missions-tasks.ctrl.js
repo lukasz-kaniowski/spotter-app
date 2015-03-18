@@ -1,23 +1,35 @@
 'use strict';
 
 angular.module('SpotterApp.missions')
-  .controller('MissionTaskCtrl', function($scope, $ionicActionSheet, imageService, $stateParams, $localStorage){
+  .controller('MissionTaskCtrl', function($scope, $ionicActionSheet, imageService, missionsService, mission, $stateParams, $localStorage){
 
-    $scope.params = {};
-    var a = $localStorage[$stateParams.mission_id];
-    console.log("a")
-    console.log(a)
+    $scope.answers = {};
+    $scope.mission = mission;
+    var current_task_id, saved_answers = $localStorage[$stateParams.mission_id];
+    if(saved_answers){
+      angular.copy(saved_answers, $scope.answers);
+    }
     var addImage = function(local_path) {
       if (!local_path)
         return false;
-      $scope.params.image = local_path;
+      $scope.answers[current_task_id] = {url: local_path};
+      $scope.$apply();
+      $scope.saveData();
     };
-    $scope.saveParams = function(){
-      console.log("$scope.params")
-      console.log($scope.params)
-      $localStorage[$stateParams.mission_id] = $scope.params;
+
+    $scope.submitData = function(){
+      missionsService.sendAnswer($scope.answers, $stateParams.mission_id);
+      //console.log(missionsService.getImageFileName($stateParams.mission_id, task_id));
     }
-    $scope.showActionsheet = function() {
+
+    $scope.saveData = function(){
+      if(!angular.equals($scope.answers, saved_answers)){
+        $localStorage[$stateParams.mission_id] = $scope.answers;
+        angular.copy($scope.answers, saved_answers);
+      }
+    }
+    $scope.showActionsheet = function(task_id) {
+      current_task_id = task_id;
       $ionicActionSheet.show({
         titleText: 'Select from',
         buttons: [

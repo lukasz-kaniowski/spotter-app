@@ -1,49 +1,55 @@
-<ion-view class="pane">
+<ion-view class="pane" title="Tasks">
   <ion-content padding="true" class="has-header">
     <!--<div class="scroll padding">-->
     <!--<div class="scroll padding" style="-webkit-transform: translate3d(0px, 32px, 0px) scale(1);">-->
       <div class="list">
-        <div class="item item-divider">Do you like packaging?</div>
-        <div class="item item-body">
-          <ion-list class="disable-user-behavior">
-            <div class="list">
-              <label class="item item-radio">
-                <input type="radio" name="group" value="yes" ng-model="params.radio">
-                <div class="item-content">
-                  Yes
+        <div class="tasks-wrapper" ng-repeat="task in mission.tasks">
+          <div class="task-radio" ng-if="task.type == 'yes/no'">
+            <div class="item item-divider">{{task.title}}</div>
+            <div class="item item-body">
+              <ion-list class="disable-user-behavior">
+                <div class="list">
+                  <label class="item item-radio">
+                    <input type="radio" value="yes" ng-model="answers[task._id].answer" ng-change="saveData()">
+                    <div class="item-content">
+                      Yes
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                  </label>
+                  <label class="item item-radio">
+                    <input type="radio" value="no" ng-model="answers[task._id].answer" ng-change="saveData()">
+                    <div class="item-content">
+                      No
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                  </label>
                 </div>
-                <i class="radio-icon ion-checkmark"></i>
-              </label>
-              <label class="item item-radio">
-                <input type="radio" name="group" value="no" ng-model="params.radio">
-                <div class="item-content">
-                  No
-                </div>
-                <i class="radio-icon ion-checkmark"></i>
+              </ion-list>
+            </div>
+          </div>
+          <div class="task-picture" ng-if="task.type == 'picture'">
+            <div class="item item-divider">{{task.title}}</div>
+            <div class="item item-body">
+              <div
+                style="line-height: 250px; border: 1px solid rgb(238, 238, 238); border-radius: 3px; text-align: center; background-color: rgb(255, 255, 255);">
+
+                <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;" ng-show="!answers[task._id].url"></i>
+                <img ng-show="answers[task._id].url" ng-src="{{answers[task._id].url}}" alt="pic" />
+              </div>
+              <button class="button button-stable button-block" ng-click="showActionsheet(task._id)">Add Photo</button>
+            </div>
+          </div>
+          <div class="task-text" ng-if="task.type == 'text'">
+            <div class="item item-divider">{{task.title}}</div>
+            <div class="item item-body">
+              <label class="item item-input">
+                <span class="input-label">Text</span><textarea placeholder="" ng-blur="saveData()" ng-model="answers[task._id].answer"> </textarea>
               </label>
             </div>
-          </ion-list>
-        </div>
-      </div>
-      <div class="list">
-        <div class="item item-divider">Take a photo of the product</div>
-        <div class="item item-body">
-          <div
-            style="line-height: 250px; border: 1px solid rgb(238, 238, 238); border-radius: 3px; text-align: center; background-color: rgb(255, 255, 255);">
-            <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
           </div>
-          <button class="button button-stable button-block" ng-click="showActionsheet()">Add Photo</button>
         </div>
       </div>
-      <div class="list">
-        <div class="item item-divider">What products stands next to it?</div>
-        <div class="item item-body">
-          <label class="item item-input">
-            <span class="input-label">Text</span><textarea placeholder="" ng-model="params.text"> </textarea>
-          </label>
-        </div>
-      </div>
-      <button class="button button-balanced button-block" ng-click="saveParams()">Submit</button>
+    <button class="button button-balanced button-block" ng-click="submitData()">Submit</button>
     <!--</div>-->
     <!--<div class="scroll-bar scroll-bar-v">-->
       <!--<div class="scroll-bar-indicator"-->

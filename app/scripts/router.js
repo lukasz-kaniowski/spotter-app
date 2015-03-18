@@ -39,7 +39,7 @@ angular.module("config")
             controller: 'MissionShowCtrl',
             resolve: {
               mission: function ($log, $stateParams, missionsService) {
-                return missionsService.getMission($stateParams.missionId);
+                return missionsService.getCurrentMission($stateParams.missionId);
               }
             }
           }
@@ -50,7 +50,12 @@ angular.module("config")
         views: {
           'menuContent': {
             templateUrl: 'scripts/missions/tasks/missions-tasks.html',
-            controller: 'MissionTaskCtrl'
+            controller: 'MissionTaskCtrl',
+            resolve: {
+              mission: function (missionsService, $stateParams) {
+                return missionsService.getCurrentMission($stateParams.mission_id);
+              }
+            }
           }
         }
       })
