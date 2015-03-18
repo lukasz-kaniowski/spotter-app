@@ -3,6 +3,7 @@
 angular.module("config")
 
   .config(function ($stateProvider, $urlRouterProvider) {
+
     $stateProvider
       .state('app', {
         url: '/app',
@@ -20,12 +21,13 @@ angular.module("config")
         views : {
           'menuContent' : {
             templateUrl : 'scripts/missions/list/missions-list.html',
-            controller : 'MissionListCtrl',
-            resolve: {
-              missions: function(missionsService){
-                return missionsService.getMissions({state: 'active'})
-              }
-            }
+            controller : 'MissionListCtrl'
+            //resolve: {
+            //  missions: function(missionsService){
+            //    console.log(1111)
+            //    console.log(missionsService.getMissions({state: 'active'}))
+            //  }
+            //}
           }
         }
       })

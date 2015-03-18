@@ -113,17 +113,18 @@ angular.module('SpotterApp')
       /**
        * Waits for currentUser to resolve before checking if user is logged in
        */
-      isLoggedInAsync: function (cb) {
-        if (currentUser.hasOwnProperty('$promise')) {
-          currentUser.$promise.then(function () {
-            cb(true);
-          }).catch(function () {
-            cb(false);
-          });
-        } else if (currentUser.hasOwnProperty('role')) {
-          cb(true);
+      isLoggedInAsync: function () {
+        //if (currentUser.hasOwnProperty('$promise')) {
+        //  currentUser.$promise.then(function () {
+        //    cb(true);
+        //  }).catch(function () {
+        //    cb(false);
+        //  });
+        //} else
+        if (currentUser.hasOwnProperty('role')) {
+          return true;
         } else {
-          cb(false);
+          return false;
         }
       },
 

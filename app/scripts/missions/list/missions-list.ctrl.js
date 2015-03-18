@@ -18,7 +18,7 @@ angular.module('SpotterApp.missions.list')
 	//deviceServices.detectCurrentPosition(false).then(getMissions).then(function(missions) {
 	//	q.resolve(missions);
 	//});
-}).controller('MissionListCtrl', function($scope, appGlobal, $ionicTabsDelegate, helperService, missionsDecorator, $state, missions) {
+}).controller('MissionListCtrl', function($scope, appGlobal, $ionicTabsDelegate, helperService, missionsDecorator, $state, missionsService) {
 	console.debug('MissionListCtrl');
 	//var delegate = $ionicScrollDelegate($scope);
 	//delegate.scrollToRememberedPosition('my-scroll-id');
@@ -35,11 +35,11 @@ angular.module('SpotterApp.missions.list')
 			$ionicTabsDelegate.select(1);
 		}
 		// appGlobal.pMissions.then(showMissions);
-		//  missionsService.getMissions({state: 'active'}).then(function (missions) {
-      //  console.log('missions', missions);
-      //  showMissions(missions);
-      //});
-		showMissions(missions);
+		  missionsService.getMissions({state: 'active'}).then(function (missions) {
+        console.log('missions', missions);
+        showMissions(missions);
+      });
+		//showMissions(missions);
 	}
 
 	function showMissions(missions) {
