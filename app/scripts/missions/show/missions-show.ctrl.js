@@ -3,26 +3,6 @@
 angular
   .module('SpotterApp.missions.show', [])
 
-  .config(function ($stateProvider) {
-
-    $stateProvider
-      .state('app.mission', {
-        url: '/missions/:missionId',
-        views: {
-          'menuContent': {
-            templateUrl: 'scripts/missions/show/missions-show.html',
-            controller: 'MissionShowCtrl',
-            resolve: {
-              mission: function ($log, $stateParams, missionsService) {
-                return missionsService.getMission($stateParams.missionId);
-              }
-            }
-          }
-        }
-      });
-
-  })
-
   .controller('MissionShowCtrl', function ($log, $scope, mission, $ionicModal, $state) {
     $log.debug('MissionShowCtrl', mission);
 
@@ -33,7 +13,7 @@ angular
         $scope.triggerAction = openModal;
         $scope.buttonLabelKey = 'Missions.Show.AcceptButton';
       } else if (mission.state === 'booked') {
-        $scope.dueTime = mission.bookingDueTime;
+        $scope.dueTime = (mission.bookingDueTime ? mission.bookingDueTime : mission.dueDate);
         $scope.triggerAction = startMission;
         $scope.buttonLabelKey = 'Missions.Show.StartButton';
       }
@@ -45,7 +25,7 @@ angular
     }
 
     function startMission() {
-      $state.go('app.missionsTasks');
+      $state.go('app.missionsTasks', {mission_id : mission._id});
     }
 
     setMission(mission);

@@ -2,19 +2,9 @@
 
 /*export $ionicScrollDelegate */
 
-angular.module('SpotterApp.missions.list').config(function($stateProvider) {
+angular.module('SpotterApp.missions.list')
 
-	$stateProvider.state('app.missions', {
-		url : '/missions',
-		views : {
-			'menuContent' : {
-				templateUrl : 'scripts/missions/list/missions-list.html',
-				controller : 'MissionListCtrl'
-			}
-		}
-	});
-
-}).run(function($q, appGlobal, deviceServices, missionsService) {
+  .run(function($q, appGlobal, deviceServices, missionsService) {
 	//var q = $q.defer();
 	//appGlobal.pMissions = q.promise;
 	//function getMissions() {
@@ -28,7 +18,7 @@ angular.module('SpotterApp.missions.list').config(function($stateProvider) {
 	//deviceServices.detectCurrentPosition(false).then(getMissions).then(function(missions) {
 	//	q.resolve(missions);
 	//});
-}).controller('MissionListCtrl', function($scope, appGlobal, $ionicTabsDelegate, helperService, missionsDecorator, $state, $ionicScrollDelegate, missionsService) {
+}).controller('MissionListCtrl', function($scope, appGlobal, $ionicTabsDelegate, helperService, missionsDecorator, $state, missions) {
 	console.debug('MissionListCtrl');
 	//var delegate = $ionicScrollDelegate($scope);
 	//delegate.scrollToRememberedPosition('my-scroll-id');
@@ -45,16 +35,20 @@ angular.module('SpotterApp.missions.list').config(function($stateProvider) {
 			$ionicTabsDelegate.select(1);
 		}
 		// appGlobal.pMissions.then(showMissions);
-		  missionsService.getMissions({state: 'active'}).then(function (missions) {
-        console.log('missions', missions);
-        showMissions(missions);
-      });
-		//showMissions(missions);
+		//  missionsService.getMissions({state: 'active'}).then(function (missions) {
+      //  console.log('missions', missions);
+      //  showMissions(missions);
+      //});
+		showMissions(missions);
 	}
 
 	function showMissions(missions) {
+    console.log("missions")
+    console.log(missions)
 		missions = missionsDecorator.decorate('listMissions', missions);
 		$scope.missions = missions;
+    console.log("$scope.missions")
+    console.log($scope.missions)
 	}
 
 
