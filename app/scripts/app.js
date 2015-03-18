@@ -15,6 +15,10 @@ angular.module('SpotterApp', ['ionic', 'config', 'SpotterApp.main', 'SpotterApp.
       id: "_id"
     });
   })
+  // Disable view cache
+  .config(function($ionicConfigProvider) {
+    $ionicConfigProvider.views.maxCache(0);
+  })
   .constant('$ionicLoadingConfig', {
     template: 'Loading...'
   })
