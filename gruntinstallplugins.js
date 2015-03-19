@@ -23,11 +23,11 @@ function createAddRemoveStatement(plugin) {
             pluginCmd += plugin.locator + ' ';
             if(plugin.variables) {
                 Object.keys(plugin.variables).forEach(function(variable){
-                    pluginCmd += '--variable ' + variable + '="' + plugin.variables[variable] + '" ';
+                    pluginCmd += '--variable ' + variable + '=' + plugin.variables[variable] + ' ';
                 });
             }
         } else {
-        	
+
             pluginCmd += plugin.id;
         }
     }
@@ -46,7 +46,7 @@ function processPlugin(index) {
 		    console.log('stdout: ' + stdout);
 		    if (error !== null) {
 		      console.log('exec error: ' + error);
-		    } 
+		    }
 	    	var k = index + 1;
 	    	if (k >= packageJson.cordovaPlugins.length) {
 	    		if (command == 'rm') {
@@ -58,11 +58,11 @@ function processPlugin(index) {
 	    			return;
 	    		}
 	    	} else {
-		       processPlugin(index + 1);	    		
+		       processPlugin(index + 1);
 	    	}
     });
 }
 
- 
+
 var command = 'add';
 processPlugin(0);
