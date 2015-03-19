@@ -210,7 +210,12 @@ angular.module('SpotterApp.missions.list', [])
       }
 
       for (var m = 0; m < $scope.missions.length; m++) {
-        latLng = new plugin.google.maps.LatLng($scope.missions[m].address.coordinates[0], $scope.missions[m].address.coordinates[1]);
+        if($scope.missions[m].address.coordinates)
+          latLng = new plugin.google.maps.LatLng($scope.missions[m].address.coordinates[0], $scope.missions[m].address.coordinates[1]);
+        else if($scope.missions[m].address.gps && $scope.missions[m].address.gps.coordinates)
+          latLng = new plugin.google.maps.LatLng($scope.missions[m].address.gps.coordinates[0], $scope.missions[m].address.gps.coordinates[1]);
+        console.log("latLng")
+        console.log(latLng)
         var iconMarker = helperService.createMarkerIcon($scope.missions[m].price, 'PLN');
         $scope.map.addMarker({
           'position': latLng,

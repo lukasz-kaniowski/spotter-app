@@ -16,8 +16,13 @@ angular.module('SpotterApp.missions')
 
         scope.populateMap = function () {
           // center map on mission
-          var latLng = new plugin.google.maps.LatLng(scope.mission.address.coordinates[0], scope.mission.address.coordinates[1]);
-          console.log("center on " + scope.mission.address.coordinates[0] + " and " + scope.mission.address.coordinates[1]);
+          if(scope.mission.address.coordinates)
+            var latLng = new plugin.google.maps.LatLng(scope.mission.address.coordinates[0], scope.mission.address.coordinates[1]);
+          else if (scope.mission.address.gps && scope.mission.address.gps.coordinates)
+            var latLng = new plugin.google.maps.LatLng(scope.mission.address.gps.coordinates[0], scope.mission.address.gps.coordinates[1]);
+
+console.log("latLng")
+console.log(latLng)
           scope.map.animateCamera({
             'target': latLng,
             'zoom': 14,

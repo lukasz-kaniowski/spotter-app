@@ -10,6 +10,15 @@ angular.module('SpotterApp.main', [])
     };
   })
 // TODO temp, move out of here
-  .controller('MenuCtrl', function($scope) {
-
-  });
+  .controller('MenuCtrl', ['$scope', '$ionicSideMenuDelegate',
+    function($scope, $ionicSideMenuDelegate) {
+      $scope.$watch(function() {
+        return $ionicSideMenuDelegate.getOpenRatio();
+      }, function(newValue) {
+        if (newValue === 0) {
+          $scope.hideLeft = true;
+        } else {
+          $scope.hideLeft = false;
+        }
+      });
+    }]);

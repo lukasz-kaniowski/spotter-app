@@ -61,9 +61,9 @@
     "org.apache.cordova.file-transfer",
     {
       "locator": "plugin.google.maps",
-      "variables": {
+      "variable": {
         "API_KEY_FOR_IOS": "AIzaSyBhp0AstgzDrK80-g-aaavwcPh11rwc9_o",
-        "API_KEY_FOR_ANDROID": "AIzaSyBOoY37pmDbdf2oQeUtp__2o0A2h35X1Tg"
+        "API_KEY_FOR_ANDROID": "AIzaSyCRGDJbkm5n5jBSs0eFvArZyrePtvKpbyA"
       }
     }
   ]
