@@ -3,9 +3,7 @@
 angular
   .module('SpotterApp.missions.show', [])
 
-  .controller('MissionShowCtrl', function ($log, $scope, mission, $ionicModal, $state) {
-    $log.debug('MissionShowCtrl', mission);
-
+  .controller('MissionShowCtrl', function ($scope, mission, $ionicModal, $state) {
     function setMission(mission) {
       $scope.mission = mission;
       if (mission.state === 'active') {
@@ -19,22 +17,46 @@ angular
       }
       //return;
     }
+    $scope.accept = function () {
+      mission.book().then(setMission).then($scope.closeModal)
+        .catch($scope.closeModal);
+    };
+    $scope.cancelMission = function () {
+      mission.cancel().then(function(){
+        $state.go('app.missions');
+      })
+    };
 
-    function openModal() {
+    function openModal(activate) {
+      if(activate) {
+        $scope.modal_text = {
+          title: "Missions.Activate.Title",
+          label: "Missions.Activate.Label",
+          time: "Missions.Activate.TimeToExecute",
+          accept: "Missions.Activate.AcceptButton",
+          cancel: "Missions.Activate.CancelButton",
+          action: 0
+        }
+      }
+      else{
+        $scope.modal_text = {
+          title: "Missions.Cancel.Title",
+          label: "Missions.Cancel.Label",
+          accept: "Missions.Cancel.AcceptButton",
+          cancel: "Missions.Cancel.CancelButton",
+          action: 1
+        }
+      }
       $scope.modal.show();
     }
+
+    $scope.openModal = openModal;
 
     function startMission() {
       $state.go('app.missionsTasks', {mission_id : mission._id});
     }
 
     setMission(mission);
-
-    $scope.accept = function () {
-      $log.debug('Accepting');
-      mission.book().then(setMission).then($scope.closeModal)
-        .catch($scope.closeModal);
-    };
 
     $ionicModal.fromTemplateUrl('scripts/missions/show/activate.modal.html', {
       scope: $scope,
@@ -47,7 +69,7 @@ angular
     $scope.closeModal = function () {
       $scope.modal.hide();
     };
-    //Cleanup the modal when we're done with it!
+//Cleanup the modal when we're done with it!
     $scope.$on('$destroy', function () {
       $scope.modal.remove();
     });

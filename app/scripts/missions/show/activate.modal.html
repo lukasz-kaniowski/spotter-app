@@ -1,19 +1,19 @@
 <ion-modal-view>
   <ion-header-bar class="bar-stable">
-    <h1 class="title" translate="Missions.Activate.Title"></h1>
+    <h1 class="title" translate="{{modal_text.title}}"></h1>
 
   </ion-header-bar>
   <ion-content padding="true" scroll="false" class="has-header">
     <div>
-      <p translate="Missions.Activate.Label"></p>
+      <p translate="{{modal_text.label}}"></p>
 
-      <p translate="Missions.Activate.TimeToExecute"></p>
+      <p ng-show="modal_text.time" translate="{{modal_text.time}}"></p>
     </div>
     <div class="button-bar">
-      <a class="button button-balanced button-block" nav-clear ng-click="accept()"
-         translate="Missions.Activate.AcceptButton"></a>
+      <a class="button button-balanced button-block" nav-clear ng-click="modal_text.action == 0 ? accept() : cancelMission()"
+         translate="{{modal_text.accept}}"></a>
       <a class="button button-assertive button-block" ng-click="closeModal()"
-         translate="Missions.Activate.CancelButton"></a>
+         translate="{{modal_text.cancel}}"></a>
     </div>
 
   </ion-content>

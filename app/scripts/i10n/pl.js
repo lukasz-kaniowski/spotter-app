@@ -24,7 +24,8 @@ var translationsPl = {
 			AcceptButton : 'Akceptuje',
 			StartButton : 'Rozpocznij',
 			TasksHeader : 'Zadania:',
-			DueInTitle : 'Pozostało:'
+			DueInTitle : 'Pozostało:',
+      Cancel: "Cancel"
 		},
 		Activate : {
 			Title : 'Akceptacja',
@@ -33,6 +34,12 @@ var translationsPl = {
 			Label : 'Czy na pewno akceptujesz to zadanie?',
 			TimeToExecute : 'Masz tylko <strong>30 minut</strong> na jego wykonanie!'
 		},
+    Cancel : {
+      Title : 'Cancel Mission',
+      AcceptButton : 'OK',
+      CancelButton : 'BACK',
+      Label : 'Once you cancel mission you will have to book it again if you want to work on it. Are you sure you want to cancel?'
+    },
 		List : {
 			DAYS_LEFT : 'dni',
 			KMS_AWAY : 'km'
