@@ -15,48 +15,70 @@ angular.module('SpotterApp').factory('missionsService', function (Restangular, $
 
     return model;
   });
-  console.log("this")
-  console.log(this)
   var currentMission = {}
 
   var imageUpload = function(prms, url){
-      console.log("prms")
-      console.log(prms)
+      var defer = $q.defer();
       var s3URI = encodeURI("https://"+prms.bucket+".s3.amazonaws.com/");
+      var location = "https://"+prms.bucket+".s3.amazonaws.com/" + prms.fileName;
       var ft = new FileTransfer(),
         options = new FileUploadOptions();
-      options = prms;
-
-      ft.upload(url, s3URI,
-        function (e) {
-          console.log("success")
-          console.log(e)
+      options.fileKey = "file";
+      options.fileName = prms.fileName;
+      options.mimeType = "image/jpeg";
+      options.chunkedMode = false;
+      options.params = {
+        "key": prms.fileName,
+        "AWSAccessKeyId": prms.awsKey,
+        "acl": prms.acl,
+        "policy": prms.policy,
+        "signature": prms.signature,
+        "Content-Type": "image/jpeg"
+      };
+      ft.upload(url, s3URI, function(){
+          defer.resolve(location);
         },
-        function (e) {
-          console.log("error")
-          console.log(e)
-        }, options, true);
+        defer.reject, options, true);
+      return defer.promise;
     },
     getImageName = function(missionId, taskId){
       return Restangular.one('missions', missionId).one('tasks', taskId).one('upload').get()
     },
-    prepareAnswers = function(answers_obj, mission_id){
-      var arr = [];
-      angular.forEach(answers_obj, function(v,k){
-        if(v.url)
-          getImageName(mission_id, k).then(function(res){
-            var defer = $q.defer();
-            imageUpload(res, v.url).then(defer.resolve, defer.reject)
-            return defer.promise;
+    asyncArr = function(mission_id, v, k){
+      var defer = $q.defer();
+      if(v.url)
+        getImageName(mission_id, k).then(function(res){
+          imageUpload(res, v.url).then(function(img_url){
+            defer.resolve({
+              data:{
+                answer: img_url
+              },
+              id: k
+            })
+          }, function(err){
+            console.log("err")
+            console.log(err)
           })
-        arr.push({
+        })
+      else
+        defer.resolve({
           data:{
             answer: v.answer
           },
           id: k
         })
+      return defer.promise;
+    },
+    prepareAnswers = function(answers_obj, mission_id){
+      var arr = [];
+      var defer = $q.defer();
+      angular.forEach(answers_obj, function(v,k){
+        arr.push(asyncArr(mission_id, v,k))
       })
-      return arr;
+      $q.all(arr).then(function(result){
+        defer.resolve(result);
+      })
+      return defer.promise;
     }
 
 
@@ -79,7 +101,11 @@ angular.module('SpotterApp').factory('missionsService', function (Restangular, $
       return defer.promise;
     },
     sendAnswer: function(answers, mission_id){
-      prepareAnswers(answers, mission_id)
+      var defer = $q.defer();
+      prepareAnswers(answers, mission_id).then(function(result){
+        Restangular.one('missions', mission_id).one('tasks').patch(result).then(defer.resolve, defer.reject)
+      })
+      return defer.promise;
     },
     getUserMissions: function () {
       return Restangular.all('missions/me').getList();

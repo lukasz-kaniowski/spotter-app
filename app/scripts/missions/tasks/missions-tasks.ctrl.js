@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('SpotterApp.missions')
-  .controller('MissionTaskCtrl', function($scope, $ionicActionSheet, imageService, missionsService, mission, $stateParams, $localStorage){
+  .controller('MissionTaskCtrl', function($scope, $ionicActionSheet, imageService, $state, $ionicModal, missionsService, mission, $stateParams, $localStorage){
 
     $scope.answers = {};
     $scope.mission = mission;
@@ -17,9 +17,21 @@ angular.module('SpotterApp.missions')
       $scope.saveData();
     };
 
+    $ionicModal.fromTemplateUrl('scripts/missions/tasks/submit-missions.modal.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+    });
+    $scope.closeModal = function() {
+      $scope.modal.hide();
+      $state.go('app.missions');
+    };
+
     $scope.submitData = function(){
-      missionsService.sendAnswer($scope.answers, $stateParams.mission_id);
-      //console.log(missionsService.getImageFileName($stateParams.mission_id, task_id));
+      missionsService.sendAnswer($scope.answers, $stateParams.mission_id).then(function(res){
+        $scope.modal.show();
+      })
     }
 
     $scope.saveData = function(){
@@ -52,6 +64,9 @@ angular.module('SpotterApp.missions')
         }
       });
     };
+    $scope.$on('$destroy', function() {
+      $scope.modal.remove();
+    });
 
 
   });

@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {},
   "devDependencies": {
-    "cordova": "~3.5.0-0.2.6",
+    "cordova": "~3.6.0",
     "glob": "~4.0.5",
     "grunt": "^0.4.5",
     "grunt-autoprefixer": "~0.4.0",
@@ -57,17 +57,14 @@
     "org.apache.cordova.splashscreen",
     "org.apache.cordova.statusbar",
     "org.apache.cordova.camera",
+    "org.apache.cordova.file",
+    "org.apache.cordova.file-transfer",
     {
       "locator": "plugin.google.maps",
       "variables": {
         "API_KEY_FOR_IOS": "AIzaSyBhp0AstgzDrK80-g-aaavwcPh11rwc9_o",
         "API_KEY_FOR_ANDROID": "AIzaSyBOoY37pmDbdf2oQeUtp__2o0A2h35X1Tg"
       }
-    },
-    "plugin.google.maps",
-    {
-      "id": "org.apache.cordova.engine.crosswalk",
-      "locator": "./engine/cordova-crosswalk-engine-0.8"
     }
   ]
 }

@@ -44,6 +44,13 @@ var translationsEn = {
       NoTasks: "You don't have any outstanding missions right now.",
       CheckMap: "Check the map for some opportunities!",
       ExpiredOn: "EXPIRED ON"
+    },
+    Tasks: {
+      modal: {
+        Title: "Mission Sent",
+        Text: "Thanks for submiting mission. We are going to review it and notify you about next steps",
+        Button: "Close"
+      }
     }
 	},
 	TaskType : {

@@ -19,6 +19,15 @@ angular.module('SpotterApp', ['ionic', 'config', 'SpotterApp.main', 'SpotterApp.
   .config(function($ionicConfigProvider) {
     $ionicConfigProvider.views.maxCache(0);
   })
+  .config(function( $compileProvider ) {
+    var currentImgSrcSanitizationWhitelist = $compileProvider.imgSrcSanitizationWhitelist();
+    var newImgSrcSanitizationWhiteList = currentImgSrcSanitizationWhitelist.toString().slice(0,-1)
+      + '|content:'
+      +currentImgSrcSanitizationWhitelist.toString().slice(-1);
+
+    console.log("Changing imgSrcSanitizationWhiteList from "+currentImgSrcSanitizationWhitelist+" to "+newImgSrcSanitizationWhiteList);
+    $compileProvider.imgSrcSanitizationWhitelist(newImgSrcSanitizationWhiteList);
+  })
   .constant('$ionicLoadingConfig', {
     template: 'Loading...'
   })
