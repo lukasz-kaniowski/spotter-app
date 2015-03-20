@@ -3,10 +3,10 @@
 /*exported oldValue */
 
 angular.module('SpotterApp.main', [])
-  .controller('MainCtrl', function($log, $scope, $ionicHistory) {
+  .controller('MainCtrl', function($log, $scope) {
     $log.debug('MainCtrl');
     $scope.myGoBack = function() {
-      $ionicHistory.goBack();
+      window.history.back();
     };
   })
 // TODO temp, move out of here

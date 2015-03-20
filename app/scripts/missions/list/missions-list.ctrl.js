@@ -45,6 +45,8 @@ angular.module('SpotterApp.missions.list')
 	function showMissions(missions) {
 		missions = missionsDecorator.decorate('listMissions', missions);
 		$scope.missions = missions;
+    console.log("$scope.missions")
+    console.log($scope.missions)
 	}
 
 

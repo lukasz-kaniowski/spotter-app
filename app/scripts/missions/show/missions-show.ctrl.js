@@ -3,7 +3,7 @@
 angular
   .module('SpotterApp.missions.show', [])
 
-  .controller('MissionShowCtrl', function ($scope, mission, $ionicModal, $state) {
+  .controller('MissionShowCtrl', function ($scope, mission, $ionicModal, missionsService, $state) {
     function setMission(mission) {
       $scope.mission = mission;
       if (mission.state === 'active') {
@@ -18,11 +18,15 @@ angular
       //return;
     }
     $scope.accept = function () {
-      mission.book().then(setMission).then($scope.closeModal)
+      mission.book().then(function(mission){
+        missionsService.updateCurrentMission('booked');
+        setMission(mission);
+      }).then($scope.closeModal)
         .catch($scope.closeModal);
     };
     $scope.cancelMission = function () {
       mission.cancel().then(function(){
+        missionsService.updateCurrentMission('active');
         $state.go('app.missions');
       })
     };

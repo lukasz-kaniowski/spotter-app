@@ -15,10 +15,6 @@ angular.module('SpotterApp', ['ionic', 'config', 'SpotterApp.main', 'SpotterApp.
       id: "_id"
     });
   })
-  // Disable view cache
-  .config(function($ionicConfigProvider) {
-    $ionicConfigProvider.views.maxCache(0);
-  })
   .config(function( $compileProvider ) {
     var currentImgSrcSanitizationWhitelist = $compileProvider.imgSrcSanitizationWhitelist();
     var newImgSrcSanitizationWhiteList = currentImgSrcSanitizationWhitelist.toString().slice(0,-1)

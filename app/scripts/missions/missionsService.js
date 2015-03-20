@@ -86,11 +86,14 @@ angular.module('SpotterApp').factory('missionsService', function (Restangular, $
     getMissions: function (args) {
       return Restangular.all('missions').getList(args);
     },
-    getCurrentMission: function(mission_id){
-      if(currentMission._id == mission_id && Object.keys(currentMission).length > 0)
+    getCurrentMission: function(mission_id, force){
+      if(!force && currentMission._id == mission_id && Object.keys(currentMission).length > 0)
         return currentMission;
       else
         return this.getMission(mission_id)
+    },
+    updateCurrentMission: function(state){
+      currentMission.state = state;
     },
     getMission: function (missionId) {
       var defer = $q.defer();
