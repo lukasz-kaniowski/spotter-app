@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('SpotterApp.missions')
-  .controller('MissionTaskCtrl', function($scope, $ionicActionSheet, imageService, $state, $ionicModal, missionsService, mission, $stateParams, $localStorage){
+  .controller('MissionTaskCtrl', function($scope, $ionicActionSheet, imageService, $state, $ionicLoading, $ionicModal, missionsService, mission, $stateParams, $localStorage){
 
     $scope.answers = {};
     $scope.mission = mission;
@@ -29,8 +29,14 @@ angular.module('SpotterApp.missions')
     };
 
     $scope.submitData = function(){
+      $ionicLoading.show();
       missionsService.sendAnswer($scope.answers, $stateParams.mission_id).then(function(res){
+        $ionicLoading.hide();
         $scope.modal.show();
+      }, function(err){
+        $scope.err_modal = $ionicModal.fromTemplate('<ion-modal-view><ion-header-bar><h1 class="title">Error</h1></ion-header-bar><ion-content>'+err.data.error+'<button ng-click="err_modal.hide()">ok</button></ion-content></ion-modal-view>', {scope: $scope})
+        $scope.err_modal.show();
+        $ionicLoading.hide();
       })
     }
 
