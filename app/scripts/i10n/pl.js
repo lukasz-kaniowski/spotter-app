@@ -16,6 +16,7 @@ var translationsPl = {
 	MENU_TEST_ONLY : 'To tylko do testow',
 	MENU_CONTACT : 'Contakt',
 	MENU_LOGIN : 'Login',
+  MENU_LOGOUT : 'Logout',
   MENU_MY_MISSIONS : 'Moje misje',
 	Missions : {
 		Show : {

@@ -14,6 +14,8 @@ angular
         $scope.dueTime = (mission.bookingDueTime ? mission.bookingDueTime : mission.dueDate);
         $scope.triggerAction = startMission;
         $scope.buttonLabelKey = 'Missions.Show.StartButton';
+      }else{
+        $scope.hide_buttons = true;
       }
       //return;
     }

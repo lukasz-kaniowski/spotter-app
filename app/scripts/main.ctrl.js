@@ -10,8 +10,12 @@ angular.module('SpotterApp.main', [])
     };
   })
 // TODO temp, move out of here
-  .controller('MenuCtrl', ['$scope', '$ionicSideMenuDelegate',
-    function($scope, $ionicSideMenuDelegate) {
+  .controller('MenuCtrl',
+    function($scope, $ionicSideMenuDelegate, $localStorage, $state) {
+      $scope.logout = function(){
+        delete $localStorage.token;
+        $state.go('login');
+      }
       $scope.$watch(function() {
         return $ionicSideMenuDelegate.getOpenRatio();
       }, function(newValue) {
@@ -21,4 +25,4 @@ angular.module('SpotterApp.main', [])
           $scope.hideLeft = false;
         }
       });
-    }]);
+    });

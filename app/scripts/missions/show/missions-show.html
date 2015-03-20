@@ -30,9 +30,10 @@
       <div class="item item-text-wrap">
         <p ng-bind-html="mission.instructions">
         </p>
-        <button ng-click="triggerAction(true)" class="button button-balanced button-block" translate="{{buttonLabelKey}}"></button>
-        <button ng-if="mission.state == 'booked'" ng-click="openModal(false)" class="button button-balanced button-block" translate="Missions.Show.Cancel"></button>
-
+        <div ng-if="!hide_buttons">
+          <button ng-click="triggerAction(true)" class="button button-balanced button-block" translate="{{buttonLabelKey}}"></button>
+          <button ng-if="mission.state == 'booked'" ng-click="openModal(false)" class="button button-balanced button-block" translate="Missions.Show.Cancel"></button>
+        </div>
       </div>
 
     </div>

@@ -16,6 +16,7 @@ var translationsEn = {
 	MENU_TEST_ONLY : 'This is only a test',
 	MENU_CONTACT : 'Contact',
 	MENU_LOGIN : 'Login',
+	MENU_LOGOUT : 'Logout',
 	MENU_MY_MISSIONS : 'My Missions',
 	Missions : {
 		Show : {
