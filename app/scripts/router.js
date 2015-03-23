@@ -16,6 +16,10 @@ angular.module("config")
         templateUrl: 'scripts/login/login.html',
         controller: 'LoginCtrl'
       })
+      .state('error', {
+        url: '/error',
+        template: '<error></error>'
+      })
       .state('app.missions', {
         url : '/missions',
         views : {

@@ -7,7 +7,8 @@ angular.module('SpotterApp')
     $scope.errors = {};
 
     $scope.login = function (form) {
-      $scope.submitted = true;
+      if($scope.login_error)
+        $scope.login_error = false;
 
       if (form.$valid) {
         Auth.login({
@@ -20,7 +21,7 @@ angular.module('SpotterApp')
             $location.path('/');
           })
           .catch(function (err) {
-            $scope.errors.other = err.message;
+            $scope.login_error = err.message;
           });
       }
     };

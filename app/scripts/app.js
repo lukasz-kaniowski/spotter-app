@@ -57,6 +57,9 @@ angular.module('SpotterApp', ['ionic', 'config', 'SpotterApp.main', 'SpotterApp.
           $location.path('/login');
           return $q.reject(response);
         }
+        else if(response.status === 500){
+          $location.path('/error');
+        }
         else {
           return $q.reject(response);
         }

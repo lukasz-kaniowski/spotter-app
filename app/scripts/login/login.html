@@ -2,11 +2,12 @@
 
   <ion-content padding="true" class="has-header mission-show-content">
     <h1>Login</h1>
+    <h2 class="login-error" ng-if="login_error">{{login_error}}</h2>
     <form name="form" ng-submit="login(form)">
       <div class="list">
         <label class="item item-input">
           <span class="input-label">Email</span>
-          <input type="text" ng-model="user.email" required>
+          <input type="email" validate ng-model="user.email" required ng-pattern="/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/">
         </label>
         <label class="item item-input">
           <span class="input-label">Password</span>
