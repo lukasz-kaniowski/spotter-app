@@ -48,13 +48,12 @@ angular.module('SpotterApp', ['ionic', 'config', 'SpotterApp.main', 'SpotterApp.
         }
         return config;
       },
-
       // Intercept 401s and redirect you to login
       responseError: function (response) {
         if (response.status === 401) {
           // remove any stale tokens
           delete $localStorage.token;
-          $location.path('/login');
+          window.location.hash = "#/login";
           return $q.reject(response);
         }
         else if(response.status === 500){

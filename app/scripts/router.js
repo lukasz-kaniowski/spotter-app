@@ -21,6 +21,7 @@ angular.module("config")
         template: '<error></error>'
       })
       .state('app.missions', {
+        cache: false,
         url : '/missions',
         views : {
           'menuContent' : {
@@ -36,6 +37,7 @@ angular.module("config")
         }
       })
       .state('app.mission', {
+        cache: false,
         url: '/missions/:missionId',
         views: {
           'menuContent': {
@@ -64,6 +66,7 @@ angular.module("config")
         }
       })
       .state('app.my-missions', {
+        cache: false,
         url : '/my-missions',
         views : {
           'menuContent' : {
