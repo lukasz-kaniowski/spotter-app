@@ -177,3 +177,18 @@ text-align: center;
   border-radius: 4px;
   font-size: 14px;
 }
+.box {
+  position: relative;
+  top: 50px;
+  height: 400px;
+  text-align: center;
+}
+.even {
+  background-color: #ffff00;
+}
+.odd{
+  background-color: blue;
+}
+.slider-pager{
+  top: 20px;
+}

@@ -5,11 +5,30 @@ angular.module("config")
   .config(function ($stateProvider, $urlRouterProvider) {
 
     $stateProvider
+      .state('start_app', {
+        url: '/',
+        resolve: {
+          start: function($localStorage, $location){
+            if($localStorage.intro && $localStorage.token){
+              $location.path('app/missions');
+            }
+            else if($localStorage.intro)
+              $location.path('/login');
+            else
+              $location.path('/intro');
+          }
+        }
+      })
       .state('app', {
         url: '/app',
         abstract: true,
         templateUrl: 'scripts/menu.html',
         controller: 'MainCtrl'
+      })
+      .state('intro', {
+        url: '/intro',
+        templateUrl: 'scripts/intro/intro.html',
+        controller: 'IntroCtrl'
       })
       .state('login', {
         url: '/login',
@@ -83,7 +102,7 @@ angular.module("config")
     ;
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/missions');
+    $urlRouterProvider.otherwise('/');
   })
 
 ;

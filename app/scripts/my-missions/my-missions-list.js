@@ -1,3 +1,4 @@
+'use strict';
 angular
   .module('SpotterApp.my-missions')
   .directive('myMissionsList', function () {

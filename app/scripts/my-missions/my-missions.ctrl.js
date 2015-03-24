@@ -2,7 +2,8 @@
 
 /*export $ionicScrollDelegate */
 
-angular.module('SpotterApp.my-missions')
+angular
+  .module('SpotterApp.my-missions', [])
   .controller('MyMissionCtrl', function($scope, appGlobal, $ionicTabsDelegate, missionsDecorator, $state, missions) {
     appGlobal.ready.then(function() {
       run();

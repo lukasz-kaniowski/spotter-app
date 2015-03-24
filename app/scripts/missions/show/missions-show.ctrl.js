@@ -3,7 +3,7 @@
 angular
   .module('SpotterApp.missions.show', [])
 
-  .controller('MissionShowCtrl', function ($scope, mission, $ionicModal, missionsService, $state) {
+  .controller('MissionShowCtrl', function ($scope, mission, $ionicModal, missionsService, $state, geolocationService, CONFIG) {
     function setMission(mission) {
       $scope.mission = mission;
       if (mission.state === 'active') {
@@ -59,7 +59,20 @@ angular
     $scope.openModal = openModal;
 
     function startMission() {
-      $state.go('app.missionsTasks', {mission_id : mission._id});
+      if(CONFIG.check_geolocation)
+        geolocationService.checkDistance(mission.address.coordinates[0], mission.address.coordinates[1]).then(function(res){
+        //geolocationService.checkDistance(mission.address.gps.coordinates[0], mission.address.gps.coordinates[1]).then(function(res){
+          if(Math.ceil(res) <= CONFIG.radius)
+            $state.go('app.missionsTasks', {mission_id : mission._id});
+          else{
+            $scope.err_modal = $ionicModal.fromTemplate('<ion-modal-view><ion-header-bar><h1 class="title">Error</h1></ion-header-bar><ion-content>You are not at the location! You cannot start the mission until you get there.<button class="button button-block button-stable" ng-click="err_modal.hide()">ok</button></ion-content></ion-modal-view>', {scope: $scope})
+            $scope.err_modal.show();
+          }
+        }, function(err){
+          alert("Check app permissions for location");
+        })
+      else
+        $state.go('app.missionsTasks', {mission_id : mission._id});
     }
 
     setMission(mission);

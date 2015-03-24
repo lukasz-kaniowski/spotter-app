@@ -34,7 +34,7 @@ angular.module('SpotterApp.missions')
         $ionicLoading.hide();
         $scope.modal.show();
       }, function(err){
-        $scope.err_modal = $ionicModal.fromTemplate('<ion-modal-view><ion-header-bar><h1 class="title">Error</h1></ion-header-bar><ion-content>'+err.data.error+'<button ng-click="err_modal.hide()">ok</button></ion-content></ion-modal-view>', {scope: $scope})
+        $scope.err_modal = $ionicModal.fromTemplate('<ion-modal-view><ion-header-bar><h1 class="title">Error</h1></ion-header-bar><ion-content>'+err.data.error+'<button class="button button-block button-stable" ng-click="err_modal.hide()">ok</button></ion-content></ion-modal-view>', {scope: $scope})
         $scope.err_modal.show();
         $ionicLoading.hide();
       })
