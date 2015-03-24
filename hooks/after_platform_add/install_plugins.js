@@ -64,5 +64,5 @@ function processPlugin(index) {
 
 
 var command = 'add';
-//processPlugin(0);
+processPlugin(0);
 

@@ -4,14 +4,20 @@ Spotter app is a cordova application. Initial setup was done using yoeoman ionic
 
 How to run 
 ===========
+
 First install all dependencies
 
-    $ npm i & bower i
+    $ sudo npm install
+    // Install angular 1.3.6 when ask
+    $ bower install
  
 Use grunt to create and build platforms
 
 	// must run first to create cordova folders
     $ grunt serve
+
+Add permissions to hooks directory
+	$ sudo chmod -R 777 hooks
 
 To deploy on Android and iOS emulator
 =============================
