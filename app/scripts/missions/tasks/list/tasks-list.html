@@ -1,0 +1,11 @@
+<ion-view class="pane" title="Tasks" cache-view="false">
+  <ion-content padding="true" class="has-header">
+    <div class="list task-list">
+      <a class="item item-icon-right task-item" ng-repeat="task in mission.tasks" href="#app/tasks-answer/{{mission._id}}/{{$index}}">
+        <i class="icon ion-chatbubble-working"></i>
+        {{task.title}}
+        <i class="icon ion-ios7-telephone-outline"></i>
+      </a>
+    </div>
+  </ion-content>
+</ion-view>

@@ -1,10 +1,11 @@
 'use strict';
 
 angular.module('SpotterApp.missions')
-  .controller('MissionTaskCtrl', function($scope, $ionicActionSheet, imageService, $state, $ionicLoading, $ionicModal, missionsService, mission, $stateParams, $localStorage){
+  .controller('TasksAnswerCtrl', function($scope, $ionicPlatform, $ionicActionSheet, imageService, $state, $ionicLoading, $ionicSlideBoxDelegate, $ionicModal, missionsService, mission, $stateParams, $localStorage){
 
     $scope.answers = {};
     $scope.mission = mission;
+    $scope.startSlide = $stateParams.slide_num;
     var current_task_id, saved_answers = $localStorage[$stateParams.mission_id];
     if(saved_answers){
       angular.copy(saved_answers, $scope.answers);
@@ -17,7 +18,7 @@ angular.module('SpotterApp.missions')
       $scope.saveData();
     };
 
-    $ionicModal.fromTemplateUrl('scripts/missions/tasks/submit-missions.modal.html', {
+    $ionicModal.fromTemplateUrl('scripts/missions/tasks/answer/submit-missions.modal.html', {
       scope: $scope,
       animation: 'slide-in-up'
     }).then(function(modal) {
@@ -45,6 +46,7 @@ angular.module('SpotterApp.missions')
         $localStorage[$stateParams.mission_id] = $scope.answers;
         angular.copy($scope.answers, saved_answers);
       }
+      $ionicSlideBoxDelegate.next();
     }
     $scope.showActionsheet = function(task_id) {
       current_task_id = task_id;
@@ -72,6 +74,9 @@ angular.module('SpotterApp.missions')
     };
     $scope.$on('$destroy', function() {
       $scope.modal.remove();
+    });
+    angular.element(document).ready(function(){
+      $ionicSlideBoxDelegate.$getByHandle('tasks').enableSlide(false);
     });
 
 

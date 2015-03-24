@@ -70,12 +70,26 @@ angular.module("config")
           }
         }
       })
-      .state('app.missionsTasks', {
-        url: '/missionsTasks/:mission_id',
+      .state('app.tasks_list', {
+        url: '/tasks-list/:mission_id',
         views: {
           'menuContent': {
-            templateUrl: 'scripts/missions/tasks/missions-tasks.html',
-            controller: 'MissionTaskCtrl',
+            templateUrl: 'scripts/missions/tasks/list/tasks-list.html',
+            controller: 'TasksListCtrl',
+            resolve: {
+              mission: function (missionsService, $stateParams) {
+                return missionsService.getCurrentMission($stateParams.mission_id);
+              }
+            }
+          }
+        }
+      })
+      .state('app.tasks_answer', {
+        url: '/tasks-answer/:mission_id/:slide_num',
+        views: {
+          'menuContent': {
+            templateUrl: 'scripts/missions/tasks/answer/tasks-answer.html',
+            controller: 'TasksAnswerCtrl',
             resolve: {
               mission: function (missionsService, $stateParams) {
                 return missionsService.getCurrentMission($stateParams.mission_id);
