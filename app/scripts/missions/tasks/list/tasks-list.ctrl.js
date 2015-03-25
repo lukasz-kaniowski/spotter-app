@@ -2,8 +2,7 @@
 
 angular.module('SpotterApp.missions')
   .controller('TasksListCtrl', function($scope, $ionicPlatform, $ionicActionSheet, imageService, $state, $ionicLoading, $ionicModal, missionsService, mission, $stateParams, $localStorage){
-
-    $scope.mission = mission;
+    $scope.mission = angular.copy(mission);
     var answersObj = $localStorage[mission._id];
     if(answersObj){
       for(var i=0;i<$scope.mission.tasks.length;i++){

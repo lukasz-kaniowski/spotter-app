@@ -1,7 +1,5 @@
 <ion-view class="pane" title="Tasks" cache-view="false">
   <ion-content padding="true" class="has-header">
-    <!--<div class="scroll padding">-->
-    <!--<div class="scroll padding" style="-webkit-transform: translate3d(0px, 32px, 0px) scale(1);">-->
     <ion-slide-box delegate-handle="tasks" active-slide="startSlide">
       <ion-slide ng-repeat="task in mission.tasks">
         <div class="task-radio" ng-if="task.type == 'yes/no'">
@@ -46,10 +44,5 @@
       </ion-slide>
     </ion-slide-box>
         <button class="button button-balanced button-block task-save-button" ng-click="saveData()">Save</button>
-    <!--</div>-->
-    <!--<div class="scroll-bar scroll-bar-v">-->
-    <!--<div class="scroll-bar-indicator"-->
-    <!--style="height: 300px; -webkit-transform: translate3d(0px, 0px, 0px) scaleY(0.893333333333333); -webkit-transform-origin: 50% 0%;"></div>-->
-    <!--</div>-->
   </ion-content>
 </ion-view>

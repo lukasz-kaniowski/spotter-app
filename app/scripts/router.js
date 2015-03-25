@@ -71,6 +71,7 @@ angular.module("config")
         }
       })
       .state('app.tasks_list', {
+        cache: false,
         url: '/tasks-list/:mission_id',
         views: {
           'menuContent': {
