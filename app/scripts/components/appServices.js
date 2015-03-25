@@ -38,7 +38,7 @@ angular.module('SpotterApp').factory('appServices', function($q, $ionicPlatform,
 					// hide keyboard accessory bar TODO uncomment - causes crash in iOS
 					// $cordovaKeyboard.hideAccessoryBar();
 					// show app in full screen
-					ionic.Platform.fullScreen(false, true);
+					ionic.Platform.fullScreen(true, false);
 					// show status bar
 					$cordovaStatusbar.style(0);
 //					$cordovaStatusbar.overlaysWebView(false);
