@@ -20,6 +20,7 @@ function createAddRemoveStatement(plugin) {
     } else {
         if((command === 'add') || (command === 'rm') ){
             pluginCmd += plugin.locator + ' ';
+
             if(plugin.variables) {
                 Object.keys(plugin.variables).forEach(function(variable){
                     pluginCmd += '--variable ' + variable + '=' + plugin.variables[variable] + ' ';

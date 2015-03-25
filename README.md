@@ -5,17 +5,29 @@ Spotter app is a cordova application. Initial setup was done using yoeoman ionic
 How to run 
 ===========
 
-FOR IOS
-    sudo chmod -R 777 test-spotter
-    sudo npm install
-    bower install
-    (install angular 1.3.6 if ask)
-    grunt serve
-    sudo npm install -g cordova@4.2.0
-    grunt platform:add:ios
-    sudo npm install -g ios-deploy
-    sudo npm install -g ios-sim
-    grunt run:ios
+Short instructions
+-  FOR IOS
+      sudo chmod -R 777 test-spotter
+      sudo npm install
+      bower install
+      (install angular 1.3.6 if ask)
+      grunt serve
+      sudo npm install -g cordova@4.2.0
+      grunt platform:add:ios
+      grunt installplugins
+      sudo npm install -g ios-deploy
+      sudo npm install -g ios-sim
+      grunt run:ios
+- FOR ANDROID
+      sudo chmod -R 777 test-spotter
+      sudo npm install
+      bower install
+      (install angular 1.3.6 if ask)
+      grunt serve
+      sudo npm install -g cordova@4.2.0
+      grunt platform:add:android
+      grunt installplugins
+      grunt run:ios
 
 First install all dependencies
 
