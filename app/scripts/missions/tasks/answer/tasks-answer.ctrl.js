@@ -15,38 +15,16 @@ angular.module('SpotterApp.missions')
         return false;
       $scope.answers[current_task_id] = {url: local_path};
       $scope.$apply();
-      $scope.saveData();
     };
-
-    $ionicModal.fromTemplateUrl('scripts/missions/tasks/answer/submit-missions.modal.html', {
-      scope: $scope,
-      animation: 'slide-in-up'
-    }).then(function(modal) {
-      $scope.modal = modal;
-    });
-    $scope.closeModal = function() {
-      $scope.modal.hide();
-      $state.go('app.missions');
-    };
-
-    $scope.submitData = function(){
-      $ionicLoading.show();
-      missionsService.sendAnswer($scope.answers, $stateParams.mission_id).then(function(res){
-        $ionicLoading.hide();
-        $scope.modal.show();
-      }, function(err){
-        $scope.err_modal = $ionicModal.fromTemplate('<ion-modal-view><ion-header-bar><h1 class="title">Error</h1></ion-header-bar><ion-content>'+err.data.error+'<button class="button button-block button-stable" ng-click="err_modal.hide()">ok</button></ion-content></ion-modal-view>', {scope: $scope})
-        $scope.err_modal.show();
-        $ionicLoading.hide();
-      })
-    }
-
     $scope.saveData = function(){
       if(!angular.equals($scope.answers, saved_answers)){
         $localStorage[$stateParams.mission_id] = $scope.answers;
         angular.copy($scope.answers, saved_answers);
       }
-      $ionicSlideBoxDelegate.next();
+      if($ionicSlideBoxDelegate.currentIndex() == ($ionicSlideBoxDelegate.slidesCount() - 1))
+        $state.go('app.tasks_list', {mission_id: $scope.mission._id});
+      else
+        $ionicSlideBoxDelegate.next();
     }
     $scope.showActionsheet = function(task_id) {
       current_task_id = task_id;
@@ -72,9 +50,7 @@ angular.module('SpotterApp.missions')
         }
       });
     };
-    $scope.$on('$destroy', function() {
-      $scope.modal.remove();
-    });
+
     angular.element(document).ready(function(){
       $ionicSlideBoxDelegate.$getByHandle('tasks').enableSlide(false);
     });

@@ -2,10 +2,10 @@
   <ion-content padding="true" class="has-header">
     <div class="list task-list">
       <a class="item item-icon-right task-item" ng-repeat="task in mission.tasks" href="#app/tasks-answer/{{mission._id}}/{{$index}}">
-        <i class="icon ion-chatbubble-working"></i>
+        <i class="icon ion-checkmark-circled" ng-class="task.answered ? 'green' : ''"></i>
         {{task.title}}
-        <i class="icon ion-ios7-telephone-outline"></i>
       </a>
     </div>
+    <button ng-disabled="!can_submit" class="button button-balanced button-block task-save-button" ng-click="submitData()">Submit</button>
   </ion-content>
 </ion-view>
