@@ -45,13 +45,12 @@ angular.module("config")
         views : {
           'menuContent' : {
             templateUrl : 'scripts/missions/list/missions-list.html',
-            controller : 'MissionListCtrl'
-            //resolve: {
-            //  missions: function(missionsService){
-            //    console.log(1111)
-            //    console.log(missionsService.getMissions({state: 'active'}))
-            //  }
-            //}
+            controller : 'MissionListCtrl',
+            resolve: {
+              missions: function(missionsService){
+                return missionsService.getMissions({state: 'active'});
+              }
+            }
           }
         }
       })
@@ -111,6 +110,14 @@ angular.module("config")
                 return missionsService.getUserMissions();
               }
             }
+          }
+        }
+      })
+      .state('test-error', {
+        url : '/test/error/:error',
+        resolve: {
+          mission: function ($log, $stateParams, $http, CONFIG) {
+            return $http.get(CONFIG.apiEndpoint + '/api/test/error/' + $stateParams.error);
           }
         }
       })

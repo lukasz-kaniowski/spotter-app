@@ -50,35 +50,37 @@ angular.module('SpotterApp', ['ionic', 'config', 'SpotterApp.main', 'SpotterApp.
       },
       // Intercept 401s and redirect you to login
       responseError: function (response) {
-        if (response.status === 401) {
-          // remove any stale tokens
-          delete $localStorage.token;
-          window.location.hash = "#/login";
-          return $q.reject(response);
-        }
-        else if(response.status === 500){
-          $location.path('/error');
-        }
-        else {
-          return $q.reject(response);
-        }
+        return $q.reject(response);
       }
     };
   })
 
-  .run(function ($rootScope, $location, Auth, spinner, $ionicSideMenuDelegate) {
+  .run(function ($rootScope, $location, Auth, spinner, $ionicSideMenuDelegate, $localStorage, $state) {
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function (event, next) {
       spinner.show();
-      Auth.isLoggedInAsync(function (loggedIn) {
-        if (next.authenticate && !loggedIn) {
-          $location.path('/login');
-        }
-      });
+      //Auth.isLoggedInAsync(function (loggedIn) {
+      //  if (next.authenticate && !loggedIn) {
+      //    $location.path('/login');
+      //  }
+      //});
     });
     $rootScope.$on('$stateChangeSuccess', function (event, next) {
       spinner.hide();
       $ionicSideMenuDelegate.toggleLeft(false);
+    });
+
+    $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
+      spinner.hide();
+      $ionicSideMenuDelegate.toggleLeft(false);
+      if (error.status === 401) {
+        // remove any stale tokens
+        delete $localStorage.token;
+        $state.go('login');
+      }
+      else if(error.status === 500){
+        $state.go('error');
+      }
     });
   })
 
