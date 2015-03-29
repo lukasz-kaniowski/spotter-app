@@ -180,9 +180,10 @@ text-align: center;
   width: 100%;
 }
 
-.invalid-input{
-  background-color: #f00!important;
-}
+//.invalid-input{
+//  border-bottom: solid 1px darkred;
+//}
+
 .login-error{
   color: #a94442;
   background-color: #f2dede;
@@ -192,18 +193,17 @@ text-align: center;
   border-radius: 4px;
   font-size: 14px;
 }
-.box {
-  position: relative;
-  top: 50px;
-  height: 400px;
-  text-align: center;
+
+form {
+  label.item.has-error {
+    border-bottom: 1px solid red;
+  }
+  label.item {
+    margin-bottom: 5px;
+  }
 }
-.even {
-  background-color: #ffff00;
-}
-.odd{
-  background-color: blue;
-}
+
+
 .slider-pager{
   top: 20px;
 }

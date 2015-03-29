@@ -66,10 +66,10 @@ angular.module('SpotterApp', ['ionic', 'config', 'SpotterApp.main', 'SpotterApp.
     };
   })
 
-  .run(function ($rootScope, $location, Auth, $ionicLoading, $ionicSideMenuDelegate) {
+  .run(function ($rootScope, $location, Auth, spinner, $ionicSideMenuDelegate) {
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function (event, next) {
-      $ionicLoading.show();
+      spinner.show();
       Auth.isLoggedInAsync(function (loggedIn) {
         if (next.authenticate && !loggedIn) {
           $location.path('/login');
@@ -77,7 +77,7 @@ angular.module('SpotterApp', ['ionic', 'config', 'SpotterApp.main', 'SpotterApp.
       });
     });
     $rootScope.$on('$stateChangeSuccess', function (event, next) {
-      $ionicLoading.hide();
+      spinner.hide();
       $ionicSideMenuDelegate.toggleLeft(false);
     });
   })
