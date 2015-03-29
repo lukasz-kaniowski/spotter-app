@@ -9,19 +9,18 @@ angular.module('SpotterApp.main', [])
     };
   })
 // TODO temp, move out of here
-  .controller('MenuCtrl',
-    function($scope, $ionicSideMenuDelegate, $localStorage, $state) {
+  .controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $localStorage, $state) {
       $scope.logout = function(){
         delete $localStorage.token;
         $state.go('login');
-      }
-      $scope.$watch(function() {
-        return $ionicSideMenuDelegate.getOpenRatio();
-      }, function(newValue) {
-        if (newValue === 0) {
-          $scope.hideLeft = true;
-        } else {
-          $scope.hideLeft = false;
-        }
-      });
+      };
+      //$scope.$watch(function() {
+      //  return $ionicSideMenuDelegate.getOpenRatio();
+      //}, function(newValue) {
+      //  if (newValue === 0) {
+      //    $scope.hideLeft = true;
+      //  } else {
+      //    $scope.hideLeft = false;
+      //  }
+      //});
     });

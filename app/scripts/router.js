@@ -55,7 +55,6 @@ angular.module("config")
         }
       })
       .state('app.mission', {
-        cache: false,
         url: '/missions/:missionId',
         views: {
           'menuContent': {
@@ -70,7 +69,6 @@ angular.module("config")
         }
       })
       .state('app.tasks_list', {
-        cache: false,
         url: '/tasks-list/:mission_id',
         views: {
           'menuContent': {
@@ -99,7 +97,6 @@ angular.module("config")
         }
       })
       .state('app.my-missions', {
-        cache: false,
         url : '/my-missions',
         views : {
           'menuContent' : {
