@@ -30,10 +30,10 @@ angular.module('SpotterApp.missions.list')
 	});
 
 	function run() {
-		console.log('checking missions tab ' + appGlobal.missionsTab);
-		if (appGlobal.missionsTab === 2) {
-			$ionicTabsDelegate.select(1);
-		}
+		//console.log('checking missions tab ' + appGlobal.missionsTab);
+		//if (appGlobal.missionsTab === 2) {
+		//	$ionicTabsDelegate.select(1);
+		//}
     showMissions(missions);
 		// appGlobal.pMissions.then(showMissions);
 
@@ -48,13 +48,11 @@ angular.module('SpotterApp.missions.list')
 
 
 	$scope.selectTab = function(index) {
-		index = index;
-		// appGlobal.missionsTab = index;
-		// console.log('changing missinos tab to '+appGlobal.missionsTab);
+
 	};
 
 	$scope.gotoMission = function(mission) {
-		appGlobal.missionsTab = 1;
+		//appGlobal.missionsTab = 1;
     $state.go('app.mission', {'missionId': mission._id});
 	};
 

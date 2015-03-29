@@ -110,12 +110,12 @@ angular.module('SpotterApp.missions.list', [])
     }
 
 
-    $scope.gotoMission = function (id) {
+    $scope.gotoMission = function (mission) {
       $interval.cancel($scope.timer);
       $scope.timer = undefined;
-      console.log("click goto mission " + id + " current marker " + appGlobal.currentMarker);
-      $state.transitionTo('app.mission', {
-        'missionId': appGlobal.currentMarker
+      console.log("click goto mission " + mission + " current marker " + appGlobal.currentMarker);
+      $state.go('app.mission', {
+        'missionId': mission._id
       });
     };
 

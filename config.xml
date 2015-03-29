@@ -7,7 +7,7 @@
   <author email="dev@cordova.apache.org" href="http://cordova.io">&#xD;
         Apache Cordova Team&#xD;
     </author>
-  <preference name="fullscreen" value="true" />
+  <preference name="fullscreen" value="true"/>
   <content src="index.html"/>
   <access origin="*"/>
 </widget>

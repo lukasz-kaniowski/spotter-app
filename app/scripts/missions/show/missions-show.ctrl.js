@@ -70,7 +70,7 @@ angular
           }
         }, function(err){
           alert("Check app permissions for location");
-        })
+        });
       else
         $state.go('app.tasks_list', {mission_id : mission._id});
     }

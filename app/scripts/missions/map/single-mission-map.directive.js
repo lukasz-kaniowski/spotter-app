@@ -21,8 +21,8 @@ angular.module('SpotterApp.missions')
           else if (scope.mission.address.gps && scope.mission.address.gps.coordinates)
             var latLng = new plugin.google.maps.LatLng(scope.mission.address.gps.coordinates[0], scope.mission.address.gps.coordinates[1]);
 
-console.log("latLng")
-console.log(latLng)
+          console.log("latLng", latLng);
+
           scope.map.animateCamera({
             'target': latLng,
             'zoom': 14,
@@ -30,7 +30,6 @@ console.log(latLng)
           });
           // show address in info window
           var icon = 'www/images/icon.png';
-          console.log(location.path);
           scope.map.addMarker({
             'position': latLng,
             'icon': icon,
