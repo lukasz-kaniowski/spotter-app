@@ -15,53 +15,40 @@
     <header class="bar bar-header bar-dark">
       <h1 class="title">The Eye</h1>
     </header>
-    <ion-content class="has-header">
+    <ion-content class="has-header dark-bg">
       <ion-list>
         <!--<ion-item nav-clear menu-close ng-click="login()">-->
         <!--Login-->
         <!--</ion-item>-->
 
-        <ion-item nav-clear menu-close href="#/app/dashboard">
-          <i class="icon  ion-home"></i> {{'MENU_DASHBOARD' | translate}}
-        </ion-item>
-
-        <!--<ion-item class="item-divider">-->
-        <!--Misje-->
-        <!--</ion-item>-->
-        <!--<ion-item nav-clear menu-close href="#/app/missions">-->
-        <!--<i class="icon ion-alert"></i> Aktualne-->
-        <!--</ion-item>-->
-        <!--<ion-item nav-clear menu-close href="#/app/missions">-->
-        <!--<i class="icon ion-location"></i> W poblizu-->
-        <!--</ion-item>-->
-        <ion-item nav-clear menu-close href="#/app/missions">
+        <ion-item class="item-positive" nav-clear  href="#/app/missions">
           <i class="icon ion-checkmark"></i> {{'MENU_FIND_MISSIONS' | translate}}
         </ion-item>
-        <ion-item nav-clear menu-close href="#/app/my-missions">
+        <ion-item class="item-positive" nav-clear  href="#/app/my-missions">
           <i class="icon ion-bookmark"></i> {{'MENU_MY_MISSIONS' | translate}}
         </ion-item>
 
-        <ion-item class="item-divider">
+        <!--<ion-item class="item-divider">-->
 
-        </ion-item>
-        <ion-item nav-clear menu-close href="#/app/profile">
-          <i class="icon ion-person"></i> {{'MENU_PROFILE' | translate}}
-        </ion-item>
-        <ion-item nav-clear menu-close href="#/app/help">
-          <i class="icon ion-help-buoy"></i> {{'MENU_HELP' | translate}}
-        </ion-item>
-        <ion-item nav-clear menu-close href="#/app/contact">
+        <!--</ion-item>-->
+        <!--<ion-item nav-clear menu-close href="#/app/profile">-->
+          <!--<i class="icon ion-person"></i> {{'MENU_PROFILE' | translate}}-->
+        <!--</ion-item>-->
+        <!--<ion-item nav-clear menu-close href="#/app/help">-->
+          <!--<i class="icon ion-help-buoy"></i> {{'MENU_HELP' | translate}}-->
+        <!--</ion-item>-->
+        <ion-item class="item-positive" nav-clear  href="#/app/contact">
           <i class="icon ion-at"></i> {{'MENU_CONTACT' | translate}}
         </ion-item>
 
-        <ion-item class="item-divider">
-          {{'MENU_TEST_ONLY' | translate}}
-        </ion-item>
-        <ion-item nav-clear menu-close href="#/login">
-          {{'MENU_LOGIN' | translate}}
-        </ion-item>
-        <ion-item nav-clear menu-close ng-click="logout()">
-          {{'MENU_LOGOUT' | translate}}
+        <!--<ion-item class="item-divider">-->
+          <!--{{'MENU_TEST_ONLY' | translate}}-->
+        <!--</ion-item>-->
+        <!--<ion-item nav-clear menu-close href="#/login">-->
+          <!--{{'MENU_LOGIN' | translate}}-->
+        <!--</ion-item>-->
+        <ion-item class="item-positive" nav-clear menu-close ng-click="logout()">
+          <i class="icon ion-log-out"></i> {{'MENU_LOGOUT' | translate}}
         </ion-item>
 
 
