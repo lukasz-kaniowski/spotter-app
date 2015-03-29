@@ -3,10 +3,14 @@
 /*exported oldValue */
 
 angular.module('SpotterApp')
-  .controller('IntroCtrl', function($scope, $state, $localStorage) {
+  .controller('IntroCtrl', function ($scope, $state, $localStorage, $ionicSlideBoxDelegate) {
 
-    $scope.login = function(){
+    $scope.login = function () {
       $localStorage.intro = true;
       $state.go('login');
+    };
+
+    $scope.next = function() {
+      $ionicSlideBoxDelegate.next();
     }
-  })
+  });
