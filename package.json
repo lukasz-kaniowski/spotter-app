@@ -26,7 +26,7 @@
     "grunt-ng-constant": "^0.5.0",
     "grunt-usemin": "~2.0.0",
     "grunt-wiredep": "^1.7.0",
-    "ionic": "^1.3.13",
+    "ionic": "^1.3.20",
     "jshint-stylish": "~0.1.3",
     "karma": "~0.12.0",
     "karma-chai": "~0.1.0",
@@ -63,7 +63,7 @@
       "locator": "plugin.google.maps",
       "variables": {
         "API_KEY_FOR_IOS": "AIzaSyDPy96cFpLJX2QaCKgR0ummd46nQMufcAA",
-        "API_KEY_FOR_ANDROID": "AIzaSyCRGDJbkm5n5jBSs0eFvArZyrePtvKpbyA"
+        "API_KEY_FOR_ANDROID": "AIzaSyC_LuVjXs1DtndxAxc5Y5NYdOWNgEd6a6M"
       }
     },
     "plugin.google.maps"
