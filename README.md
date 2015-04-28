@@ -43,6 +43,11 @@ Use grunt to create and build platforms
 Add permissions to hooks directory
 	$ sudo chmod -R 777 hooks
 
+Login credentials
+=================
+
+  dev@dev.com : dev
+
 To deploy on Android and iOS emulator
 =============================
 
