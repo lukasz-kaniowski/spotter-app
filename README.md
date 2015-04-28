@@ -27,7 +27,7 @@ Short instructions
       sudo npm install -g cordova@4.2.0
       grunt platform:add:android
       grunt installplugins
-      grunt run:ios
+      grunt run:android
 
 First install all dependencies
 
