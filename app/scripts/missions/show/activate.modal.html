@@ -9,11 +9,11 @@
 
       <p ng-show="modal_text.time" translate="{{modal_text.time}}"></p>
     </div>
-    <div class="button-bar">
-      <a class="button button-balanced button-block" nav-clear ng-click="modal_text.action == 0 ? accept() : cancelMission()"
-         translate="{{modal_text.accept}}"></a>
-      <a class="button button-assertive button-block" ng-click="closeModal()"
-         translate="{{modal_text.cancel}}"></a>
+    <div>
+      <div class="button button-balanced button-block" nav-clear ng-click="modal_text.action == 0 ? accept() : cancelMission()"
+         translate="{{modal_text.accept}}"></div>
+      <div class="button button-assertive button-block" ng-click="closeModal()"
+         translate="{{modal_text.cancel}}"></div>
     </div>
 
   </ion-content>
