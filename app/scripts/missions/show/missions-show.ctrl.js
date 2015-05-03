@@ -27,9 +27,12 @@ angular
         .catch($scope.closeModal);
     };
     $scope.cancelMission = function () {
-      mission.cancel().then(function(){
-        missionsService.updateCurrentMission('active');
-        $state.go('app.missions');
+      mission.cancel()
+        .then($scope.closeModal)
+        .catch($scope.closeModal)
+        .then(function(){
+          missionsService.updateCurrentMission('active');
+          $state.go('app.missions');
       })
     };
 
