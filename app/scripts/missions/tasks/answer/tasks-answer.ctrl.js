@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('SpotterApp.missions')
-  .controller('TasksAnswerCtrl', function ($scope, $ionicPlatform, $ionicActionSheet, imageService, $state, $ionicLoading, $ionicSlideBoxDelegate, $ionicModal, missionsService, mission, $stateParams, $localStorage) {
+  .controller('TasksAnswerCtrl', function ($scope, $ionicPlatform, $ionicActionSheet, imageService, $state,
+                                           $ionicLoading, $ionicSlideBoxDelegate, $ionicModal, missionsService,
+                                           mission, $stateParams, $localStorage, $log) {
 
     $scope.answers = {};
     $scope.mission = mission;
@@ -10,12 +12,13 @@ angular.module('SpotterApp.missions')
     if (saved_answers) {
       angular.copy(saved_answers, $scope.answers);
     }
-    var addImage = function (local_path) {
-      if (!local_path)
-        return false;
-      $scope.answers[current_task_id] = {url: local_path};
-      $scope.$apply();
+    var addImage = function (promise) {
+      promise.then(function (local_path) {
+        $log.debug('Add Image', local_path);
+        $scope.answers[current_task_id] = {url: local_path};
+      });
     };
+
     $scope.saveData = function () {
       if (!angular.equals($scope.answers, saved_answers)) {
         $localStorage[$stateParams.mission_id] = $scope.answers;
@@ -40,11 +43,11 @@ angular.module('SpotterApp.missions')
         },
         buttonClicked: function (index) {
           if (index === 0) {
-            imageService.camera(addImage);
+            addImage(imageService.camera());
             return true;
           }
           else {
-            imageService.album(addImage);
+            addImage(imageService.album());
             return true;
           }
         }
