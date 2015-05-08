@@ -6,7 +6,7 @@ angular.module('SpotterApp')
       var options = {
         quality: 50,
         sourceType: source,
-        destinationType: Camera.DestinationType.FILE_URI
+        destinationType: Camera.DestinationType.NATIVE_URI
       };
 
       return $cordovaCamera.getPicture(options);

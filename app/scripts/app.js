@@ -18,7 +18,7 @@ angular.module('SpotterApp', ['ionic', 'config', 'SpotterApp.main', 'SpotterApp.
   .config(function( $compileProvider ) {
     var currentImgSrcSanitizationWhitelist = $compileProvider.imgSrcSanitizationWhitelist();
     var newImgSrcSanitizationWhiteList = currentImgSrcSanitizationWhitelist.toString().slice(0,-1)
-      + '|file:|content:'
+      + '|assets-library:|file:|content:'
       +currentImgSrcSanitizationWhitelist.toString().slice(-1);
 
     console.log("Changing imgSrcSanitizationWhiteList from "+currentImgSrcSanitizationWhitelist+" to "+newImgSrcSanitizationWhiteList);

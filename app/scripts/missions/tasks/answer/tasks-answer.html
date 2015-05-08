@@ -28,7 +28,7 @@
               style="line-height: 250px; border: 1px solid rgb(238, 238, 238); border-radius: 3px; text-align: center; background-color: rgb(255, 255, 255);height:250px;">
 
               <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;" ng-show="!answers[task._id].url"></i>
-              <img ng-show="answers[task._id].url" ng-src="{{answers[task._id].url}}" alt="pic" />
+              <img ng-show="answers[task._id].url" src="{{answers[task._id].url}}" alt="pic" />
             </div>
             <button class="button button-stable button-block" ng-click="showActionsheet(task._id)">Add Photo</button>
           </div>
