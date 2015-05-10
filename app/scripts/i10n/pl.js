@@ -14,7 +14,7 @@ var translationsPl = {
 	MENU_PROFILE : 'Profil',
 	MENU_HELP : 'Pomoc',
 	MENU_TEST_ONLY : 'To tylko do testow',
-	MENU_CONTACT : 'Contakt',
+	MENU_CONTACT : 'Kontakt',
 	MENU_LOGIN : 'Login',
   MENU_LOGOUT : 'Logout',
   MENU_MY_MISSIONS : 'Moje misje',
@@ -26,7 +26,7 @@ var translationsPl = {
 			StartButton : 'Rozpocznij',
 			TasksHeader : 'Zadania:',
 			DueInTitle : 'Pozostało:',
-      Cancel: "Cancel"
+      Cancel: "Anuluj"
 		},
 		Activate : {
 			Title : 'Akceptacja',
@@ -36,28 +36,28 @@ var translationsPl = {
 			TimeToExecute : 'Masz tylko <strong>30 minut</strong> na jego wykonanie!'
 		},
     Cancel : {
-      Title : 'Cancel Mission',
+      Title : 'Anuluj Misje',
       AcceptButton : 'OK',
-      CancelButton : 'BACK',
-      Label : 'Once you cancel mission you will have to book it again if you want to work on it. Are you sure you want to cancel?'
+      CancelButton : 'WRÓĆ',
+      Label : 'Jestes pewien ze chcesz anulowac ta misje?'
     },
 		List : {
 			DAYS_LEFT : 'dni',
 			KMS_AWAY : 'km'
 		},
     MyMissions :{
-      Booked: 'To Do',
-      Review: 'In Review',
-      Closed: 'Completed',
-      NoTasks: "You don't have any outstanding missions right now.",
-      CheckMap: "Check the map for some opportunities!",
+      Booked: 'Aktualne',
+      Review: 'Sprawdzane',
+      Closed: 'Skonczone',
+      NoTasks: "Nie masz zadnych misji.",
+      CheckMap: "Sprawdz mape aby znalezc misje w twojej okolicy. ",
       ExpiredOn: "EXPIRED ON"
     },
     Tasks: {
       modal: {
-        Title: "Mission Sent",
-        Text: "Thanks for submiting mission. We are going to review it and notify you about next steps",
-        Button: "Close"
+        Title: "Misja wyslana. ",
+        Text: "Dzieki za wyslanie misji. Misja bedzie teraz weryfikowana. Powiadomimy Cie o postepach.",
+        Button: "Zamknij"
       }
     }
 	},
